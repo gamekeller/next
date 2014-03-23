@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  table.table.table-striped.table-hover
+    thead
+      tr
+        th ID
+        th Username
+    tbody
+      each user in users
+        tr
+          td= user._id
+          td= user.username

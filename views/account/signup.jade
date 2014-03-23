@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  if message
+    p= message
+
+  form(action='/signup', method='post')
+    div
+      label Username:
+      input(type='text', name='username')
+    div
+      label E-Mail:
+      input(type='email', name='email')
+    div
+      label Password:
+      input(type='password', name='password')
+    div
+      button.pure-button(type='submit') Submit

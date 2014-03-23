@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+
+  if user && user.admin
+    each medal in medals
+      p= medal.name
+
+  p= profile.username
+
+  p= profile
+
+  p= profile.profile

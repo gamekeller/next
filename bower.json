@@ -1,0 +1,15 @@
+{
+  "name": "Gamekeller",
+  "version": "0.0.1",
+  "authors": [
+    "Heinrich Fenkart <hnrch02@gmail.com>"
+  ],
+  "main": "app.js",
+  "license": "MIT",
+  "homepage": "http://gamekeller.net",
+  "private": true,
+  "dependencies": {
+    "twbs-bootstrap-sass": "~3.1.1",
+    "jquery": "~2.1.0"
+  }
+}
