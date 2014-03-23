@@ -5,7 +5,9 @@ block content
   .page-header
     h1 Login
 
-  form.form-horizontal(action='/login', method='post', role='form')
+  form.form-horizontal(method='POST', role='form')
+
+    input(type='hidden', name='_csrf', value=token)
 
     .form-group
       label.col-sm-2.control-label(for='username') Username:

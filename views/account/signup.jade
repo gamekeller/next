@@ -1,18 +1,33 @@
 extends ../layout
 
 block content
-  if message
-    p= message
 
-  form(action='/signup', method='post')
-    div
-      label Username:
-      input(type='text', name='username')
-    div
-      label E-Mail:
-      input(type='email', name='email')
-    div
-      label Password:
-      input(type='password', name='password')
-    div
-      button.pure-button(type='submit') Submit
+  .page-header
+    h1 Sign Up
+
+  form(method='POST', role='form')
+
+    input(type='hidden', name='_csrf', value=token)
+
+    .form-group
+      label.col-sm-2.control-label(for='username') Username:
+
+      .col-sm-10
+        input.form-control(type='text', id='username', name='username', placeholder='Username')
+
+    .form-group
+      label.col-sm-2.control-label(for='email') E-Mail:
+
+      .col-sm-10
+        input.form-control(type='email', id='email', name='email', placeholder='E-Mail address')
+
+
+    .form-group
+      label.col-sm-2.control-label(for='password') Password:
+
+      .col-sm-10
+        input.form-control(type='password', id='password', name='password', placeholder='Password')
+
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        button.btn.btn-primary(type='submit') Sign in
