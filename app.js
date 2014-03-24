@@ -65,7 +65,7 @@ app.configure(function() {
     store: new MongoStore({
       url: secrets.db,
       auto_reconnect: true
-    })
+    }, function() { console.log('✔ Session store connection established') })
   }))
   app.use(express.csrf())
 
