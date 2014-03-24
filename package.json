@@ -13,17 +13,17 @@
     "connect-mincer": "~1.0.0",
     "connect-mongo": "~0.4.0",
     "express-validator": "~2.1.1",
-    "express-flash": "~0.0.2"
-  },
-  "devDependencies": {
+    "express-flash": "~0.0.2",
     "grunt": "~0.4.2",
-    "grunt-nodemon": "~0.2.1",
-    "grunt-concurrent": "~0.5.0",
-    "grunt-shell-spawn": "~0.3.0",
     "bower": "~1.3.1",
     "node-sass": "~0.8.3",
     "coffee-script": "~1.7.1",
     "mincer": "~0.5.13"
+  },
+  "devDependencies": {
+    "grunt-nodemon": "~0.2.1",
+    "grunt-concurrent": "~0.5.0",
+    "grunt-shell-spawn": "~0.3.0"
   },
   "engines": {
     "node": "0.10.x"
