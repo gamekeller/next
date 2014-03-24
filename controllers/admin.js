@@ -10,6 +10,7 @@ exports.getAdmin = function(req, res, next) {
       return next(err)
 
     res.render('admin', {
+      title: 'Admin Page',
       users: users
     })
   })
