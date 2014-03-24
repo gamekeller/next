@@ -1,24 +1,34 @@
-'use strict'
-var mongoose = require('mongoose')
-var secrets  = require('./config/secrets')
-var dbLoaded = false
-var User     = require('./models/User')
-var Medal    = require('./models/Medal')
-
-function loadDBSchema() {
-  if(dbLoaded === false) {
-    mongoose.connect(secrets.db)
-    mongoose.connection.on('error', function() {
-      console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.')
-    })
-    dbLoaded = true
-  }
-}
-
 module.exports = function(grunt) {
+  'use strict'
+
+  var mongoose = require('mongoose')
+  var bower    = require('bower')
+  var secrets  = require('./config/secrets')
+  var User     = require('./models/User')
+  var Medal    = require('./models/Medal')
+  var DBLoaded = false
+
+  function loadDB() {
+    if(!DBLoaded) {
+      mongoose.connect(secrets.db)
+      mongoose.connection.on('error', function() {
+        console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.')
+      })
+      DBLoaded = true
+    }
+  }
+
+  grunt.registerTask('bower', 'install all bower dependencies', function() {
+    bower.commands.install()
+      .on('log', function(result) {
+        grunt.log.writeln(['bower', result.id.cyan, result.message].join(' '))
+      })
+      .on('error', function(err) { grunt.fail.fatal(error) })
+      .on('end', this.async())
+  })
 
   grunt.registerTask('addUser', 'add a user to the database', function(name, email, pass, admin) {
-    loadDBSchema()
+    loadDB()
 
     var done = this.async()
     var user =
@@ -41,7 +51,7 @@ module.exports = function(grunt) {
   })
 
   grunt.registerTask('addMedal', 'add a medal to the database', function(name, desc) {
-    loadDBSchema()
+    loadDB()
 
     var done = this.async()
     var medal =
@@ -69,7 +79,7 @@ module.exports = function(grunt) {
   })
 
   grunt.registerTask('dropDB', 'drop the database', function() {
-    loadDBSchema()
+    loadDB()
 
     var done = this.async()
 
@@ -147,9 +157,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon')
   grunt.loadNpmTasks('grunt-concurrent')
 
+  // Development server task.
   grunt.registerTask('server', ['concurrent:dev'])
 
+  // Database operation tasks.
+  grunt.registerTask('db', ['concurrent:dropDB', 'concurrent:seedDB'])
   grunt.registerTask('db.drop', ['concurrent:dropDB'])
   grunt.registerTask('db.seed', ['concurrent:seedDB'])
-  grunt.registerTask('db', ['concurrent:dropDB', 'concurrent:seedDB'])
+
+  // Heroku buildpack task.
+  grunt.registerTask('heroku', ['precompile', 'dropDB', 'seedDB'])
 }
