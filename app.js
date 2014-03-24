@@ -42,87 +42,68 @@ mongoose.connection.on('error', function() {
  * Express configuration
  */
 
-var hour  = 3600000
-var day   = (hour * 24)
-var month = (day * 30)
+// General setup
+// --------------------------------
+app.set('port', process.env.PORT || 3000)
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jade')
+app.use(mincer.assets())
+app.use(express.compress())
+app.use(express.favicon('public/favicon.ico'))
+app.use(express.logger('dev'))
+app.use(express.cookieParser())
+app.use(express.json())
+app.use(express.urlencoded())
+app.use(validator())
+app.use(express.methodOverride())
+app.use(express.session({
+  secret: secrets.sessionSecret,
+  store: new MongoStore({
+    url: secrets.db,
+    auto_reconnect: true
+  }, function() { console.log('✔ Session store connection established') })
+}))
+app.use(express.csrf())
 
-// All environments
-app.configure(function() {
-  app.set('port', process.env.PORT || 3000)
-  app.set('views', __dirname + '/views')
-  app.set('view engine', 'jade')
-  app.use(mincer.assets())
-  app.use(express.compress())
-  app.use(express.favicon('public/favicon.ico'))
-  app.use(express.logger('dev'))
-  app.use(express.cookieParser())
-  app.use(express.json())
-  app.use(express.urlencoded())
-  app.use(validator())
-  app.use(express.methodOverride())
-  app.use(express.session({
-    secret: secrets.sessionSecret,
-    store: new MongoStore({
-      url: secrets.db,
-      auto_reconnect: true
-    }, function() { console.log('✔ Session store connection established') })
-  }))
-  app.use(express.csrf())
+// Passport
+// --------------------------------
+app.use(passport.initialize())
+app.use(passport.session())
 
-  // Passport
-  app.use(passport.initialize())
-  app.use(passport.session())
+// Locals
+// --------------------------------
+app.use(function(req, res, next) {
+  res.locals.user = req.user
+  res.locals.token = req.csrfToken()
 
-  // Locals
-  app.use(function(req, res, next) {
+  // Navigation items
+  var nav = []
 
-    // User
-    res.locals.user = req.user
+  if(req.user) {
+    if(req.user.admin)
+      nav.push({ href: '/admin', name: 'Admin Page' })
 
-    // CSRF token
-    res.locals.token = req.csrfToken()
+    nav.push(
+      { href: '/account', name: 'Account' },
+      { href: '/logout', name: 'Log Out' }
+    )
+  } else
+    nav.push(
+      { href: '/signup', name: 'Sign Up' },
+      { href: '/login', name: 'Login' }
+    )
 
-    // Navigation items
-    var nav = []
+  res.locals.navItems = nav
 
-    if(req.user) {
-      if(req.user.admin)
-        nav.push({ href: '/admin', text: 'Admin Page' })
-
-      nav.push(
-        { href: '/account', text: 'Account' },
-        { href: '/logout', text: 'Log Out' }
-      )
-    } else
-      nav.push(
-        { href: '/signup', text: 'Sign Up' },
-        { href: '/login', text: 'Log In' }
-      )
-
-    res.locals.navItems = nav
-
-    return next()
-  })
-
-  // Flash messages
-  app.use(flash())
-
-  // Return to middleware
-  app.use(function(req, res, next) {
-    if(req.method !== 'GET')
-      return next()
-
-    if(/(login|logout|signup)$/.test(req.path.split('/')[1]))
-      return next()
-
-    req.session.returnTo = req.path
-    next()
-  })
-
-  app.use(app.router)
+  return next()
 })
 
-// Production config
+// Flash messages
+// --------------------------------
+app.use(flash())
+
+// Asset configuration
+// --------------------------------
 app.configure('production', function() {
   app.use(st({
     path: path.join(__dirname, 'public/assets'),
@@ -130,17 +111,35 @@ app.configure('production', function() {
   }))
 })
 
-// Development config
 app.configure('development', function() {
   app.use('/assets', mincer.createServer())
 })
 
-// Not found middleware
+// Router
+// --------------------------------
+
+// Keep track of previous URL
+app.use(function(req, res, next) {
+  if(req.method !== 'GET')
+    return next()
+
+  if(/(login|logout|signup)$/.test(req.path.split('/')[1]))
+    return next()
+
+  req.session.returnTo = req.path
+  next()
+})
+
+// Router
+app.use(app.router)
+
+// 404
 app.use(function(req, res) {
   res.status(404)
   res.render('404')
 })
 
+// Last stop: default error handler
 app.use(express.errorHandler())
 
 /**
