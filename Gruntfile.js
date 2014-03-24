@@ -166,5 +166,5 @@ module.exports = function(grunt) {
   grunt.registerTask('db.seed', ['concurrent:seedDB'])
 
   // Heroku buildpack task.
-  grunt.registerTask('heroku', ['precompile', 'dropDB', 'seedDB'])
+  grunt.registerTask('heroku', ['bower', 'precompile', 'dropDB', 'seedDB'])
 }
