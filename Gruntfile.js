@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     if(!DBLoaded) {
       mongoose.connect(secrets.db)
       mongoose.connection.on('error', function() {
-        console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.')
+        grunt.fail.fatal('✗ MongoDB Connection Error. Please make sure MongoDB is running.')
       })
       DBLoaded = true
     }
@@ -84,15 +84,13 @@ module.exports = function(grunt) {
     var done = this.async()
 
     mongoose.connection.on('open', function() {
-      mongoose.connection.db.dropDatabase(function(err) {
-        if(err) {
-          grunt.log.error('Error: ' + err)
-          done(false)
-        } else {
-          console.log('Successfully dropped the database')
-          done()
-        }
+      var collections = mongoose.connection.collections
+
+      Object.keys(collections).forEach(function(collection) {
+        collections[collection].drop()
       })
+
+      done()
     })
   })
 
