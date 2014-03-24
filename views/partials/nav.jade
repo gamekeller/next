@@ -14,5 +14,5 @@
 
       ul.nav.navbar-nav
         each item in navItems
-          li
-            a(href=item.href)= item.text
+          li(class= title == item.name ? 'active' : undefined)
+            a(href=item.href)= item.name
