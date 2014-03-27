@@ -24,21 +24,34 @@
   border-top-right-radius: 0;
   .box-shadow(0 6px 12px rgba(0, 0, 0, .05));
 
-  > li > a {
-    padding: 8px 20px;
-    font-weight: 300;
-    border: 1px solid @gray-lighter;
-    border-width: 0 1px;
+  > li {
 
     &:hover,
-    &:focus {
+    &.active {
+      + .divider + li > a { border-top-color: @brand-primary; }
+    }
+
+    > a {
+      padding: 8px 20px;
+      font-weight: 300;
+      border: 1px solid @gray-lighter;
+      border-width: 0 1px;
+    }
+
+    > a:hover,
+    > a:focus,
+    &.active > a {
       border-color: @brand-primary;
     }
   }
 
   .divider {
     margin: 0;
-    background-color: #f9f9f9;
+    height: 0;
+
+    + li > a {
+      border-top-width: 1px;
+    }
   }
 }
 
