@@ -2,12 +2,24 @@ extends ../layout
 
 block content
 
+  .page-header
+    h1
+      img(src='#{profile.gravatar(60)}')
+      = profile.username
+
+  if profile.medals
+    each medal in profile.medals
+      p= medal._id
+
   if user && user.admin
-    each medal in medals
-      p= medal.name
+    form(action= '/@' + profile.username + '/medals', method='post', role='form')
 
-  p= profile.username
+      input(type='hidden', name='_csrf', value=token)
 
-  p= profile
+      .form-group
+        select.form-control(multiple, name='medals')
+          each medal in medals
+            option(value= medal._id)= medal.name
 
-  p= profile.profile
+      .form-group
+        button.btn.btn-primary(type='submit') Update

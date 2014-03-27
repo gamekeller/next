@@ -1,3 +1,20 @@
+mixin list(items)
+  each item in items
+    if item.dropdown
+      li.dropdown(class= title == item.name ? 'active' : undefined)
+        a.dropdown-toggle(href='#', data-toggle='dropdown')
+          != item.content
+          i.caret
+        ul.dropdown-menu
+          each dItem in item.items
+            if dItem.divider
+              li.divider
+            else
+              li: a(href=dItem.href)= dItem.name
+    else
+      li(class= title == item.name ? 'active' : undefined)
+        a(href=item.href)= item.name
+
 .navbar.navbar-default.navbar-fixed-top(role='navigation')
   .container
 
@@ -13,6 +30,7 @@
     .collapse.navbar-collapse
 
       ul.nav.navbar-nav
-        each item in navItems
-          li(class= title == item.name ? 'active' : undefined)
-            a(href=item.href)= item.name
+        +list(nav.main)
+
+      ul.nav.navbar-nav.navbar-right
+        +list(nav.right)

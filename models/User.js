@@ -1,5 +1,6 @@
 var mongoose         = require('mongoose')
 var bcrypt           = require('bcryptjs')
+var crypto           = require('crypto')
 var ObjectId         = mongoose.Schema.ObjectId
 var SALT_WORK_FACTOR = 10
 
@@ -51,6 +52,20 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
 
     callback(null, isMatch)
   })
+}
+
+/**
+ * Get Gravatar URL
+ */
+userSchema.methods.gravatar = function(size, defaults) {
+  size     = size || 200
+  defaults = defaults || 'retro' 
+
+  if(!this.email)
+    return 'https://0.gravatar.com/avatar/?s=' + size + '&d=' + defaults
+
+  var md5 = crypto.createHash('md5').update(this.email)
+  return 'https://gravatar.com/avatar/' + md5.digest('hex').toString() + '?s=' + size + '&d=' + defaults
 }
 
 module.exports = mongoose.model('User', userSchema)

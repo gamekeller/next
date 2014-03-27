@@ -39,6 +39,36 @@ mongoose.connection.on('error', function() {
 })
 
 /**
+ * Render override
+ */
+app.response.render = function(view, options, fn) {
+  options = options || {};
+  var self = this;
+  var req = this.req;
+  var app = req.app;
+
+  // support callback function as second arg
+  if ('function' == typeof options) {
+    fn = options, options = {};
+  }
+
+  // merge res.locals
+  options._locals = self.locals;
+
+  // custom local
+  options._locals.view = view.split('/').slice(-1);
+
+  // default callback to respond
+  fn = fn || function(err, str){
+    if (err) return req.next(err);
+    self.send(str);
+  };
+
+  // render
+  app.render(view, options, fn);
+}
+
+/**
  * Express configuration
  */
 
@@ -73,27 +103,34 @@ app.use(passport.session())
 // Locals
 // --------------------------------
 app.use(function(req, res, next) {
-  res.locals.user = req.user
+  var user = res.locals.user = req.user
   res.locals.token = req.csrfToken()
 
   // Navigation items
-  var nav = []
+  var nav = res.locals.nav = {
+    main: [],
+    right: []
+  }
 
-  if(req.user) {
-    if(req.user.admin)
-      nav.push({ href: '/admin', name: 'Admin Page' })
+  if(user) {
+    if(user.admin)
+      nav.main.push({ href: '/admin', name: 'Admin Page' })
 
-    nav.push(
-      { href: '/account', name: 'Account' },
-      { href: '/logout', name: 'Log Out' }
-    )
+    nav.right.push({
+      dropdown: true,
+      content: '<img class="avatar" src="' + user.gravatar(60) + '"> ' + user.username,
+      items: [
+        { href: '/account', name: 'Account' },
+        { href: '/@' + user.username, name: 'Profile' },
+        { divider: true },
+        { href: '/logout', name: 'Log Out' }
+      ]
+    })
   } else
-    nav.push(
-      { href: '/signup', name: 'Sign Up' },
-      { href: '/login', name: 'Login' }
+    nav.right.push(
+      { href: '/login', name: 'Login' },
+      { href: '/signup', name: 'Sign Up' }
     )
-
-  res.locals.navItems = nav
 
   return next()
 })
@@ -153,6 +190,8 @@ app.get('/signup', userController.getSignup)
 app.post('/signup', userController.postSignup)
 app.get('/account', pass.ensureAuthenticated, userController.getAccount)
 app.get('/@:user', profileController.getProfile)
+app.get('/@:user/medals', profileController.getMedals)
+app.post('/@:user/medals', profileController.postMedals)
 app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), adminController.getAdmin)
 
 /**

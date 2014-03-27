@@ -1,13 +1,16 @@
 #flash
   if messages.errors
-    .alert.alert-danger.animated.fadeIn
+    .alert.alert-danger
+      button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
       for error in messages.errors
-        div= error.msg
+        div!= error.msg
   if messages.info
-    .alert.alert-info.animated.fadeIn
+    .alert.alert-info
+      button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
       for info in messages.info
-        div= info.msg
+        div!= info.msg
   if messages.success
-    .alert.alert-success.animated.fadeIn
+    .alert.alert-success
+      button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
       for success in messages.success
-        div= success.msg
+        div!= success.msg

@@ -9,7 +9,7 @@
   "homepage": "http://gamekeller.net",
   "private": true,
   "dependencies": {
-    "twbs-bootstrap-sass": "~3.1.1",
+    "bootstrap": "~3.1.1",
     "jquery": "~2.1.0"
   }
 }

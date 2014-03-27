@@ -1,0 +1,42 @@
+body {
+  padding-top: 70px;
+}
+
+.auth {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.footer {
+  margin-top: 40px;
+  padding: 20px 0 40px;
+  border-top: 1px solid @gray-lighter;
+  font-size: 12px;
+  color: #aaa;
+  &:extend(.clearfix all);
+
+  .list-inline {
+    margin-bottom: 0;
+  }
+}
+
+.form-control-prefix {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: (@grid-gutter-width / 2);
+  padding: (@padding-base-vertical + 1) (@padding-base-horizontal + 1);
+  color: @input-color-placeholder;
+  .user-select(none);
+}
+
+.page-signup #username {
+  padding-left: 67px;
+}
+
+.navbar .avatar {
+  width: 20px;
+  height: 20px;
+  margin: -2px 2px 0 0;
+  border-radius: 3px;
+}

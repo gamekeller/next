@@ -55,7 +55,7 @@ exports.postLogin = function(req, res, next) {
         return next(err)
 
       // res.locals.user = user
-      req.flash('success', { msg: 'Success! You are logged in.' })
+      req.flash('success', { msg: '<strong>Success!</strong> You are logged in.' })
       return res.redirect(req.session.returnTo || '/')
     })
   })(req, res, next)
@@ -83,9 +83,14 @@ exports.getSignup = function(req, res) {
  * @param password
  */
 exports.postSignup = function(req, res, next) {
-  req.assert('username', 'Username is not valid').isAlphanumeric().len(3, 16)
-  req.assert('email', 'Email is not valid').isEmail()
-  req.assert('password', 'Password must be at least 4 characters long').matches(/^[^\s]+$/).len(4)
+  req.assert('username', 'Username must not be empty').notEmpty()
+  req.assert('username', 'Username may only contain alphanumeric characters').isAlphanumeric()
+  req.assert('username', 'Username must range between 3 and 16 characters in length').len(3, 16)
+  req.assert('email', 'eMail address must not be empty').notEmpty()
+  req.assert('email', 'eMail address is not valid').isEmail()
+  req.assert('password', 'Password must not be empty').notEmpty()
+  req.assert('password', 'Password must be at least 4 characters long').len(4)
+  req.assert('password', 'Password must not contain whitespace characters').matches(/^[^\s]+$/)
   req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password)
 
   var errors = req.validationErrors()

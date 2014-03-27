@@ -2,31 +2,41 @@ extends ../layout
 
 block content
 
-  .page-header
-    h1 Sign Up
+  .auth
 
-  form.form-horizontal(method='POST', role='form')
+    .page-header
+      h1 Sign Up
 
-    input(type='hidden', name='_csrf', value=token)
+    form.form-horizontal(method='POST', role='form')
 
-    .form-group
-      label.col-sm-2.control-label(for='username') Username:
+      input(type='hidden', name='_csrf', value=token)
 
-      .col-sm-10
-        input.form-control(type='text', id='username', name='username', placeholder='Username')
+      .form-group
+        label.col-sm-2.control-label(for='username') Username:
 
-    .form-group
-      label.col-sm-2.control-label(for='email') E-Mail:
+        .col-sm-10
+          span.form-control-prefix gk.cm/@
+          input.form-control(type='text', id='username', name='username', placeholder='Username')
 
-      .col-sm-10
-        input.form-control(type='email', id='email', name='email', placeholder='E-Mail address')
+      .form-group
+        label.col-sm-2.control-label(for='email') E-Mail:
 
-    .form-group
-      label.col-sm-2.control-label(for='password') Password:
+        .col-sm-10
+          input.form-control(type='email', id='email', name='email', placeholder='E-Mail address')
 
-      .col-sm-10
-        input.form-control(type='password', id='password', name='password', placeholder='Password')
+      .form-group
+        label.col-sm-2.control-label(for='password') Password:
 
-    .form-group
-      .col-sm-offset-2.col-sm-10
-        button.btn.btn-primary(type='submit') Sign Up
+        .col-sm-10
+          input.form-control(type='password', id='password', name='password', placeholder='Password')
+
+      .form-group
+        label.col-sm-2.control-label(for='confirmPassword') Confirm Password:
+
+        .col-sm-10
+          input.form-control(type='password', id='confirmPassword', name='confirmPassword', placeholder='Confirm Password')
+
+      .form-group
+        .col-sm-offset-2.col-sm-10
+          button.btn.btn-primary(type='submit') Sign Up
+          button.btn.btn-default(type='reset') Reset
