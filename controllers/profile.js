@@ -1,8 +1,9 @@
+var _     = require('lodash')
 var User  = require('../models/User')
 var Medal = require('../models/Medal')
 
 function exists(username, next, callback) {
-  User.findOne({ username: username }, 'username email createdAt profile -_id', function(err, user) {
+  User.findOne({ username: username }, 'username email createdAt profile', function(err, user) {
     if(err)
       return next(err)
 
@@ -47,23 +48,34 @@ exports.getMedals = function(req, res, next) {
  */
 exports.postMedals = function(req, res, next) {
   exists(req.params.user, next, function(user) {
-    var userMedals = req.body.medals
-
-    Medal.find({}, function(err, medals) {
+    Medal.find({}, '_id', function(err, medals) {
       if(err)
         return next(err)
 
-      var medalIds = []
+      var now        = _.now()
+      var userMedals = _.transform(user.profile.medals, function(result, medal) { result[medal.id] = medal })
+      medals         = _.map(medals, function(medal) { return medal._id.toString() })
 
-      medals.forEach(function(medal) { medalIds.push(medal._id) })
+      user.profile.medals = _(req.body.medals)
+        .keys()
+        .remove(function(id) { return _.contains(medals, id) && req.body.medals[id] === 'on' })
+        .each(function(id, i, arr) {
+          if(_.has(userMedals, id))
+            arr[i] = userMedals[id]
+          else
+            arr[i] = {
+              id: id.toString(),
+              date: now
+            }
+        })
+        .value()
 
-      userMedals.forEach(function(medal, i) {
-        if(medal in medalIds) {
-          //user
-        }
-      })
+        user.save(function(err) {
+          if(err)
+            return next(err)
 
-      res.redirect('/@' + req.params.user)
+          res.redirect('/@' + req.params.user)
+        })
     })
   })
 }

@@ -1,8 +1,8 @@
-var mongoose         = require('mongoose')
-var bcrypt           = require('bcryptjs')
-var crypto           = require('crypto')
-var ObjectId         = mongoose.Schema.ObjectId
-var SALT_WORK_FACTOR = 10
+var _        = require('lodash')
+var mongoose = require('mongoose')
+var bcrypt   = require('bcryptjs')
+var crypto   = require('crypto')
+var Medal    = require('./Medal')
 
 /**
  * User schema
@@ -15,7 +15,10 @@ var userSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now, required: true },
 
   profile: {
-    medals: [{ id: ObjectId, date: Date }]
+    medals: [{
+      id: { type: String, required: true },
+      date: { type: Date, required: true }
+    }]
   }
 })
 
@@ -28,7 +31,7 @@ userSchema.pre('save', function(next) {
   if(!user.isModified('password'))
     return next()
 
-  bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+  bcrypt.genSalt(10, function(err, salt) {
     if(err)
       return next(err)
 
@@ -59,13 +62,26 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
  */
 userSchema.methods.gravatar = function(size, defaults) {
   size     = size || 200
-  defaults = defaults || 'retro' 
+  defaults = defaults || 'retro'
 
-  if(!this.email)
-    return 'https://0.gravatar.com/avatar/?s=' + size + '&d=' + defaults
+  var base  = 'https://0.gravatar.com/avatar/'
+  var query = '?s=' + size + '&d=' + defaults + '&r=pg'
 
-  var md5 = crypto.createHash('md5').update(this.email)
-  return 'https://gravatar.com/avatar/' + md5.digest('hex').toString() + '?s=' + size + '&d=' + defaults
+  return base + (this.email ? crypto.createHash('md5').update(this.email).digest('hex').toString() : '') + query
+}
+
+/**
+ * Has medal by ID
+ */
+userSchema.methods.hasMedal = function(id) {
+  var hasMedal = false
+
+  _.each(this.profile.medals, function(medal) {
+    if(medal.id == id)
+      hasMedal = true
+  })
+
+  return hasMedal
 }
 
 module.exports = mongoose.model('User', userSchema)

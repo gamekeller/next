@@ -7,19 +7,19 @@ block content
       img(src='#{profile.gravatar(60)}')
       = profile.username
 
-  if profile.medals
-    each medal in profile.medals
-      p= medal._id
+  if profile.profile.medals
+    each medal in profile.profile.medals
+      p #{medal.id}, conferred #{medal.date}
 
   if user && user.admin
     form(action= '/@' + profile.username + '/medals', method='post', role='form')
-
       input(type='hidden', name='_csrf', value=token)
 
-      .form-group
-        select.form-control(multiple, name='medals')
-          each medal in medals
-            option(value= medal._id)= medal.name
+      each medal in medals
+        .checkbox
+          label
+            input(type='checkbox', name='medals[#{medal._id}]', checked=profile.hasMedal(medal._id))
+            = medal.name
 
       .form-group
         button.btn.btn-primary(type='submit') Update
