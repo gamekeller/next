@@ -84,13 +84,15 @@ module.exports = function(grunt) {
     var done = this.async()
 
     mongoose.connection.on('open', function() {
-      var collections = mongoose.connection.collections
-
-      Object.keys(collections).forEach(function(collection) {
-        collections[collection].drop()
+      mongoose.connection.db.dropDatabase(function(err) {
+        if(err) {
+          grunt.fail.fatal('Error: ' + err)
+          done(false)
+        } else {
+          grunt.log.writeln('Successfully dropped the database.')
+          done()
+        }
       })
-
-      done()
     })
   })
 
