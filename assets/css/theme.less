@@ -18,30 +18,34 @@
 .dropdown-menu {
   padding: 0;
   overflow: hidden;
-  border: none;
-  border-top: 1px solid @brand-primary;
+  border-color: @gray-lighter;
+  border-top: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   .box-shadow(0 6px 12px rgba(0, 0, 0, .05));
 
+  @media (min-width: @screen-sm-min) {
+    max-width: 300px;
+
+    > li:hover + .divider + li > a,
+    .divider + li > a:hover,
+    .divider + li > a:focus {
+      border-top-color: @brand-primary;
+    }
+  }
+
   > li {
 
-    &:hover,
-    &.active {
-      + .divider + li > a { border-top-color: @brand-primary; }
+    &:first-child > a {
+      border-top: 1px solid @brand-primary;
     }
 
     > a {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
       padding: 8px 20px;
       font-weight: 300;
-      border: 1px solid @gray-lighter;
-      border-width: 0 1px;
-    }
-
-    > a:hover,
-    > a:focus,
-    &.active > a {
-      border-color: @brand-primary;
     }
   }
 
@@ -50,12 +54,15 @@
     height: 0;
 
     + li > a {
-      border-top-width: 1px;
+      border-top: 1px solid @gray-lighter;
     }
   }
+
+  > .active + .divider + li > a,
+  .divider + .active > a {
+    border-top-color: @brand-primary;
+  }
 }
-
-
 
 // Buttons ====================================================================
 
