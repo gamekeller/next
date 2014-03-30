@@ -128,8 +128,8 @@ app.use(function(req, res, next) {
     })
   } else
     nav.right.push(
-      { href: '/login', name: 'Login' },
-      { href: '/signup', name: 'Sign Up' }
+      { href: '/login?returnTo=' + req.path, name: 'Login' },
+      { href: '/signup?returnTo=' + req.path, name: 'Sign Up' }
     )
 
   return next()
@@ -155,19 +155,7 @@ app.configure('development', function() {
 // Router
 // --------------------------------
 
-// Keep track of previous URL
-app.use(function(req, res, next) {
-  if(req.method !== 'GET')
-    return next()
-
-  if(/(login|logout|signup)$/.test(req.path.split('/')[1]))
-    return next()
-
-  req.session.returnTo = req.path
-  next()
-})
-
-// Router
+// Actual router
 app.use(app.router)
 
 // 404

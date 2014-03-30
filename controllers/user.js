@@ -56,7 +56,7 @@ exports.postLogin = function(req, res, next) {
 
       // res.locals.user = user
       req.flash('success', { msg: '<strong>Success!</strong> You are logged in.' })
-      return res.redirect(req.session.returnTo || '/')
+      return res.redirect(req.query.returnTo || '/')
     })
   })(req, res, next)
 }
@@ -119,7 +119,7 @@ exports.postSignup = function(req, res, next) {
         return next(err)
 
       req.flash('success', { msg: 'Success! You are logged in.' })
-      res.redirect(req.session.returnTo || '/')
+      res.redirect(req.query.returnTo || '/')
     })
   })
 }
