@@ -1,6 +1,26 @@
 extends ../layout
 
 block content
-  p Admin: #{user.admin}
-  p Username: #{user.username}
-  p Email: #{user.email}
+
+  form.form-horizontal(method='POST', role='form')
+
+    input(type='hidden', name='_csrf', value=token)
+
+    .form-group
+      label.col-sm-2.control-label Admin
+      .col-sm-10
+        p.form-control-static= user.admin
+
+    .form-group
+      label.col-sm-2.control-label Username
+      .col-sm-10
+        p.form-control-static= user.username
+
+    .form-group
+      label.col-sm-2.control-label E-Mail
+      .col-sm-10
+        input.form-control(type='email', name='email', value=user.email)
+
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        button.btn.btn-primary(type='submit') Update

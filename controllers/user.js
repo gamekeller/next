@@ -131,3 +131,28 @@ exports.postSignup = function(req, res, next) {
 exports.getAccount = function(req, res) {
   res.render('account/settings', { title: 'Account' })
 }
+
+/**
+ * POST /account
+ * Update account settings
+ */
+exports.postAccount = function(req, res, next) {
+  req.assert('email', 'eMail address must not be empty').notEmpty()
+  req.assert('email', 'eMail address is not valid').isEmail()
+
+  var errors = req.validationErrors()
+
+  if(errors) {
+    req.flash('errors', errors)
+    return res.redirect('/account')
+  }
+
+  req.user.email = req.body.email
+
+  req.user.save(function(err) {
+    if(err)
+      return next(err)
+
+    res.redirect('/account')
+  })
+}
