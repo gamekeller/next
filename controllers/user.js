@@ -137,8 +137,17 @@ exports.getAccount = function(req, res) {
  * Update account settings
  */
 exports.postAccount = function(req, res, next) {
-  req.assert('email', 'eMail address must not be empty').notEmpty()
-  req.assert('email', 'eMail address is not valid').isEmail()
+  var user = req.user
+  var data = req.body
+
+  req.assert('account.email', 'eMail address must not be empty').notEmpty()
+  req.assert('account.email', 'eMail address is not valid').isEmail()
+
+  if(data.account.password !== '') {
+    req.assert('account.password', 'Password must be at least 4 characters long').len(4)
+    req.assert('account.password', 'Password must not contain whitespace characters').matches(/^[^\s]+$/)
+    req.assert('confirmPassword', 'Passwords do not match').equals(data.account.password)
+  }
 
   var errors = req.validationErrors()
 
@@ -147,9 +156,12 @@ exports.postAccount = function(req, res, next) {
     return res.redirect('/account')
   }
 
-  req.user.email = req.body.email
+  user.email = data.account.email
 
-  req.user.save(function(err) {
+  if(data.account.password !== '')
+    user.password = data.account.password
+
+  user.save(function(err) {
     if(err)
       return next(err)
 

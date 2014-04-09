@@ -19,7 +19,17 @@ block content
     .form-group
       label.col-sm-2.control-label E-Mail
       .col-sm-10
-        input.form-control(type='email', name='email', value=user.email)
+        input.form-control(type='email', name='account[email]', value=user.email)
+
+    .form-group
+      label.col-sm-2.control-label Password
+      .col-sm-10
+        input.form-control.js-password(type='password', name='account[password]', placeholder='•••••••••••••••••••••')
+
+    .form-group.hidden
+      label.col-sm-2.control-label Password Confirmation
+      .col-sm-10
+        input.form-control.js-confirm-password(type='password', name='confirmPassword', placeholder='•••••••••••••••••••••')
 
     .form-group
       .col-sm-offset-2.col-sm-10
