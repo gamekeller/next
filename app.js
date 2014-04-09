@@ -41,31 +41,11 @@ mongoose.connection.on('error', function() {
 /**
  * Render override
  */
-app.response.render = function(view, options, fn) {
-  options = options || {};
-  var self = this;
-  var req = this.req;
-  var app = req.app;
+var render = app.response.render
 
-  // support callback function as second arg
-  if ('function' == typeof options) {
-    fn = options, options = {};
-  }
-
-  // merge res.locals
-  options._locals = self.locals;
-
-  // custom local
-  options._locals.view = view.split('/').slice(-1);
-
-  // default callback to respond
-  fn = fn || function(err, str){
-    if (err) return req.next(err);
-    self.send(str);
-  };
-
-  // render
-  app.render(view, options, fn);
+app.response.render = function() {
+  this.locals.view = arguments[0].split('/').slice(-1)
+  render.apply(this, arguments)
 }
 
 /**
