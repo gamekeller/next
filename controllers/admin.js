@@ -11,7 +11,7 @@ exports.getAdmin = function(req, res, next) {
 
     res.render('admin', {
       title: 'Admin Page',
-      users: users
+      users: users.reverse()
     })
   })
 }
