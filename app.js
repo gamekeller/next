@@ -33,7 +33,7 @@ var app = express()
 /**
  * Mongoose config
  */
-mongoose.connect(secrets.db)
+mongoose.connect(secrets.db, secrets.dbOptions)
 mongoose.connection.on('error', function() {
   console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.')
 })
