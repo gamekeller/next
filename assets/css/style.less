@@ -34,9 +34,40 @@ body {
   padding-left: 67px;
 }
 
-.navbar .avatar {
-  width: 20px;
-  height: 20px;
-  margin: -2px 2px 0 0;
-  border-radius: 3px;
+.navbar {
+  border: none;
+
+  .navbar-brand {
+    &:hover,
+    &:focus {
+      background-color: @brand-primary;
+    }
+  }
+
+  .avatar {
+    width: 20px;
+    height: 20px;
+    margin: -2px 2px 0 0;
+    border-radius: 3px;
+  }
+}
+
+.navbar-brand {
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: @brand-primary;
+
+  .logo {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .navbar {
+    > .container,
+    > .container-fluid {
+      .navbar-brand { margin-left: -40px; }
+    }
+  }
 }
