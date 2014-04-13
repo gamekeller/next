@@ -1,52 +1,47 @@
-var _     = require('lodash')
-var User  = require('../models/User')
-var Medal = require('../models/Medal')
+var router = require('express').Router()
+var _      = require('lodash')
+var pass   = require('../config/passport')
+var User   = require('../models/User')
+var Medal  = require('../models/Medal')
 
-function exists(username, next, callback) {
-  User.findOne({ username: username }, 'username email createdAt profile', function(err, user) {
+router.param('user', function(req, res, next, id) {
+  User.findOne(id, function(err, user) {
     if(err)
       return next(err)
-
-    if(user)
-      callback(user)
-    else
+    else if(!user)
       return next()
+
+    req.profile = user
+    next()
   })
-}
+})
 
 /**
- * GET /@:username
+ * GET /@:user
  * Profile page
  */
-exports.getProfile = function(req, res, next) {
-  exists(req.params.user, next, function(user) {
-    Medal.find({}, function(err, medals) {
-      if(err)
-        return next(err)
-
-      res.render('account/profile', {
-        title: user.username,
-        profile: user,
-        medals: medals
-      })
+router.get('/@:user', function(req, res, next) {
+  Medal.find().exec().then(function(medals) {
+    res.render('account/profile', {
+      title: req.profile.username,
+      profile: req.profile,
+      medals: medals
     })
-  })
-}
+  }, next)
+})
 
 /**
- * GET /@:username/medals
+ * GET /@:user/medals
  * All medals of a user
  */
-exports.getMedals = function(req, res, next) {
-  exists(req.params.user, next, function(user) {
-    res.send(user.username + ' exists!')
-  })
-}
+router.get('/@:user/medals', function(req, res, next) {
+  res.send(req.profile.username + ' exists!')
+})
 
 /**
- * POST /@:username/medals
+ * POST /@:user/medals
  */
-exports.postMedals = function(req, res, next) {
+router.post('/@:user/medals', pass.ensureAuthenticated, pass.ensureAdmin(), function(req, res, next) {
   exists(req.params.user, next, function(user) {
     Medal.find({}, '_id', function(err, medals) {
       if(err)
@@ -78,4 +73,9 @@ exports.postMedals = function(req, res, next) {
         })
     })
   })
-}
+})
+
+/**
+ * Export the router
+ */
+module.exports = router

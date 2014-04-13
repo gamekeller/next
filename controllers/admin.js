@@ -1,10 +1,12 @@
-var User = require('../models/User')
+var router = require('express').Router()
+var pass   = require('../config/passport')
+var User   = require('../models/User')
 
 /**
  * GET /admin
  * Admin control panel
  */
-exports.getAdmin = function(req, res, next) {
+router.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), function(req, res, next) {
   User.find({}, function(err, users) {
     if(err)
       return next(err)
@@ -14,4 +16,9 @@ exports.getAdmin = function(req, res, next) {
       users: users.reverse()
     })
   })
-}
+})
+
+/**
+ * Export the router
+ */
+module.exports = router

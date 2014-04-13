@@ -1,28 +1,30 @@
+var router   = require('express').Router()
 var passport = require('passport')
+var pass     = require('../config/passport')
 var User     = require('../models/User')
 var Medal    = require('../models/Medal')
 
 /**
- * GET /login
+ * GET /logout
  * Log out
  */
-exports.getLogout = function(req, res) {
+router.get('/logout', function(req, res) {
   req.logout()
   res.redirect('/')
-}
+})
 
 /**
  * GET /login
  * Login page
  */
-exports.getLogin = function(req, res) {
+router.get('/login', function(req, res) {
   if(req.user)
     return res.redirect('/')
 
   res.render('account/login', {
     title: 'Login'
   })
-}
+})
 
 /**
  * POST /login
@@ -30,7 +32,7 @@ exports.getLogin = function(req, res) {
  * @param username
  * @param password
  */
-exports.postLogin = function(req, res, next) {
+router.post('/login', function(req, res, next) {
   req.assert('username', 'Username is not valid').isAlphanumeric().len(3, 16)
   req.assert('password', 'Password cannot be blank').notEmpty()
 
@@ -54,12 +56,11 @@ exports.postLogin = function(req, res, next) {
       if(err)
         return next(err)
 
-      // res.locals.user = user
       req.flash('success', { msg: '<strong>Success!</strong> You are logged in.' })
       return res.redirect(req.query.returnTo || '/')
     })
   })(req, res, next)
-}
+})
 
 /**
  * GET /signup
@@ -67,14 +68,14 @@ exports.postLogin = function(req, res, next) {
  * @param username
  * @param password
  */
-exports.getSignup = function(req, res) {
+router.get('/signup', function(req, res) {
   if(req.user)
     return res.redirect('/')
 
   res.render('account/signup', {
     title: 'Sign Up'
   })
-}
+})
 
 /**
  * POST /signup
@@ -82,7 +83,7 @@ exports.getSignup = function(req, res) {
  * @param email
  * @param password
  */
-exports.postSignup = function(req, res, next) {
+router.post('/signup', function(req, res, next) {
   req.assert('username', 'Username must not be empty').notEmpty()
   req.assert('username', 'Username may only contain alphanumeric characters').isAlphanumeric()
   req.assert('username', 'Username must range between 3 and 16 characters in length').len(3, 16)
@@ -122,21 +123,23 @@ exports.postSignup = function(req, res, next) {
       res.redirect(req.query.returnTo || '/')
     })
   })
-}
+})
 
 /**
  * GET /account
  * Profile settings page
  */
-exports.getAccount = function(req, res) {
-  res.render('account/settings', { title: 'Account' })
-}
+router.get('/account', pass.ensureAuthenticated, function(req, res) {
+  res.render('account/settings', {
+    title: 'Account'
+  })
+})
 
 /**
  * POST /account
  * Update account settings
  */
-exports.postAccount = function(req, res, next) {
+router.post('/account', pass.ensureAuthenticated, function(req, res, next) {
   var user = req.user
   var data = req.body
 
@@ -146,6 +149,7 @@ exports.postAccount = function(req, res, next) {
   if(data.account.password !== '') {
     req.assert('account.password', 'Password must be at least 4 characters long').len(4)
     req.assert('account.password', 'Password must not contain whitespace characters').matches(/^[^\s]+$/)
+    req.assert('confirmPassword', 'Password confirmation field must not be empty').notEmpty()
     req.assert('confirmPassword', 'Passwords do not match').equals(data.account.password)
   }
 
@@ -167,4 +171,9 @@ exports.postAccount = function(req, res, next) {
 
     res.redirect('/account')
   })
-}
+})
+
+/**
+ * Export the router
+ */
+module.exports = router
