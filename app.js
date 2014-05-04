@@ -16,7 +16,7 @@ var cookieParser   = require('cookie-parser')
 var methodOverride = require('method-override')
 var session        = require('express-session')
 var csrf           = require('csurf')
-var errorHandler   = require('errorhandler')
+var errorHandler   = require('errorhandler')()
 var MongoStore     = require('connect-mongo')(session)
 
 /**
@@ -148,14 +148,17 @@ app.use(adminController)
 
 // 404
 // --------------------------------
-app.use(function(req, res) {
-  res.status(404)
-  res.render('404')
+app.use(function(err, req, res, next) {
+  if(err.message === '404' || err.status === 404)
+    if((req.accepts('html') && !err.force) || err.force === 'html')
+      res.status(404).render('404')
+    else if((req.accepts('json') && !err.force) || err.force === 'json')
+      res.status(404).send({ error: 'Not found' })
+    else
+      res.status(404).type('txt').send('Not found')
+  else
+    errorHandler.apply(null, arguments)
 })
-
-// Last stop: default error handler
-// --------------------------------
-app.use(errorHandler())
 
 /**
  * Start the server

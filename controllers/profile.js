@@ -4,12 +4,12 @@ var pass   = require('../config/passport')
 var User   = require('../models/User')
 var Medal  = require('../models/Medal')
 
-router.param('user', function(req, res, next, id) {
-  User.findOne(id, function(err, user) {
+router.param('user', function(req, res, next, name) {
+  User.findOne({ username: name }, function(err, user) {
     if(err)
       return next(err)
     else if(!user)
-      return next()
+      return next(new Error(404))
 
     req.profile = user
     next()
