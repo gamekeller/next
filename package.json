@@ -25,7 +25,7 @@
     "passport-local": "~1.0.0",
     "rimraf": "~2.2.6",
     "st": "~0.4.1",
-    "static-favicon": "~1.0.2"
+    "serve-favicon": "~2.0.0"
   },
   "devDependencies": {
     "grunt-nodemon": "~0.2.1",
