@@ -98,14 +98,32 @@ module.exports = function(grunt) {
 
   // Mincer asset precompilation
   grunt.registerTask('precompile', function() {
+    var fs     = require('fs')
+    var rimraf = require('rimraf')
     var Mincer = require('mincer')
     var done   = this.async()
 
+    if(fs.existsSync('./public/assets'))
+      rimraf.sync('./public/assets')
+
     var env = new Mincer.Environment('./')
+
+    env.registerHelper('asset_path', function(name, opts) {
+      var asset = env.findAsset(name, opts)
+
+      if(!asset)
+        grunt.fail.fatal('File [' + name + '] not found')
+
+      return 'assets/' + asset.digestPath
+    })
+
     env.appendPath('assets')
 
     var manifest = new Mincer.Manifest(env, './public/assets')
     manifest.compile(['css/main.css', 'js/**/*', 'img/**/*'], function(err, data) {
+      if(err)
+        grunt.fail.fatal('Failed compile assets: ' + (err.message || err.toString()))
+
       grunt.log.writeln('Finished precompilation.')
       done()
     })
