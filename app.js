@@ -26,6 +26,7 @@ var homeController    = require('./controllers/home')
 var accountController = require('./controllers/account')
 var profileController = require('./controllers/profile')
 var adminController   = require('./controllers/admin')
+var apiController     = require('./controllers/api')
 
 /**
  * Configuration
@@ -145,6 +146,7 @@ app.use(homeController)
 app.use(accountController)
 app.use(profileController)
 app.use(adminController)
+app.use('/api', apiController)
 
 // 404
 // --------------------------------
