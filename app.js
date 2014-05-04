@@ -17,7 +17,7 @@ var methodOverride = require('method-override')
 var session        = require('express-session')
 var csrf           = require('csurf')
 var errorHandler   = require('errorhandler')
-//var MongoStore     = require('connect-mongo')(session)
+var MongoStore     = require('connect-mongo')(session)
 
 /**
  * Load controllers
@@ -76,11 +76,11 @@ app.use(bodyParser())
 app.use(validator())
 app.use(methodOverride())
 app.use(session({
-  secret: secrets.sessionSecret
-  // store: new MongoStore({
-  //   url: secrets.db,
-  //   auto_reconnect: true
-  // }, function() { console.log('✔ Session store connection established') })
+  secret: secrets.sessionSecret,
+  store: new MongoStore({
+    url: secrets.db,
+    auto_reconnect: true
+  }, function() { console.log('✔ Session store connection established') })
 }))
 app.use(csrf())
 
