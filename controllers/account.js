@@ -2,7 +2,6 @@ var router   = require('express').Router()
 var passport = require('passport')
 var pass     = require('../config/passport')
 var User     = require('../models/User')
-var Medal    = require('../models/Medal')
 
 /**
  * GET /logout

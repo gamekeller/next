@@ -6,20 +6,3 @@ block content
     h1
       img(src='#{profile.gravatar(60)}')
       = profile.username
-
-  if profile.profile.medals
-    each medal in profile.profile.medals
-      p #{medal.id}, conferred #{medal.date}
-
-  if user && user.admin
-    form(action= '/@' + profile.username + '/medals', method='post', role='form')
-      input(type='hidden', name='_csrf', value=token)
-
-      each medal in medals
-        .checkbox
-          label
-            input(type='checkbox', name='medals[#{medal._id}]', checked=profile.hasMedal(medal._id))
-            = medal.name
-
-      .form-group
-        button.btn.btn-primary(type='submit') Update

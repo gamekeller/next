@@ -2,7 +2,6 @@ var _        = require('lodash')
 var mongoose = require('mongoose')
 var bcrypt   = require('bcryptjs')
 var crypto   = require('crypto')
-var Medal    = require('./Medal')
 
 /**
  * User schema
@@ -14,12 +13,7 @@ var userSchema = new mongoose.Schema({
   admin: { type: Boolean, required: true },
   createdAt: { type: Date, default: Date.now, required: true },
 
-  profile: {
-    medals: [{
-      id: { type: String, required: true },
-      date: { type: Date, required: true }
-    }]
-  }
+  profile: {}
 })
 
 /**
@@ -68,20 +62,6 @@ userSchema.methods.gravatar = function(size, defaults) {
   var query = '?s=' + size + '&d=' + defaults + '&r=pg'
 
   return base + (this.email ? crypto.createHash('md5').update(this.email).digest('hex').toString() : '') + query
-}
-
-/**
- * Has medal by ID
- */
-userSchema.methods.hasMedal = function(id) {
-  var hasMedal = false
-
-  _.each(this.profile.medals, function(medal) {
-    if(medal.id == id)
-      hasMedal = true
-  })
-
-  return hasMedal
 }
 
 module.exports = mongoose.model('User', userSchema)

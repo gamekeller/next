@@ -5,7 +5,6 @@ module.exports = function(grunt) {
   var bower    = require('bower')
   var secrets  = require('./config/secrets')
   var User     = require('./models/User')
-  var Medal    = require('./models/Medal')
   var DBLoaded = false
 
   function loadDB() {
@@ -50,32 +49,9 @@ module.exports = function(grunt) {
     })
   })
 
-  grunt.registerTask('addMedal', 'add a medal to the database', function(name, desc) {
-    loadDB()
-
-    var done = this.async()
-    var medal =
-      new Medal({
-        name: name,
-        desc: desc,
-      })
-
-    medal.save(function(err) {
-      if(err) {
-        grunt.log.error('Error: ' + err)
-        done(false)
-      } else {
-        grunt.log.writeln('Saved medal: ' + medal.name)
-        done()
-      }
-    })
-  })
-
   grunt.registerTask('seedDB', 'seed the database', function() {
     grunt.task.run('addUser:admin:admin@example.com:admin:true')
     grunt.task.run('addUser:bob:bob@example.com:password:false')
-    grunt.task.run('addMedal:foobar:blabla')
-    grunt.task.run('addMedal:lewl:testing')
   })
 
   grunt.registerTask('dropDB', 'drop the database', function() {
