@@ -137,7 +137,7 @@ module.exports = function(grunt) {
     // Task configuration.
     shell: {
       db: {
-        command: 'mongod',
+        command: 'mongod --dbpath /usr/local/var/mongodb',
         options: {
           async: true
         }
