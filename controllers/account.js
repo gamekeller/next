@@ -169,6 +169,7 @@ router.post('/account', pass.ensureAuthenticated, function(req, res, next) {
     if(err)
       return next(err)
 
+    req.flash('success', { msg: '<strong>Success!</strong> Your account settings were updated.' })
     res.redirect('/account')
   })
 })
