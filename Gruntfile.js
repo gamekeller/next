@@ -74,35 +74,46 @@ module.exports = function(grunt) {
 
   // Mincer asset precompilation
   grunt.registerTask('precompile', function() {
-    var fs     = require('fs')
     var rimraf = require('rimraf')
     var Mincer = require('mincer')
     var done   = this.async()
 
-    if(fs.existsSync('./public/assets'))
-      rimraf.sync('./public/assets')
+    rimraf.sync('./public/assets')
 
     var env = new Mincer.Environment('./')
 
-    env.registerHelper('asset_path', function(name, opts) {
-      var asset = env.findAsset(name, opts)
-
-      if(!asset)
-        grunt.fail.fatal('File [' + name + '] not found')
-
-      return 'assets/' + asset.digestPath
-    })
-
     env.appendPath('assets')
 
-    var manifest = new Mincer.Manifest(env, './public/assets')
-    manifest.compile(['css/main.css', 'js/**/*', 'img/**/*'], function(err, data) {
-      if(err)
-        grunt.fail.fatal('Failed compile assets: ' + (err.message || err.toString()))
+    env.ContextClass.defineAssetPath(function(pathname, options) {
+      var asset = this.environment.findAsset(pathname, options)
 
-      grunt.log.writeln('Finished precompilation.')
-      done()
+      if(!asset)
+        throw new Error('File ' + pathname + ' not found')
+
+      return '/assets/' + asset.digestPath
     })
+
+    env.jsCompressor  = 'uglify'
+    env.cssCompressor = 'csso'
+
+    env = env.index
+
+    var manifest = new Mincer.Manifest(env, './public/assets')
+    var toCompile = [
+      'css/main.css',
+      'css/pages/*',
+      'js/main.js',
+      'img/*',
+      'fonts/*'
+    ]
+
+    try {
+      var assetsData = manifest.compile(toCompile, { compress: true })
+      grunt.log.writeln('Assets were successfully compiled.\nManifest data (a proper JSON) was written to:\n' + manifest.path)
+      console.dir(assetsData)
+    } catch(err) {
+      grunt.fail.fatal('Failed compile assets: ' + (err.message || err.toString()))
+    }
   })
 
   // Project configuration.
