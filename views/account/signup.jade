@@ -2,11 +2,17 @@ extends ../layout
 
 block content
 
-  .auth
+  #content.small-container
+
+    include ../partials/flash
 
     .page-header
-      h1 Sign Up
+      h1 Registrieren
 
+    p.
+      Registrationen werden zur Zeit nicht angenommen. Bitte versuche es zu einem späteren Zeitpunkt erneut.
+
+  //
     form.form-horizontal(method='POST', role='form')
 
       input(type='hidden', name='_csrf', value=token)

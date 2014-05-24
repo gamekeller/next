@@ -1,23 +1,33 @@
 body {
-  padding-top: 70px;
+  background-color: #1c1f24;
 }
 
-.auth {
-  max-width: 620px;
-  margin: 0 auto;
+#wrapper {
+  padding-top: 40px;
+  background-color: #5d1402;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
 }
 
-.footer {
-  margin-top: 40px;
-  padding: 20px 0 40px;
-  border-top: 1px solid @gray-lighter;
-  font-size: 12px;
-  color: #aaa;
-  &:extend(.clearfix all);
+#content-wrapper {
+  padding-top: 30px;
+  padding-bottom: 70px;
+}
 
-  .list-inline {
-    margin-bottom: 0;
+#content {
+  background-color: #fafafa;
+
+  &.container {
+    padding-top: 20px;
   }
+}
+
+.small-container {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 40px;
 }
 
 .form-control-prefix {
@@ -31,18 +41,12 @@ body {
 }
 
 .page-signup #username {
-  padding-left: 67px;
+  padding-left: 69px;
 }
 
 .navbar {
   border: none;
-
-  .navbar-brand {
-    &:hover,
-    &:focus {
-      background-color: @brand-primary;
-    }
-  }
+  background-color: rgba(0, 0, 0, .75);
 
   .avatar {
     width: 20px;
@@ -55,19 +59,19 @@ body {
 .navbar-brand {
   padding-right: 10px;
   padding-left: 10px;
-  background-color: @brand-primary;
-
-  .logo {
-    width: 20px;
-    height: 20px;
-  }
+  font-size: 20px;
+  color: @brand-primary;
+  .transition(color .3s ease);
 }
 
-@media (min-width: @screen-sm-min) {
-  .navbar {
-    > .container,
-    > .container-fluid {
-      .navbar-brand { margin-left: -40px; }
-    }
+.navbar-inverse .navbar-brand {
+  color: @brand-primary;
+}
+
+.page-header {
+  margin-top: 0;
+
+  h1 {
+    margin-top: 0;
   }
 }

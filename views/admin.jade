@@ -4,12 +4,10 @@ block content
   table.table.table-striped.table-hover
     thead
       tr
-        th ID
         th Username
         th Admin
     tbody
       each user in users
         tr
-          td= user._id
-          td= user.username
+          td(title=user._id)= user.username
           td= user.admin ? 'Yes' : 'No'

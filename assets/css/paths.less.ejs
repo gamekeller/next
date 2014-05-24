@@ -1,24 +1,15 @@
-.logo {
-  display: inline-block;
-  vertical-align: top;
-  width: 32px;
-  height: 32px;
-  background-image: url(<%= asset_path('img/logo.svg') %>);
+@font-face {
+  font-family: 'gkicons';
+  src: url(<%= asset_path('fonts/gkicons.eot') + '?w2870e' %>);
+  src: url(<%= asset_path('fonts/gkicons.eot') + '?#iefixw2870e' %>) format('embedded-opentype'),
+       url(<%= asset_path('fonts/gkicons.woff') + '?w2870e' %>) format('woff'),
+       url(<%= asset_path('fonts/gkicons.ttf') + '?w2870e' %>) format('truetype'),
+       url(<%= asset_path('fonts/gkicons.svg') + '?w2870e#gkicons' %>) format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.logo-dark {
-  background-image: url(<%= asset_path('img/logo-dark.svg') %>);
-}
-
-.logo-light {
-  background-image: url(<%= asset_path('img/logo-light.svg') %>);
-}
-
-.logo-footer {
-  background-image: url(<%= asset_path('img/logo-footer.svg') %>);
-}
-
-.logo-small {
-  width: 16px;
-  height: 16px;
+#wrapper,
+.masthead {
+  background-image: url(<%= asset_path('img/bg.svg') %>);
 }

@@ -21,7 +21,8 @@ router.get('/login', function(req, res) {
     return res.redirect('/')
 
   res.render('account/login', {
-    title: 'Login'
+    title: 'Login',
+    special: true
   })
 })
 
@@ -72,7 +73,8 @@ router.get('/signup', function(req, res) {
     return res.redirect('/')
 
   res.render('account/signup', {
-    title: 'Sign Up'
+    title: 'Registrieren',
+    special: true
   })
 })
 
@@ -83,6 +85,10 @@ router.get('/signup', function(req, res) {
  * @param password
  */
 router.post('/signup', function(req, res, next) {
+  // TEMP: don't allow signups
+  req.flash('errors', [{ msg: 'Sign-ups are not permitted at this time.' }])
+  return res.redirect('/signup')
+
   req.assert('username', 'Username must not be empty').notEmpty()
   req.assert('username', 'Username may only contain alphanumeric characters').isAlphanumeric()
   req.assert('username', 'Username must range between 3 and 16 characters in length').len(3, 16)
@@ -110,10 +116,11 @@ router.post('/signup', function(req, res, next) {
   user.save(function(err) {
     if(err) {
       if(err.code === 11000)
-        req.flash('errors', { msg: 'User with that username alread exists.' })
+        req.flash('errors', { msg: 'User with that username already exists.' })
 
       return res.redirect('/signup')
     }
+
     req.logIn(user, function(err) {
       if(err)
         return next(err)

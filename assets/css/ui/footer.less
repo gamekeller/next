@@ -1,0 +1,129 @@
+.footer {
+  margin: 20px 0;
+  font-size: 14px;
+  color: lighten(#2F3235, 15%);
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li a,
+  .gamekeller {
+    display: block;
+    padding: 10px 15px;
+    text-align: center;
+    color: inherit;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    .transition(color .3s ease);
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: #f90;
+    }
+  }
+
+  .links {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #2f3235;
+  }
+
+  .info {
+    display: none;
+
+    a {
+      font-size: 10px;
+      color: #2a2d30;
+      line-height: 17px;
+    }
+  }
+
+  .social {
+    display: table;
+    width: 100%;
+    font-size: 16px;
+
+    li {
+      display: table-cell;
+
+      a {
+        letter-spacing: 0;
+        padding: 10px;
+      }
+    }
+  }
+}
+
+.gamekeller {
+  line-height: 32px;
+  font-size: 16px;
+
+  .icon {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 6px;
+    font-size: 32px;
+    color: @brand-primary;
+  }
+}
+
+@media (min-width: @screen-xs) {
+  .footer {
+    border-bottom: 1px solid #2f3235;
+    margin-bottom: 80px;
+    font-size: 12px;
+
+    li {
+      &:first-child a {
+        padding-left: 0;
+      }
+
+      &:last-child a {
+        padding-right: 0;
+      }
+    }
+
+    .gamekeller {
+      float: left;
+      padding: 11px 10px 10px 0;
+      line-height: 16px;
+      font-size: 12px;
+
+      .icon {
+        margin-right: 4px;
+        font-size: 16px;
+        color: inherit;
+      }
+    }
+
+    .links {
+      float: right;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+
+      li {
+        float: left;
+      }
+    }
+
+    .info {
+      display: block;
+      float: left;
+    }
+
+    .social {
+      float: right;
+      display: block;
+      width: auto;
+
+      li {
+        display: inline-block;
+      }
+    }
+  }
+}

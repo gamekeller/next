@@ -22,7 +22,7 @@ var MongoStore     = require('connect-mongo')(session)
 /**
  * Load controllers
  */
-var homeController    = require('./controllers/home')
+var commonController  = require('./controllers/common')
 var accountController = require('./controllers/account')
 var profileController = require('./controllers/profile')
 var adminController   = require('./controllers/admin')
@@ -117,8 +117,8 @@ app.use(function(req, res, next) {
     })
   } else
     nav.right.push(
-      { href: '/login?returnTo=' + req.path, name: 'Login' },
-      { href: '/signup?returnTo=' + req.path, name: 'Sign Up' }
+      { href: '/login' /* ?returnTo=' + req.path */, name: 'Login' },
+      { href: '/signup' /* ?returnTo=' + req.path */, name: 'Registrieren' }
     )
 
   return next()
@@ -141,12 +141,23 @@ else
 /**
  * Routes
  */
-app.use(homeController)
+app.use(commonController)
 app.use(accountController)
 app.use(profileController)
 app.use(adminController)
 
+app.use(st({
+  path: path.join(__dirname, 'public'),
+  url: '/',
+  passthrough: true
+}))
+
 // 404
+app.use(function(req, res, next) {
+  return next(new Error(404))
+})
+
+// Error handler
 // --------------------------------
 app.use(function(err, req, res, next) {
   if(err.message === '404' || err.status === 404)

@@ -45,7 +45,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
       padding: 8px 20px;
-      font-weight: 300;
     }
   }
 
@@ -65,13 +64,14 @@
 }
 
 .navbar .dropdown-menu {
-  background-color: #2b2b2b;
+  background-color: rgba(0, 0, 0, .75);
+  border: 0;
 
   > li {
     &:first-child > a { border-top: 0; }
   }
 
-  .divider + li > a { border-top-color: #3c3c3c; }
+  .divider + li > a { border-top-color: #343434; }
 
   a {
     color: #fff;
@@ -115,10 +115,6 @@
 }
 
 // Typography =================================================================
-
-body {
-  font-weight: 300;
-}
 
 // Tables =====================================================================
 

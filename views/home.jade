@@ -1,8 +1,28 @@
-extends layout
+doctype html
+html
+  head
+    title Gamekeller
+    include partials/head
+    != css('css/main.css')
+    != css('css/pages/home.css')
+  body(class= 'page-' + view)
 
-block content
-  h1= title
-  unless user
-    p Welcome to #{title}
-  else
-    p Hello, #{user.username}
+    .masthead
+      .inner
+        .content.small-container
+          h1.title
+            span.icon.icon-gamekeller
+            span.sr-only Gamekeller
+          h2.slogan Dein Zuhause im Internet
+          h3.details.
+            Wir sind eine multinationale Gaming-Community, die sich auf maximalen Komfort konzentriert.
+
+    #footer
+      .container
+        .callout.small-container
+          h1 Wir sind noch nicht ganz fertig.
+          h4 Während wir noch fleißig an der Website tüfteln, kannst Du uns ja schonmal besuchen kommen. Wir freuen uns auf Dich!
+
+        include partials/footer
+
+    != js('js/main.js')

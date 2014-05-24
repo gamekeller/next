@@ -1,6 +1,19 @@
 var router = require('express').Router()
 var User   = require('../models/User')
 
+/**
+ * Only show profiles when logged in
+ */
+router.use(function(req, res, next) {
+  if(!req.user)
+    return next(new Error(404))
+  else
+    next()
+})
+
+/**
+ * Get corresponding user for the requested profile
+ */
 router.param('user', function(req, res, next, name) {
   User.findOne({ username: name }, function(err, user) {
     if(err)
