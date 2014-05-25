@@ -4,7 +4,6 @@
 var express        = require('express')
 var st             = require('st')
 var flash          = require('express-flash')
-var path           = require('path')
 var mongoose       = require('mongoose')
 var passport       = require('passport')
 var validator      = require('express-validator')
@@ -67,6 +66,12 @@ var env = process.env.NODE_ENV || 'development'
 app.set('port', process.env.PORT || 3000)
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
+app.use(st({
+  path: __dirname + '/public',
+  url: '/',
+  passthrough: true,
+  index: false
+}))
 app.use(mincer.assets())
 app.use(compress())
 app.use(favicon(__dirname + '/public/favicon.ico'))
@@ -132,7 +137,7 @@ app.use(flash())
 // --------------------------------
 if(env === 'production')
   app.use(st({
-    path: path.join(__dirname, 'public/assets'),
+    path: __dirname + '/public/assets',
     url: '/assets'
   }))
 else
@@ -145,12 +150,6 @@ app.use(commonController)
 app.use(accountController)
 app.use(profileController)
 app.use(adminController)
-
-app.use(st({
-  path: path.join(__dirname, 'public'),
-  url: '/',
-  passthrough: true
-}))
 
 // 404
 app.use(function(req, res, next) {
