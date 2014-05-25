@@ -104,6 +104,7 @@ module.exports = function(grunt) {
       'css/pages/*',
       'js/main.js',
       'img/*',
+      'img/404/*',
       'fonts/*'
     ]
 

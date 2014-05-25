@@ -1,3 +1,5 @@
+- var imgs = [['sherlock', '150%'], ['snape', '150%'], ['bujuhu', ''], ['dwight', '150%'], ['ban', ''], ['endstille', ''], ['dog', ''], ['coke', ''], ['firing', ''], ['putin', 'contain']]
+- imgs.forEach(function(arr) { arr[0] = asset_path('img/404/' + arr[0] + '.gif') })
 doctype html
 html
   head
@@ -217,7 +219,7 @@ html
         background-size: cover;
         box-shadow: 0 1px 1px rgba(0, 0, 0, .3);
       }
-  body
+  body(data-sources=JSON.stringify(imgs))
     .content
       .valign-outer
         .valign-inner
@@ -243,17 +245,17 @@ html
 
     script.
       !function(win, doc) {
+        var bgs = JSON.parse(doc.body.getAttribute('data-sources'))
         var currentBg = localStorage.getItem('gk.404.bg');
 
         var PARTYTIME = win.PARTYTIME = function() {
-          var bgs = [['sherlock', '150%'], ['snape', '150%'], ['bujuhu', ''], ['dwight', '150%'], ['ban', ''], ['endstille', ''], ['dog', ''], ['coke', ''], ['firing', ''], ['putin', 'contain']]
           var pick
 
           do pick = Math.floor(Math.random() * bgs.length)
           while(bgs[pick][0] === currentBg)
 
           doc.body.style.backgroundSize = bgs[pick][1]
-          doc.body.style.backgroundImage = 'url(/assets/img/404/' + (bgs[pick][0]) + '.gif)'
+          doc.body.style.backgroundImage = 'url(' + bgs[pick][0] + ')'
           currentBg = bgs[pick][0]
           localStorage.setItem('gk.404.bg', currentBg)
         }
