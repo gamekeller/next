@@ -59,7 +59,6 @@ app.response.render = function() {
 /**
  * Express configuration
  */
-var env = process.env.NODE_ENV || 'development'
 
 // General setup
 // --------------------------------
@@ -136,7 +135,7 @@ app.use(flash())
 
 // Asset configuration
 // --------------------------------
-if(env === 'production')
+if(app.get('env') === 'production')
   app.use(st({
     path: __dirname + '/public/assets',
     url: '/assets'
@@ -168,7 +167,7 @@ app.use(function(err, req, res, next) {
     else
       res.status(404).type('txt').send('Not found')
   else
-    if(env === 'production')
+    if(app.get('env') === 'production')
       res.status(500).send('Something went wrong, but fear not! A team of highly trained monkeys has been dispatched to deal with this situation. If you see them, run.')
     else
       errorHandler.apply(null, arguments)
@@ -178,5 +177,5 @@ app.use(function(err, req, res, next) {
  * Start the server
  */
 app.listen(app.get('port'), function() {
-  console.log('✔ Express server listening on port %d in %s mode', app.get('port'), env)
+  console.log('✔ Express server listening on port %d in %s mode', app.get('port'), app.get('env'))
 })
