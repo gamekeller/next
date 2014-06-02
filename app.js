@@ -75,7 +75,7 @@ app.use(st({
 app.use(mincer.assets())
 app.use(compress())
 app.use(favicon(__dirname + '/public/favicon.ico'))
-app.use(logger('dev'))
+app.use(logger(process.env.LOGFORMAT || 'dev'))
 app.use(cookieParser())
 app.use(bodyParser())
 app.use(validator())
