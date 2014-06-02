@@ -63,6 +63,7 @@ app.response.render = function() {
 // General setup
 // --------------------------------
 app.enable('trust proxy')
+app.disable('x-powered-by')
 app.set('port', process.env.PORT || 3000)
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
