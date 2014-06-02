@@ -167,7 +167,10 @@ app.use(function(err, req, res, next) {
     else
       res.status(404).type('txt').send('Not found')
   else
-    errorHandler.apply(null, arguments)
+    if(env === 'production')
+      res.status(500).send('Something went wrong, but fear not! A team of highly trained monkeys has been dispatched to deal with this situation. If you see them, run.')
+    else
+      errorHandler.apply(null, arguments)
 })
 
 /**
