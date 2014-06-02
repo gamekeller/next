@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 
   function loadDB() {
     if(!DBLoaded) {
-      mongoose.connect(secrets.db, secrets.dbOptions)
+      mongoose.connect(secrets.db)
       mongoose.connection.on('error', function() {
         grunt.fail.fatal('✗ MongoDB Connection Error. Please make sure MongoDB is running.')
       })
