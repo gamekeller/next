@@ -1,6 +1,8 @@
 module.exports = function(grunt) {
   'use strict'
 
+  var fs       = require('fs')
+  var exec     = require('child_process').exec
   var mongoose = require('mongoose')
   var bower    = require('bower')
   var secrets  = require('./config/secrets')
@@ -16,6 +18,28 @@ module.exports = function(grunt) {
       DBLoaded = true
     }
   }
+
+  grunt.registerTask('revupdate', 'update rev info in footer of site', function() {
+    var done = this.async()
+
+    exec('git rev-parse HEAD', function(err, rev, stderr) {
+      if(err)
+        return grunt.fail.fatal(err)
+      if(stderr)
+        return grunt.fail.fatal(stderr)
+
+      var jade = 'a(href=\'https://github.com/gamekeller/next/commit/' + rev.replace('\n', '') + '\') rev. ' + rev.substr(0, 10)
+
+      fs.writeFile(__dirname + '/views/partials/rev.jade', jade, function(err) {
+        if(err)
+          return grunt.fail.fatal(err)
+
+        grunt.log.writeln('views/partials/rev.jade updated.')
+
+        done()
+      })
+    })
+  })
 
   grunt.registerTask('bower', 'install all bower dependencies', function() {
     bower.commands.install()
@@ -164,7 +188,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-concurrent')
 
   // Development server task.
-  grunt.registerTask('server', ['concurrent:dev'])
+  grunt.registerTask('server', ['revupdate', 'concurrent:dev'])
 
   // Database operation tasks.
   grunt.registerTask('db', ['concurrent:dropDB', 'concurrent:seedDB'])
