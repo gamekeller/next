@@ -63,6 +63,7 @@ var env = process.env.NODE_ENV || 'development'
 
 // General setup
 // --------------------------------
+app.enable('trust proxy')
 app.set('port', process.env.PORT || 3000)
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
