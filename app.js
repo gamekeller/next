@@ -136,12 +136,7 @@ app.use(flash())
 
 // Asset configuration
 // --------------------------------
-if(app.get('env') === 'production')
-  app.use(st({
-    path: __dirname + '/public/assets',
-    url: '/assets'
-  }))
-else
+if(app.get('env') === 'development')
   app.use('/assets', mincer.createServer())
 
 /**
