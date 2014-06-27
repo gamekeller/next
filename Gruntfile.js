@@ -151,7 +151,8 @@ module.exports = function(grunt) {
       db: {
         command: 'mongod --dbpath /usr/local/var/mongodb',
         options: {
-          async: true
+          stdout: false,
+          stderr: false
         }
       }
     },
