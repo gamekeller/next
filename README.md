@@ -1,4 +1,6 @@
 # [next Gamekeller website](https://github.com/gamekeller/next/)
+[![dependency Status](https://david-dm.org/gamekeller/next/status.svg)](https://david-dm.org/gamekeller/next#info=dependencies)
+[![devDependency Status](https://david-dm.org/gamekeller/next/dev-status.svg)](https://david-dm.org/gamekeller/next#info=devDependencies)
 
 The next version of our website, built on node, powered by express and MongoDB.
 
