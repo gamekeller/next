@@ -98,11 +98,8 @@ module.exports = function(grunt) {
 
   // Mincer asset precompilation
   grunt.registerTask('precompile', function() {
-    var rimraf = require('rimraf')
     var Mincer = require('mincer')
     var done   = this.async()
-
-    rimraf.sync('./public/assets')
 
     var env = new Mincer.Environment('./')
 

@@ -23,7 +23,6 @@
     "morgan": "~1.1.1",
     "passport": "~0.2.0",
     "passport-local": "~1.0.0",
-    "rimraf": "~2.2.8",
     "st": "~0.5.1",
     "serve-favicon": "~2.0.0"
   },
