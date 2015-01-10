@@ -130,7 +130,7 @@ module.exports = function(grunt) {
     ]
 
     try {
-      var assetsData = manifest.compile(toCompile, { compress: true })
+      var assetsData = manifest.compile(toCompile)
       grunt.log.writeln('Assets were successfully compiled.\nManifest data (a proper JSON) was written to:\n' + manifest.path)
       console.dir(assetsData)
     } catch(err) {
