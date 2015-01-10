@@ -12,7 +12,7 @@ AWS.config.update({
 
 var bucket = new AWS.S3({ params: { Bucket: 'gamekeller' } })
 
-glob('public/assets/!(manifest)/**/*')
+glob('public/assets/!(manifest)/**/*', { nodir: true })
   .map(function(filename) {
     return new P(function(resolve, reject) {
       bucket.putObject({
