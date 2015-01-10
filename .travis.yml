@@ -4,6 +4,9 @@ node_js:
 branches:
   only:
     - live
+env:
+  - secure: "Ra0VmkwKLLxGbsFMCaS1nJzU7DRWWbSfeFtWmvzWJJn184rKYQVrTKzh+dNnjmDptNpUzEFWVBKUD5Zx/Nf5ZBilkrhIlQjgkStOygx6doaQXRAEdMSckxwGg/+OtjsbsjZk8GX4sEDsFi9Y800uiAmjZDdyuwxsEMcqXIowmhI="
+  - secure: "Ed2MAQR+nKbzswhBnubdQtjQ3teErCAkFF6fcs2DuZvJQ/DrrXi6OBhlFLbx/GtOTnzBt/XImVYtquORZ+0ioTEDRTmna8ht17hlRZ/J19Fd4VOcbFOF4qMoRQbCvSUqyYvpZVO4OQvSZsH6CtZsUuL3iVQtsEBErtBOn77oVRg="
 before_install:
   - openssl aes-256-cbc -K $encrypted_a71eb8336e4c_key -iv $encrypted_a71eb8336e4c_iv -in deploy/key.rsa.enc -out deploy/key.rsa -d
 install:
