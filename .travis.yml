@@ -18,5 +18,5 @@ install:
   - grunt precompile
 script: node deploy/s3.js
 after_success:
-  - rsync -e "ssh -i $PWD/deploy/key.rsa" public/assets/manifest.json deploy-gamekeller-net@gamekeller.net:/var/www/gamekeller.net/src/public/assets
-  - ssh -i $PWD/deploy/key.rsa deploy-gamekeller-net@gamekeller.net "bash -s" < deploy/server.sh
+  - rsync -e "ssh -i $PWD/deploy/key.rsa -o StrictHostKeyChecking=no" public/assets/manifest.json deploy-gamekeller-net@gamekeller.net:/var/www/gamekeller.net/src/public/assets
+  - ssh -i $PWD/deploy/key.rsa -o StrictHostKeyChecking=no deploy-gamekeller-net@gamekeller.net "bash -s" < deploy/server.sh
