@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "0.11"
+branches:
+  only:
+    - live
+before_install:
+  - openssl aes-256-cbc -K $encrypted_a71eb8336e4c_key -iv $encrypted_a71eb8336e4c_iv -in deploy/key.rsa.enc -out deploy/key.rsa -d
+  - ssh-add deploy/key.rsa
+install:
+  - npm install -g grunt-cli
+  - npm install glob mime-types aws-sdk
+  - npm install
+  - grunt bower
+  - grunt precompile
+script: node deploy/s3.js
+after_success:
+  - rsync public/assets/manifest.json deploy-gamekeller-net@gamekeller.net:/var/www/gamekeller.net/src/public/assets
+  - ssh deploy-gamekeller-net@gamekeller.net "bash -s" < deploy/server.sh

@@ -64,3 +64,7 @@ $RECYCLE.BIN/
 
 ###App###
 views/partials/rev.jade
+
+###Deploy###
+deploy/key.rsa
+deploy/key.rsa.pub
