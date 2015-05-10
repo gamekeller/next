@@ -1,6 +1,7 @@
 !function($) {
   var ranks = '"$$ getConfig().teamspeak.rankImages $$"'.split(',')
   var paths = '"$$ getConfig().teamspeak.rankImages.map(function(img) { return asset_path("img/ranks/" + img + ".png") }) $$"'.split(',')
+  var assetHost = '"$$ getConfig().assetHost $$"'
 
   function loadContent($target, $loading, $error, $info) {
     $target
@@ -26,7 +27,7 @@
             'title="' + (data.link_flair_text ? '[' + data.link_flair_text + '] ' : '') + data.title +
             '">' + data.title + '</a>' +
             ' von ' +
-            (hasRank ? '<img class="img-flair" src="' + paths[ranks.indexOf(rank)] + '" title="' + data.author_flair_text + '"> ' : '')
+            (hasRank ? '<img class="img-flair" src="' + assetHost + paths[ranks.indexOf(rank)] + '" title="' + data.author_flair_text + '"> ' : '')
             + data.author +
             '</li>').appendTo($target)
         })
