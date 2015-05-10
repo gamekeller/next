@@ -1,7 +1,14 @@
-mixin list(items)
+mixin _list(items, dontCheckActive)
   each item in items
     if item.dropdown
-      li.dropdown(class= title == item.name ? 'active' : undefined)
+
+      - var hasActive = false
+
+      if !dontCheckActive
+        each dItem in item.items
+          - if(utils.navItemIsActive(dItem)) return hasActive = true
+
+      li.dropdown(class=hasActive ? 'active' : '')
         a.dropdown-toggle(href='#', data-toggle='dropdown')
           != item.content
           i.caret
@@ -10,10 +17,22 @@ mixin list(items)
             if dItem.divider
               li.divider
             else
-              li: a(href=dItem.href)= dItem.name
+              li(class=!dontCheckActive && utils.navItemIsActive(dItem) ? 'active' : '')
+                a(href=dItem.href)= dItem.name
     else
-      li(class= title == item.name ? 'active' : undefined)
-        a(href=item.href)= item.name
+      li(class=!dontCheckActive && utils.navItemIsActive(item) ? 'active' : '')
+        if item.form
+          +form(action=item.href)
+            if item.content
+              != item.content
+            else if item.name
+              = item.name
+        else
+          a(href=item.href, title=item.title)
+            if item.content
+              != item.content
+            else if item.name
+              = item.name
 
 .navbar.navbar-inverse.navbar-fixed-top(role='navigation')
   .container
@@ -31,7 +50,7 @@ mixin list(items)
     .collapse.navbar-collapse
 
       ul.nav.navbar-nav
-        +list(nav.main)
+        +_list(nav.main)
 
       ul.nav.navbar-nav.navbar-right
-        +list(nav.right)
+        +_list(nav.right, true)

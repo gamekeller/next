@@ -1,60 +1,88 @@
 /**
  * Dependencies
  */
-var express        = require('express')
-var st             = require('st')
-var flash          = require('express-flash')
-var mongoose       = require('mongoose')
-var passport       = require('passport')
-var validator      = require('express-validator')
+var assign         = require('lodash-node/modern/objects/assign')
 var bodyParser     = require('body-parser')
 var compress       = require('compression')
-var favicon        = require('serve-favicon')
-var logger         = require('morgan')
 var cookieParser   = require('cookie-parser')
-var methodOverride = require('method-override')
-var session        = require('express-session')
+var csp            = require('helmet-csp')
 var csrf           = require('csurf')
+var error          = require('./lib/error')
 var errorHandler   = require('errorhandler')()
-var MongoStore     = require('connect-mongo')(session)
-
-/**
- * Load controllers
- */
-var commonController  = require('./controllers/common')
-var accountController = require('./controllers/account')
-var profileController = require('./controllers/profile')
-var adminController   = require('./controllers/admin')
-
-/**
- * Configuration
- */
-var secrets = require('./config/secrets')
-var pass    = require('./config/passport')
-var mincer  = require('./config/mincer')
+var express        = require('express')
+var favicon        = require('serve-favicon')
+var hbs            = require('hbs').__express
+var isRegExp       = require('lodash-node/modern/objects/isRegExp')
+var logger         = require('morgan')
+var methodOverride = require('method-override')
+var moment         = require('moment')
+var mongoose       = require('mongoose')
+var nodemailer     = require('nodemailer')
+var passport       = require('passport')
+var redis          = require('./lib/redis')
+var session        = require('express-session')
+var teamspeak      = require('./lib/teamspeak')
+var utils          = require('./lib/utils')
+var validator      = require('express-validator')
+var RedisStore     = require('connect-redis')(session)
 
 /**
  * Create Express server
  */
-var app = express()
+var app = module.exports = express()
+
+require('./lib/helpers/flash')(app)
+require('./lib/helpers/returnWith')(app)
+require('./lib/helpers/handleMongooseError')(app)
+require('./lib/helpers/resolveUrl')(app)
+require('./lib/helpers/render')(app)
+
+/**
+ * Configuration
+ */
+var config = app.config = require('./lib/config')
+var mincer = require('./lib/mincer')
+
+/**
+ * Redis
+ */
+redis.$.on('connect', function() {
+  console.log('✔ Redis connection established.')
+})
+redis.$.on('error', function() {
+  console.error('✗ Unable to connect to Redis.')
+})
 
 /**
  * Mongoose config
  */
-mongoose.connect(secrets.db)
+mongoose.connect(config.secrets.db)
+mongoose.connection.on('connected', function() {
+  console.log('✔ MongoDB connection established.')
+})
 mongoose.connection.on('error', function() {
-  console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.')
+  console.error('✗ Unable to connect to MongoDB.')
 })
 
 /**
- * Render override
+ * Teamspeak config
  */
-var render = app.response.render
+teamspeak.connect(config.teamspeak)
+teamspeak.on('connect', function() {
+  console.log('✔ TeamSpeak Server Query connection established.')
+})
+teamspeak.on('error', function() {
+  console.error('✗ Unable to connect to the TeamSpeak Server Query.')
+})
 
-app.response.render = function() {
-  this.locals.view = arguments[0].split('/').slice(-1)
-  render.apply(this, arguments)
-}
+if(!module.parent)
+  require('./lib/teamspeak/statusMonitor')
+
+/**
+ * moment
+ */
+moment.locale('de')
+app.moment = moment
 
 /**
  * Express configuration
@@ -62,44 +90,108 @@ app.response.render = function() {
 
 // General setup
 // --------------------------------
-app.enable('trust proxy')
+if(app.get('env') === 'production')
+  app.enable('trust proxy')
 app.disable('x-powered-by')
-app.set('port', process.env.PORT || 3000)
+app.set('port', config.port || process.env.PORT || 3000)
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
-app.use(st({
-  path: __dirname + '/public',
-  url: '/',
-  passthrough: true,
-  index: false
-}))
+app.engine('html', hbs)
+app.engine('txt', hbs)
 app.use(mincer.assets())
 app.use(compress())
 app.use(favicon(__dirname + '/public/favicon.ico'))
-app.use(logger(process.env.LOGFORMAT || 'dev'))
+app.use(logger(process.env.LOGFORMAT || 'dev', {
+  skip: function(req) { return /apple-touch-icon|browserconfig|favicon|mstile|robots|assets/.test(req.originalUrl.split('/')[1]) }
+}))
 app.use(cookieParser())
-app.use(bodyParser())
+app.use(bodyParser.json())
+app.use(bodyParser.json({ type: 'application/csp-report' }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(validator())
 app.use(methodOverride())
+app.use('/api', require('./lib/controllers/api'))
 app.use(session({
-  secret: secrets.sessionSecret,
-  store: new MongoStore({
-    url: secrets.db,
-    auto_reconnect: true
-  }, function() { console.log('✔ Session store connection established') })
+  name: 'sid',
+  resave: true,
+  saveUninitialized: true,
+  secret: config.secrets.session,
+  genid: function() { return '' + new mongoose.Types.ObjectId },
+  store: new RedisStore({
+    client: redis.$
+  })
 }))
+app.use(csp({
+  defaultSrc: ["'self'", 'serve.gamekeller.net'],
+  scriptSrc: ["'self'", "'unsafe-inline'", 'www.google-analytics.com'],
+  styleSrc: ["'self'", "'unsafe-inline'", 'fonts.googleapis.com'],
+  imgSrc: ["'self'", '0.gravatar.com', 'camo.gamekeller.net'],
+  fontSrc: ["'self'", 'fonts.googleapis.com', 'fonts.gstatic.com'],
+  connectSrc: ["'self'", 'www.reddit.com'],
+  sandbox: ['allow-forms', 'allow-same-origin', 'allow-scripts'],
+  reportUri: '/report-csp-violation'
+}))
+app.post('/report-csp-violation', function(req, res) {
+  if(req.headers['content-type'] !== 'application/csp-report')
+    return res.status(400).end()
+
+  console.error('CSP Violation:', JSON.stringify(req.body, null, 2))
+  res.status(200).end()
+})
 app.use(csrf())
+
+// Mailer
+// --------------------------------
+var Mailer = require('./lib/mailer')
+app.mailer = new Mailer(nodemailer.createTransport(config.mail), app.render.bind(app))
 
 // Passport
 // --------------------------------
 app.use(passport.initialize())
 app.use(passport.session())
+require('./lib/helpers/auth')(app)
+
+// Asset configuration
+// --------------------------------
+if(app.get('env') === 'development')
+  app.use('/assets', mincer.createServer())
+
+if(app.get('env') === 'development' || process.env.SIMULATE_PRODUCTION)
+  app.use(express.static(__dirname + '/public'))
+
+// Session updates
+// --------------------------------
+app.use(function(req, res, next) {
+  var now  = Date.now()
+  var sess = req.session
+
+  sess.userAgent = req.headers['user-agent']
+  sess.ipAddress = req.ip
+  sess.usedAt    = now
+
+  if(!sess.createdAt)
+    sess.createdAt = now
+
+  sess.save(next)
+})
 
 // Locals
 // --------------------------------
 app.use(function(req, res, next) {
-  var user = res.locals.user = req.user
-  res.locals.token = req.csrfToken()
+  var user = req.user
+
+  assign(res.locals, {
+    req: req,
+    config: config,
+    user: user,
+    moment: moment,
+    url: req.resolveUrl.bind(req),
+    utils: utils
+  })
+
+  utils.navItemIsActive = function(item) {
+    return item.active || (isRegExp(item.view) && item.view.test(res.activeView)) || item.view === res.activeView
+  }
 
   // Navigation items
   var nav = res.locals.nav = {
@@ -108,70 +200,86 @@ app.use(function(req, res, next) {
   }
 
   if(user) {
-    if(user.admin)
-      nav.main.push({ href: '/admin', name: 'Admin Page' })
-
-    nav.right.push({
-      dropdown: true,
-      content: '<img class="avatar" src="' + user.gravatar(60) + '"> ' + user.username,
-      items: [
-        { href: '/account', name: 'Account' },
-        { href: '/@' + user.username, name: 'Profile' },
-        { divider: true },
-        { href: '/logout', name: 'Log Out' }
-      ]
-    })
-  } else
-    nav.right.push(
-      { href: '/login' /* ?returnTo=' + req.path */, name: 'Login' },
-      { href: '/signup' /* ?returnTo=' + req.path */, name: 'Registrieren' }
+    nav.main.push(
+      { href: '/members', name: 'Mitglieder', view: 'members' }
     )
 
-  return next()
+    if(user.admin)
+      nav.main.push({ href: '/admin', name: 'Administration', view: /^admin/ })
+
+    nav.right.push(
+      { href: '/' + user.username, content: '<img class="mini-avatar" src="' + user.gravatarUrl(40) + '"> ' + user.username },
+      { href: '/account', content: '<span class="icon icon-gear"></span>', title: 'Einstellungen' },
+      { href: '/logout', form: true, content: '<button type="submit" class="btn btn-link" title="Ausloggen"><span class="icon icon-logout"></span></button>' }
+    )
+  } else
+    nav.right.push(
+      { href: '/login', name: 'Login' },
+      { href: '/signup', name: 'Registrieren' }
+    )
+
+  // Return path
+  var route = req.path.split('/')[1]
+
+  if(req.method === 'POST' || /login|logout|signup|session/i.test(route) || app.get('env') === 'development' && /apple-touch-icon|browserconfig|favicon|mstile|robots|assets/.test(route))
+    return next()
+
+  req.session.returnTo = req.path
+
+  next()
 })
-
-// Flash messages
-// --------------------------------
-app.use(flash())
-
-// Asset configuration
-// --------------------------------
-if(app.get('env') === 'development')
-  app.use('/assets', mincer.createServer())
 
 /**
  * Routes
  */
-app.use(commonController)
-app.use(accountController)
-app.use(profileController)
-app.use(adminController)
+app.use(require('./lib/controllers/common'))
+
+// Authentication
+app.use('/signup', require('./lib/controllers/auth/signup'))
+app.use('/login', require('./lib/controllers/auth/login'))
+app.use('/logout', require('./lib/controllers/auth/logout'))
+app.use('/forgot', require('./lib/controllers/auth/forgot'))
+
+app.use('/account', require('./lib/controllers/account'))
+app.use('/session', require('./lib/controllers/session'))
+app.use('/admin', require('./lib/controllers/admin'))
+app.use(require('./lib/controllers/profile'))
 
 // 404
 app.use(function(req, res, next) {
-  return next(new Error(404))
+  return next(new error.NotFound)
 })
 
 // Error handler
 // --------------------------------
 app.use(function(err, req, res, next) {
-  if(err.message === '404' || err.status === 404)
-    if((req.accepts('html') && !err.force) || err.force === 'html')
-      res.status(404).render('404')
-    else if((req.accepts('json') && !err.force) || err.force === 'json')
-      res.status(404).send({ error: 'Not found' })
-    else
-      res.status(404).type('txt').send('Not found')
+  if(err.code === 'EBADCSRFTOKEN')
+    err = new error.Forbidden('Invalid CSRF token')
+
+  if(!(err instanceof error.HTTPError))
+    if(app.get('env') === 'production') {
+      console.error(err.stack)
+      err = new error.HTTPError(500)
+    } else {
+      return errorHandler.apply(null, Array.prototype.slice.call(arguments))
+    }
+
+  var isApi = req.url.indexOf('/api') === 0
+
+  res.status(err.status)
+
+  if(req.accepts('html') && !isApi)
+    res.type('html').send(err.toHTMLString())
+  else if(req.accepts('json'))
+    res.json(err)
   else
-    if(app.get('env') === 'production')
-      res.status(500).send('Something went wrong, but fear not! A team of highly trained monkeys has been dispatched to deal with this situation. If you see them, run.')
-    else
-      errorHandler.apply(null, arguments)
+    res.type('txt').send(err.toString())
 })
 
 /**
  * Start the server
  */
-app.listen(app.get('port'), function() {
-  console.log('✔ Express server listening on port %d in %s mode', app.get('port'), app.get('env'))
-})
+if(!module.parent)
+  app.listen(app.get('port'), function() {
+    console.log('✔ Express server listening on port %d in %s mode.', app.get('port'), app.get('env'))
+  })

@@ -1,0 +1,9 @@
+mixin timestamp(unix, disableSuffix)
+  if unix
+    - var noSuffix  = disableSuffix ? 'false' : 'true'
+    - var time      = moment(unix)
+    - var formatted = time.format('dddd, Do MMMM YYYY, HH:mm:ss [Uhr]')
+    if attributes.absolute
+      time(class=attributes.classes, datetime=time.toISOString(), title=formatted)= formatted
+    else
+      time.js-timestamp(class=attributes.classes, datetime=time.toISOString(), title=formatted, data-unix=unix, data-suffix=noSuffix)= time.fromNow(disableSuffix)

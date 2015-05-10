@@ -1,0 +1,39 @@
+.account-session-indicator {
+  float: left;
+  width: 8px;
+  height: 8px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background-color: #ccc;
+
+  &.active {
+    background-color: @brand-success;
+  }
+}
+
+.account-session-icon {
+  float: left;
+  width: 32px;
+  margin: 1px 0 0 15px;
+  text-align: center;
+
+  .account-session-dormant & {
+    color: #bbb;
+  }
+
+  &.icon-device-tablet {
+    padding-left: 1px;
+  }
+}
+
+.account-session-details {
+  margin-top: 40px;
+
+  @media (min-width: @screen-md-min) {
+    margin: 0 90px 0 70px;
+  }
+}
+
+.account-session-revoke {
+  float: right;
+}

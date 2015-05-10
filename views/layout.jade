@@ -1,31 +1,28 @@
+include mixins/form
+include mixins/timestamp
+include mixins/markdownEditor
+include mixins/nav
+include mixins/profileCard
+
 doctype html
-html
+html(lang='de')
   head
-    if title === 'Gamekeller'
-      title Gamekeller
-    else
-      title #{title} | Gamekeller
     include partials/head
-    != css('css/main.css')
-  body(class= 'page-' + view)
+  body
 
     #wrapper
       include partials/nav
 
       #content-wrapper
-        if special
-          .container
-            block content
-        else
-          #content.container
-            include partials/flash
-
-            block content
+        #content.container
+          block content
 
     #footer
       .container
         include partials/footer
 
     != js('js/main.js')
+    if customJs
+      != js('js/pages/' + customJs + '.js')
 
     include partials/analytics

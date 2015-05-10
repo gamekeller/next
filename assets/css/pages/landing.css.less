@@ -1,0 +1,238 @@
+@import "../variables.less";
+@import "../../bower/bootstrap/less/mixins.less";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  padding: 0;
+}
+
+#actions {
+  background-color: #23262a;
+
+  @media (max-width: @screen-sm-min) {
+    .container {
+      padding: 0;
+    }
+
+    ul {
+      display: table;
+      margin: 0;
+      table-layout: fixed;
+      width: 100%;
+
+      li {
+        display: table-cell;
+        width: 100%;
+        text-align: center;
+
+        a {
+          padding: 12px 8px;
+        }
+
+        &:not(:last-child) a {
+          border-right: 1px solid #2d3034;
+        }
+      }
+    }
+  }
+
+  a {
+    color: #fff;
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      background-color: transparent;
+    }
+  }
+
+  @media (min-width: @screen-sm-min) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: transparent;
+
+    a {
+      position: relative;
+      color: #fff;
+
+      &:before {
+        content: '';
+        position: absolute;
+        right: 8px;
+        bottom: 7px;
+        left: 8px;
+        height: 1px;
+        background-color: #fff;
+        .scaleX(0);
+        .transition-transform(.2s ease-in-out);
+      }
+
+      &:hover,
+      &:focus {
+        &:before {
+          .scaleX(1);
+        }
+      }
+    }
+  }
+}
+
+.small-container {
+  padding-top: 0;
+  padding-bottom: 0;
+  text-align: center;
+}
+
+.masthead {
+  display: table;
+  width: 100%;
+  height: 100%;
+  padding: 0 15px;
+  background-color: #5d1402;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  text-align: center;
+
+  .inner {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  @media (min-height: 920px) and (min-width: @screen-sm) {
+    .content {
+      margin-top: -200px;
+    }
+  }
+
+  .title,
+  .slogan,
+  .details {
+    margin: 0;
+    color: #fff;
+  }
+
+  .title {
+    font-size: 96px;
+    margin-bottom: 20px;
+
+    .icon {
+      display: block;
+    }
+  }
+
+  .slogan {
+    margin-bottom: 10px;
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 100;
+    letter-spacing: -1px;
+  }
+
+  .details {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: rgba(255, 255, 255, .6);
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+
+  .btn {
+    padding: 12px 16px 10px;
+    border: 0;
+    background-color: #fff;
+    color: @brand-primary;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
+    .transition(all .15s ease);
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 8px 12px rgba(0, 0, 0, .15);
+      .translate(0, -4px);
+    }
+
+    &:active {
+      box-shadow: inset 0 3px 6px rgba(0, 0, 0, .25);
+      .translate(0, 0);
+    }
+  }
+
+  @media (min-width: @screen-sm-min) {
+    padding: 0;
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .15);
+
+    .title {
+      font-size: 128px;
+    }
+
+    .slogan {
+      margin-bottom: 20px;
+      font-size: 64px;
+    }
+
+    .details {
+      font-size: 26px;
+    }
+  }
+}
+
+.callout {
+  padding: 50px 40px;
+  max-width: 600px;
+
+  h1 {
+    color: #c0c9d5;
+    font-weight: 100;
+  }
+
+  h4 {
+    color: #7c838d;
+    line-height: 1.5;
+  }
+
+  @media (max-width: @screen-sm) {
+    h1 {
+      font-size: 32px;
+    }
+
+    h4 {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: @screen-sm-min) {
+  #teamspeak-btn {
+    display: none;
+  }
+}
+
+#footer {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 25px;
+    background-image: linear-gradient(rgba(0, 0, 0, .1), transparent);
+  }
+
+  .footer {
+    margin-top: 0;
+  }
+}

@@ -1,8 +1,62 @@
 extends ../layout
 
+mixin bio(verb, visible)
+  - verb = verb || 'ändern'
+
+  p Hier hast du die Möglichkeit deinem Profil etwas Substanz zu verleihen.
+  +form
+    +markdownEditor(placeholder='Ein paar Worte zur Lage der Nation...', name='profile[bio]', visible=visible)
+      if hasContent
+        != profile.bio.source
+
+    .form-group
+      button.btn.btn-primary(type='submit')= 'Biografie ' + verb
+
 block content
 
-  .page-header
-    h1
-      img(src='#{profile.gravatar(60)}')
-      = profile.username
+  - var hasContent = !!profile.bio.rendered
+  - var isViewingOwnProfile = user && user.username === profile.username
+
+  if !hasContent && !isViewingOwnProfile
+    include ../partials/flash
+
+    .profile.is-empty
+      +profileCard(profile)
+
+  else
+    .profile.row
+      .col-md-3
+        .sticky-sidebar.js-sticky-sidebar
+          +profileCard(profile)
+
+      .col-md-9
+        include ../partials/flash
+
+        if isViewingOwnProfile
+          .panel.panel-default
+            if hasContent
+              .panel-heading.clearfix
+                h3.panel-title.pull-left Biografie
+                ul.nav.nav-tabs.pull-right
+                  li.active
+                    a(href='#profile-bio', role='tab', data-toggle='tab') Ansehen
+                  li
+                    a(href='#profile-bio-edit', role='tab', data-toggle='tab') Bearbeiten
+              .panel-body
+                .tab-content
+                  #profile-bio.markdown-body.tab-pane.active
+                    != profile.bio.rendered
+                  #profile-bio-edit.tab-pane
+                    +bio
+            else
+              .panel-heading
+                h3.panel-title Biografie
+              .panel-body
+                +bio('hinzufügen', true)
+
+        else
+          .panel.panel-default
+            .panel-heading
+              h3.panel-title Biografie
+            .panel-body.markdown-body
+              != profile.bio.rendered

@@ -1,0 +1,104 @@
+extends ../layout
+
+block content
+
+  .row
+    include _nav
+
+    .col-md-9
+
+      include ../partials/flash
+
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title E-Mail-Adresse
+        .panel-body
+          +form(type='horizontal')
+
+            .form-group
+              label.col-sm-3.control-label E-Mail-Adresse
+              .col-sm-9
+                input.form-control(type='email', name='account[email]', value=user.email)
+
+            .form-group
+              label.col-sm-3.control-label Status
+              .col-sm-9
+                p.form-control-static
+                  if user.emailVerified
+                    span.icon.icon-check.icon-inline.text-success
+                    | Verifiziert
+                  else
+                    span.icon.icon-cross.icon-inline.text-danger
+                    | Unverifiziert&nbsp;
+                    if user.emailVerification.resendTries <= 0
+                      button.btn.btn-default.btn-sm.btn-inline.visually-disabled.js-tooltip(type='button', tabindex='-1', title=config.emailVerification.messages.resendThresholdDepleted) E-Mail erneut senden
+                    else if Date.now() - user.emailVerification.sentAt <= config.emailVerification.resendCooldown * 1e3
+                      button.btn.btn-default.btn-sm.btn-inline.visually-disabled.js-tooltip.js-resend-cooldown(type='button', tabindex='-1', title=config.emailVerification.messages.resendOnCooldown, data-ready-at='#{user.emailVerification.sentAt + config.emailVerification.resendCooldown * 1e3}') E-Mail erneut senden
+                    else
+                      button.btn.btn-default.btn-sm.btn-inline(type='submit', formaction=url('./verify/email/resend')) E-Mail erneut senden
+
+
+            .form-group
+              .col-sm-offset-3.col-sm-9
+                button.btn.btn-primary(type='submit') E-Mail-Adresse ändern
+
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title
+            | Passwort
+            small.small-pulled-right
+              | Passwort zuletzt geändert&nbsp;
+              +timestamp(user.passwordChangedAt)
+        .panel-body
+          +form
+
+            .form-group.floating-label
+              label(for='currentPassword') Aktuelles Passwort
+              input.form-control(type='password', id='currentPassword', name='currentPassword', placeholder='Aktuelles Passwort', data-placeholder='••••••••••••••••••••••••')
+
+            .form-group.floating-label
+              label(for='newPassword') Neues Passwort
+              input.form-control.js-password(type='password', id='newPassword', name='account[password]', placeholder='Neues Passwort', data-placeholder='••••••••••••••••••••••••')
+
+            .form-group.floating-label
+              label(for='newPasswordConfirmation') Neues Passwort wiederholen
+              input.form-control.js-confirm-password(type='password', id='newPasswordConfirmation', name='confirmPassword', placeholder='Neues Passwort wiederholen', data-placeholder='••••••••••••••••••••••••')
+
+            .form-group
+              button.btn.btn-primary.btn-pull-left(type='submit') Passwort ändern
+              a.btn.btn-default.btn-pull-right(href='/forgot') Passwort vergessen
+
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title
+            | Teamspeak-Verknüpfung&nbsp;
+            small(title='Wenn du deinen Account mit deiner Teamspeak-Identität verknüpfst, wird dein Teamspeak-Rang auch auf deinem Profil angezeigt.').help.icon.icon-help.js-tooltip
+        .panel-body
+          if user.teamspeakLinked
+            +form(type='horizontal')
+
+              .form-group
+                label.col-sm-3.control-label Teamspeak-ID
+                .col-sm-9
+                  p.form-control-static= user.teamspeakUid
+
+              .form-group
+                .col-sm-offset-3.col-sm-9
+                  button.btn.btn-default(type='submit', formaction='/account/teamspeak/unlink') Verknüpfung aufheben
+          else
+            p Ändere deinen Teamspeak-Nickname in den folgenden Code, um eine Teamspeak-Identität mit deinem Account zu verknüpfen:
+
+            +form(action='/account/teamspeak/link')
+
+              .form-group.floating-label.floating-label-populated
+                label Code
+                .form-control-group.has-right-icon
+                  input.form-control.copy-field.js-copy-field(type='text', readonly, value=user.teamspeakLink.code)
+                  .form-control-overlay.is-right
+                    button.btn.btn-link.js-tooltip(type='submit', formaction='/account/teamspeak/regenerateCode', title='Neuen Code generieren', data-container='body')
+                      span.icon.icon-reload
+
+              .form-group
+                button.btn.btn-primary(type='submit') Fortfahren
+
+      a.text-dark.pull-right(href=url('./delete')) Account löschen

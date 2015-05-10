@@ -1,6 +1,13 @@
+meta(charset='utf-8')
+meta(http-equiv='X-UA-Compatible', content='IE=edge')
+meta(name='viewport', content='width=device-width, initial-scale=1')
+if title === 'Gamekeller'
+  title Gamekeller
+else
+  title #{title} · Gamekeller
 script.
   var _prum=[["id","54c90d00abe53d0b61635bd3"],["mark","firstbyte",(new Date).getTime()]];(function(){var b=document.getElementsByTagName("script")[0],a=document.createElement("script");a.async="async";a.src="//rum-static.pingdom.net/prum.min.js";b.parentNode.insertBefore(a,b)})();
-link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Roboto:100,300,400,500')
+link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,500italic,700,700italic')
 link(rel='apple-touch-icon', sizes='57x57', href='/apple-touch-icon-57x57.png')
 link(rel='apple-touch-icon', sizes='114x114', href='/apple-touch-icon-114x114.png')
 link(rel='apple-touch-icon', sizes='72x72', href='/apple-touch-icon-72x72.png')
@@ -16,3 +23,8 @@ link(rel='icon', type='image/png', href='/favicon-16x16.png', sizes='16x16')
 link(rel='icon', type='image/png', href='/favicon-32x32.png', sizes='32x32')
 meta(name='msapplication-TileColor', content='#da532c')
 meta(name='msapplication-TileImage', content='/mstile-144x144.png')
+!= css('css/main.css')
+if customCss
+  != css('css/pages/' + customCss + '.css')
+script.
+  document.documentElement.classList.add('js')

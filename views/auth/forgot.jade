@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+
+  .small-container
+
+    include ../partials/flash
+
+    .panel.panel-default.panel-lg
+
+      .panel-heading
+        h3.panel-title Passwort vergessen
+
+      .panel-body
+        p Solltest du das Passwort zu deinem Account vergessen haben, kannst du hier einen Rücksetzungslink anfordern, der dir per E-Mail zugesandt wird.
+
+        +form
+          .form-group.floating-label
+            label(for='email') E-Mail-Adresse
+            input.form-control(type='email', id='email', name='email', placeholder='username@example.com')
+
+          .form-group
+            button.btn.btn-primary(type='submit') Rücksetzung anfordern

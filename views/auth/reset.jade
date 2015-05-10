@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+
+  .small-container
+
+    include ../partials/flash
+
+    .panel.panel-default.panel-lg
+
+      .panel-heading
+        h3.panel-title Passwort zurücksetzen
+
+      .panel-body
+        p Solltest du das Passwort zu deinem Account vergessen haben, kannst du hier einen Rücksetzungslink anfordern, der dir per E-Mail zugesandt wird.
+
+        +form
+          .form-group.floating-label
+            label(for='password') Passwort
+            input.form-control(type='password', id='password', name='password', placeholder='Passwort', data-placeholder='••••••••••••••••••••••••')
+
+          .form-group.floating-label
+            label(for='password') Passwort wiederholen
+            input.form-control(type='password', id='confirmPassword', name='confirmPassword', placeholder='Passwort wiederholen', data-placeholder='••••••••••••••••••••••••')
+
+          .form-group
+            button.btn.btn-primary(type='submit') Passwort ändern

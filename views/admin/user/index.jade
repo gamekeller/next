@@ -1,0 +1,108 @@
+extends ../../layout
+
+block content
+
+  .row
+    include _nav
+
+    .col-md-9
+
+      include ../../partials/flash
+
+      .panel.panel-default.panel-lg
+
+        .panel-heading
+          h3.panel-title User "#{profile.username}" bearbeiten
+
+        .panel-body
+          +form
+            .form-group.floating-label.floating-label-populated
+              label ID
+              p.form-control-static #{profile._id}
+              small.help-block
+                | Registriert&nbsp;
+                +timestamp(profile.createdAt)
+
+            .form-group.floating-label.floating-label-populated
+              label(for='username') Username
+              input.form-control(type='text', id='username', name='user[username]', placeholder='Username', value!=profile.username)
+
+            .form-group.floating-label
+              label(for='password') Passwort ändern
+              input.form-control(type='password', id='password', name='user[password]', placeholder='Passwort')
+              small.help-block
+                | Passwort zuletzt geändert&nbsp;
+                +timestamp(profile.passwordChangedAt)
+                button.btn.btn-default.btn-xs.btn-pull-right(type='submit', formaction=url('./sendPasswordReset')) Zurücksetzungsemail senden
+
+            if profile.forgotPassword.code
+              .form-group.floating-label.floating-label-populated
+                label Passwortzurücksetzung
+                .floating-label-body
+                  dl.dl-horizontal
+                    dt Letzte E-Mail gesendet
+                    dd
+                      +timestamp(profile.forgotPassword.sentAt)
+                    dt
+                      label(for='passwordResetRemainingTries') Verbleibende Versuche
+                    dd
+                      input.form-control(type='number', id='passwordResetRemainingTries', name='user[forgotPassword][resendTries]', value!=profile.forgotPassword.resendTries)
+
+            .form-group.floating-label.floating-label-populated
+              label(for='email') E-Mail-Adresse
+              input.form-control(type='email', id='email', name='user[email]', placeholder='username@example.com', value!=profile.email)
+
+            .form-group.floating-label.floating-label-populated
+              label E-Mail-Verifizierung
+              if profile.emailVerification.code
+                .floating-label-body
+                  dl.dl-horizontal
+                    dt Verifiziert
+                    dd
+                      input(type='checkbox', name='user[emailVerified]', checked=profile.emailVerified)
+                      if !profile.emailVerified
+                        | &nbsp;
+                        button.btn.btn-default.btn-sm.btn-inline(type='submit', formaction=url('./sendEmailVerification')) E-Mail erneut senden
+                    dt Letzte E-Mail gesendet
+                    dd
+                      +timestamp(profile.emailVerification.sentAt)
+                    dt
+                      label(for='emailVerificationRemainingTries') Verbleibende Versuche
+                    dd
+                      input.form-control(type='number', id='emailVerificationRemainingTries', name='user[emailVerification][resendTries]', value!=profile.emailVerification.resendTries)
+              else
+                ul.list-inline
+                  li
+                    .checkbox
+                      label
+                        input(type='checkbox', name='user[emailVerified]', checked=profile.emailVerified)
+                        | Verifiziert
+                  li
+                    a.btn.btn-default.btn-sm(href=url('./sendEmailVerification')) Bestätigungsmail senden
+
+            .form-group.floating-label(class=profile.teamspeakLinked ? 'floating-label-populated' : '')
+              label(for='teamspeakUid') Teamspeak-Verknüpfung
+              input.form-control(type='text', id='teamspeakUid', name='user[teamspeakUid]', placeholder='Teamspeak Client-UID', value=profile.teamspeakUid)
+
+            .form-group.floating-label.floating-label-populated
+              label Rechte
+              .checkbox
+                label
+                  input(type='checkbox', name='user[admin]', checked=profile.admin)
+                  | Admin
+
+            h3
+              | Profil&nbsp;
+              small
+                a(href=url('/#{profile.username}'), target='_blank')
+                  span.icon.icon-open
+
+            .form-group.floating-label.floating-label-populated
+              label Biografie
+              .floating-label-body
+                +markdownEditor(placeholder='Biografie...', name='user[profile][bio][source]')
+                  if profile.bio.source
+                    != profile.bio.source
+
+            .form-group
+              button.btn.btn-primary(type='submit') User speichern

@@ -1,0 +1,58 @@
+mixin securityLog(log)
+  mixin list(obj)
+    each val, key in obj
+      if val && val.ua
+        dt #{key}:
+        dd
+          p.snuggle-down(title=val.description) #{val.name} auf #{val.os}
+          small.text-muted #{val.ua}
+      else if utils.isPlainObject(val)
+        dt #{key}:
+        dd
+          .descending-details
+            dl
+              +list(val)
+      else
+        if /At$/.test(key)
+          dt #{key.replace(/At$/, '')}:
+          dd: +timestamp(val)(absolute=true)
+        else
+          dt #{key}:
+          dd #{val}
+
+  if log.length
+    ul.account-history.panel-list
+      each item in log
+        li.account-history-item.panel-list-item
+          strong.account-history-item-action #{item.action}
+          .account-history-item-timestamp
+            +timestamp(item.createdAt)
+          .account-history-item-details.js-expander-scope
+            span #{item.description}
+            a.expander.js-expander-toggle(href='#') …
+            .account-history-item-info.expander-target.js-expander-target
+              dl
+                dt Zeitpunkt:
+                dd
+                  +timestamp(item.createdAt)(absolute=true)
+
+                dt Verantwortlicher:
+                dd
+                  .descending-details
+                    if item.actor.sessionId === req.session.id
+                      p.text-active Ging von deiner aktuellen Session aus.
+
+                    dl
+                      dt IP-Adresse:
+                      dd #{item.actor.ipAddress}
+
+                      dt Browser:
+                      dd
+                        p.snuggle-down(title=item.actor.platform.description) #{item.actor.platform.name} auf #{item.actor.platform.os}
+                        small.text-muted #{item.actor.userAgent}
+
+                if item.details
+                  +list(item.details)
+  else
+    .panel-body
+      p Keine Einträge vorhanden.

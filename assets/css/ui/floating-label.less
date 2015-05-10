@@ -1,0 +1,85 @@
+@transition-duration: .25s;
+@transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+@transition-timing-function: ease;
+
+.floating-label {
+  padding-top: 4px;
+  position: relative;
+
+  &,
+  > label {
+    transition: all @transition-duration @transition-timing-function;
+  }
+
+  > label {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-weight: 400;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #a5a5a5;
+    pointer-events: none;
+    transform: translate(0, 4px);
+
+    .js & {
+      display: inline-block;
+    }
+  }
+
+
+  > .form-control {
+    padding-top: 0;
+    height: auto;
+
+    .js &::placeholder {
+      opacity: 0;
+      transition: opacity @transition-duration @transition-timing-function;
+    }
+  }
+
+  > .form-control-static {
+    padding-bottom: 0;
+  }
+
+  .checkbox,
+  .radio {
+    margin: 0;
+  }
+}
+
+// Make floating labels look acceptable in IE10+
+_:-ms-input-placeholder, :root.js .floating-label > .form-control:-ms-input-placeholder {
+  opacity: 1;
+  color: transparent;
+}
+
+.floating-label-active,
+.floating-label-populated {
+  padding-top: 22px;
+
+  .floating-label-body {
+    padding-top: 4px;
+  }
+
+  > label {
+    display: inline-block;
+    transform: scale(.8) translate(-13%, 5px);
+  }
+
+  &.has-error > label {
+    color: @brand-danger;
+  }
+}
+
+.js .floating-label-active {
+  > label {
+    color: @input-border-focus;
+  }
+
+  > .form-control::placeholder {
+    opacity: 1;
+  }
+}

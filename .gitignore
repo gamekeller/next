@@ -48,7 +48,7 @@ Icon
 
 # SublimeText project files
 *.sublime-workspace
-
+*.sublime-project
 
 ###Windows###
 
@@ -64,6 +64,7 @@ $RECYCLE.BIN/
 
 ###App###
 views/partials/rev.jade
+config.local.json
 
 ###Deploy###
 deploy/key.rsa

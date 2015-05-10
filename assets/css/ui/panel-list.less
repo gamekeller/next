@@ -1,0 +1,43 @@
+.panel-list {
+  &:extend(.list-unstyled all);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.panel-list-item {
+  display: block;
+  padding: 15px 20px;
+  border-top: 1px solid @gray-lighter;
+  color: #999;
+
+  &:hover {
+    background-color: @list-group-hover-bg;
+  }
+
+  &.active {
+    background-color: #fff;
+    color: #777;
+  }
+
+  .text-muted {
+    color: #c0c0c0;
+  }
+
+  .panel-lg & {
+    padding: 15px 40px;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  a& {
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: @brand-primary;
+    }
+  }
+}

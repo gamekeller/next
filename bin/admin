@@ -1,0 +1,228 @@
+#!/usr/bin/env node
+'use strict'
+
+var repl     = require('repl')
+var mongoose = require('mongoose')
+var redis    = require('../lib/redis')
+var config   = require('../lib/config')
+var User     = require('../lib/models/User')
+
+function pad(str, width) {
+  var len = Math.max(0, width - str.length)
+  return str + Array(len + 1).join(' ')
+}
+
+function toggleAdmin(state) {
+  return function(username, cb) {
+    User.update({ username: username }, { admin: state }, function(err, numberAffected) {
+      if(err)
+        return cb('Something went wrong: ' + err)
+      if(numberAffected === 0)
+        return cb('User "' + username + '" was not found!')
+
+      cb('Successfully ' + (state ? 'granted' : 'removed') + ' admin powers ' + (state ? 'to' : 'from') + ' "' + username + '"!')
+    })
+  }
+}
+
+function logoutUser(username, cb) {
+  User.findOne({ username: username }, 'sessions', function(err, user) {
+    if(err)
+      return cb('Something went wrong: ' + err)
+    if(!user)
+      return cb('User "' + username + '" was not found!')
+
+    var cmds = []
+
+    user.sessions.forEach(function(id) {
+      cmds.push(['del', 'sess:' + id])
+    })
+
+    redis.$.multi(cmds).exec(function(err, res) {
+      if(err)
+        return cb('Something went wrong: ' + err)
+
+      user.sessions = []
+
+      user.save(function(err) {
+        if(err)
+          return cb('Something went wrong: ' + err)
+
+        cb('Successfully logged "' + username + '" out.')
+      })
+    })
+  })
+}
+
+var commands = {
+  'admin': {
+    help: 'Grant a user admin powers.',
+    args: '<username>',
+    fn: toggleAdmin(true)
+  },
+  'remove-admin': {
+    help: 'Remove admin powers from a user.',
+    args: '<username>',
+    fn: toggleAdmin(false)
+  },
+  'logout': {
+    help: 'Destroy all sessions of a user.',
+    args: '<username>',
+    fn: logoutUser
+  },
+  'set-password': {
+    help: 'Set the password of a user.',
+    args: '<username> <password>',
+    fn: function(args, cb) {
+      var creds    = args.split(' ')
+      var username = creds[0]
+      var password = creds[1]
+
+      User.findOne({ username: username }, function(err, user) {
+        if(err)
+          return cb('Something went wrong: ' + err)
+        if(!user)
+          return cb('User "' + username + '" was not found!')
+
+        user.password = password
+
+        user.save(function(err) {
+          if(err)
+            return cb('Something went wrong: ' + err)
+
+          logoutUser(username, function(msg) {
+            console.log(msg)
+            cb('Successfully updated the password of "' + username + '"!')
+          })
+        })
+      })
+    }
+  },
+  'disconnect-ts-id': {
+    help: 'Disconnect a Teamspeak-ID from any user it is connected to.',
+    args: '<teamspeak-id>',
+    fn: function(id, cb) {
+      User.findOne({ teamspeakUid: id }, function(err, user) {
+        if(err)
+          return cb('Something went wrong: ' + err)
+        if(!user)
+          return cb('The Teamspeak-ID "' + id + '" isn\'t used.')
+
+        user.teamspeakUid = ''
+
+        user.save(function(err) {
+          if(err)
+            return cb('Something went wrong: ' + err)
+
+          cb('Successfully disconnected the Teamspeak-ID "' + id + '" from the user "' + user.username + '".')
+        })
+      })
+    }
+  },
+  'help': {
+    help: 'Display a help message.',
+    args: '[command]',
+    fn: function(cmd, cb) {
+      var cmds     = Object.keys(commands)
+      var fullCmds = cmds.map(function(cmd) {
+        var args = commands[cmd].args
+        return cmd + (args ? ' ' + args : '')
+      })
+      var width = fullCmds.reduce(function(max, command) {
+        return Math.max(max, command.length)
+      }, 0)
+
+      if(cmd) {
+        cb([
+          '',
+          '  Usage: ' + cmd + ' ' + commands[cmd].args,
+          '',
+          '  ' + commands[cmd].help,
+          ''
+        ].join('\n'))
+      } else {
+        cb([
+          '',
+          '  CLI for the Gamekeller website',
+          '',
+          '  Commands:\n',
+          cmds.map(function(cmd, i) {
+            return pad(fullCmds[i], width) + '   ' + commands[cmd].help
+          }).join('\n').replace(/^/gm, '    '),
+          ''
+        ].join('\n'))
+      }
+    },
+  },
+  'exit': {
+    help: 'Exit this program.',
+    fn: function() {
+      this.emit('exit')
+    }
+  }
+}
+
+var status = {
+  mongo: 0,
+  redis: 0
+}
+
+function startRepl() {
+  if(!status.mongo || !status.redis) return
+
+  console.log('')
+
+  var r = repl.start({
+    useColors: true,
+    eval: function(raw, context, filename, cb) {
+      var input = raw.replace(/[\(\)]/g, '').trim().split(' ')
+      var name  = input.shift()
+      var cmd   = commands[name]
+
+      if(cmd) {
+        if(cmd.args) {
+          var optArgs = cmd.args.match(/\[[^\]]+\]/g) || []
+          var reqArgs = cmd.args.match(/<[^>]+>/g) || []
+
+          if(input.length < reqArgs.length || input.length > reqArgs.length + optArgs.length)
+            return cb('Arguments do not match. Try "help ' + name + '".')
+        }
+
+        cmd.fn.call(r, input.join(' '), cb)
+      } else {
+        cb('Unknown command. Try "help".')
+      }
+    }
+  })
+
+  r.on('exit', function() {
+    mongoose.connection.close(function() {
+      console.log('Bye!')
+      process.exit()
+    })
+  })
+}
+
+mongoose.connect(config.secrets.db)
+
+mongoose.connection.on('error', function() {
+  console.error('✗ Unable to connect to MongoDB.')
+  process.exit(1)
+})
+
+mongoose.connection.on('connected', function() {
+  console.log('✔ MongoDB connection established.')
+  status.mongo = 1
+  startRepl()
+})
+
+redis.$.on('error', function() {
+  console.error('✗ Unable to connect to Redis.')
+  process.exit(1)
+})
+
+redis.$.on('ready', function() {
+  console.log('✔ Redis connection established.')
+  status.redis = 1
+  startRepl()
+})

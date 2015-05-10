@@ -1,0 +1,50 @@
+.expander {
+  display: inline-block;
+  height: 12px;
+  margin: 0 5px;
+  padding: 0 5px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 5px;
+  color: @gray-light;
+  vertical-align: middle;
+  background-color: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: @gray-light;
+    background-color: #d0d0d0;
+  }
+
+  &:focus {
+    color: @gray-light;
+  }
+
+  &:active,
+  &.active {
+    color: #fff;
+    background-color: @brand-active;
+  }
+}
+
+.expander-target {
+  display: none;
+  visibility: hidden;
+  margin-top: 12px;
+
+  &.active {
+    display: block;
+    visibility: visible;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}

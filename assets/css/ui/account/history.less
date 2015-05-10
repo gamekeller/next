@@ -1,0 +1,24 @@
+.account-history-item-action {
+  float: left;
+
+  @media (min-width: @screen-md-min) {
+    &:after {
+      content: '—';
+      color: #999;
+      margin: 0 4px;
+    }
+  }
+}
+
+.account-history-item-details {
+  margin-top: 20px;
+
+  @media (min-width: @screen-md-min) {
+    margin-top: 0;
+    overflow: hidden;
+  }
+}
+
+.account-history-item-timestamp {
+  float: right;
+}

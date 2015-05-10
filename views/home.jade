@@ -1,33 +1,83 @@
-doctype html
-html
-  head
-    title Gamekeller
-    include partials/head
-    != css('css/main.css')
-    != css('css/pages/home.css')
-  body(class= 'page-' + view)
+extends layout
 
-    .masthead
-      .inner
-        .content.small-container
-          h1.title
-            span.icon.icon-gamekeller
-            span.sr-only Gamekeller
-          h2.slogan Dein Zuhause im Internet
-          h3.details.
-            Wir sind eine multinationale Gaming-Community, die sich auf maximalen Komfort konzentriert.
-          .buttons
-            a.btn(href='ts3server://gamekeller.net?port=9987') Schau auf unserem Teamspeak vorbei!
+mixin message
+  if !user.teamspeakLinked || !hasFriends
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title Erste Schritte
+      .panel-body
+        p
+          | Willkommen auf der Homepage von Gamekeller!
+        p
+          | Hier ein paar Vorschläge, die du jetzt auf der Website erledigen kannst:
+          ul
+            if !user.teamspeakLinked
+              li
+                a(href='') Verknüpfe deinen Account mit deiner Teamspeak-Identität
+                br
+                | Durch die Verknüpfung wird dein Teamspeak-Rang auch auf <a href="/#{user.username}">deinem Profil</a> angezeigt.
+            if !hasFriends
+              li
+                b Füge jemanden als Freund hinzu
+                br
+                | Dadurch wird dir zum Beispiel auf dieser Seite angezeigt, sobald er im Teamspeak online ist, vorausgesetzt er hat seinen Account mit seiner Teamspeak-Identität verknüpft.
 
+mixin reddit
+  .panel.panel-default.js-reddit
+    .panel-heading
+      h3.panel-title
+        | Neues aus dem Subreddit
+        small.small-pulled-right
+          button.btn.btn-link.btn-title.panel-title-right-btn.js-reddit-reload(type='button', title='Aktualisieren')
+            span.icon.icon-reload
 
-    #footer
-      .container
-        .callout.small-container
-          h1 Wir sind noch nicht ganz fertig.
-          h4 Während wir noch fleißig an der Website tüfteln, kannst Du uns ja schon mal besuchen kommen. Wir freuen uns auf Dich!
+    .panel-body
+      noscript: style .js-reddit-error { display: block !important; }
+      p.snuggle-down.text-danger.js-reddit-error.hide Beiträge konnten nicht geladen werden.
+      p.snuggle-down.text-muted.js-reddit-loading Laden...
+      p.js-reddit-info.hide
+        | Die drei neusten Beiträge aus&nbsp;
+        a(href='http://www.reddit.com/r/gamekeller') /r/gamekeller
+        | .
+    ul.panel-list.js-reddit-target.hide
 
-        include partials/footer
+mixin friendsOnTeamspeak
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title Freunde jetzt online im Teamspeak
+    .panel-body
+      if friendsOnTeamspeak.length
+        p Es #{(friendsOnTeamspeak.length > 1 ? 'sind ' : 'ist ') + friendsOnTeamspeak.length} deiner Freunde jetzt im Teamspeak online.
+      else
+        p Keiner deiner Freunde ist momentan auf dem Teamspeak online.
+    if friendsOnTeamspeak.length
+      ul.panel-list
+        each friend in friendsOnTeamspeak
+          each con in friend.teamspeakConnections
+            li.panel-list-item
+              if friend.teamspeakRank
+                img.img-flair(src=asset_path('img/ranks/#{friend.teamspeakRank.toLowerCase()}.png'))
+                | &nbsp;
+              a(href='/#{friend.username}') #{friend.username}
+              |  im Channel #{con.currentChannel.name} als #{con.nickname}
+              a.pull-right.hidden-sm.hidden-xs(href='ts3server://#{config.teamspeak.url}?port=9987&cid=#{con.currentChannel.id}') Hinterherjoinen
 
-    != js('js/main.js')
+block content
 
-    include partials/analytics
+  - var hasFriends = user.friends.length
+
+  include partials/flash
+
+  h1 Home
+
+  .row
+    .col-md-5.column
+      if hasFriends
+        +message
+      +reddit
+
+    .col-md-7.column
+      if hasFriends
+        +friendsOnTeamspeak
+      else
+        +message

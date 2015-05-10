@@ -1,0 +1,33 @@
+extends ../layout
+
+block content
+
+  .small-container
+
+    include ../partials/flash
+
+    .panel.panel-default.panel-lg
+
+      .panel-heading
+        h3.panel-title Login
+
+      .panel-body
+
+        if config.flags.login
+          +form
+
+            .form-group.floating-label
+              label(for='username') Username
+              input.form-control(type='text', id='username', name='username', placeholder='Username', autocorrect='off', autocapitalize='off')
+
+            .form-group.floating-label
+              label(for='password') Passwort
+              input.form-control(type='password', id='password', name='password', placeholder='Passwort', data-placeholder='••••••••••••••••••••••••')
+
+            .form-group
+              button.btn.btn-primary.btn-pull-left(type='submit') Einloggen
+              a.btn.btn-link.btn-pull-right(href='/forgot') Passwort vergessen
+
+        else
+          p.
+            Login ist zur Zeit nicht möglich. Bitte versuche es zu einem späteren Zeitpunkt erneut.

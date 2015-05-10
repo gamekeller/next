@@ -17,7 +17,7 @@
     color: inherit;
     letter-spacing: 1px;
     text-transform: uppercase;
-    .transition(color .3s ease);
+    transition: color .3s ease;
 
     &:hover,
     &:focus {
@@ -49,6 +49,7 @@
 
     li {
       display: table-cell;
+      font-size: 150%;
 
       a {
         letter-spacing: 0;
@@ -71,7 +72,7 @@
   }
 }
 
-@media (min-width: @screen-xs) {
+@media (min-width: @grid-float-breakpoint) {
   .footer {
     border-bottom: 1px solid #2f3235;
     margin-bottom: 80px;
@@ -123,6 +124,7 @@
 
       li {
         display: inline-block;
+        font-size: 100%;
       }
     }
   }

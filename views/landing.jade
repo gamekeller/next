@@ -1,0 +1,39 @@
+doctype html
+html(lang='de')
+  head
+    include partials/head
+  body
+
+    .masthead
+      .inner
+        .content.small-container
+          h1.title
+            span.icon.icon-gamekeller
+            span.sr-only Gamekeller
+          h2.slogan Dein Zuhause im Internet
+          h3.details.
+            Wir sind eine multinationale Gaming-Community, die sich auf maximalen Komfort konzentriert.
+          .buttons
+            a#teamspeak-btn.btn(href='ts3server://gamekeller.net?port=9987') Schau auf unserem Teamspeak vorbei!
+
+    #actions
+      .container
+        ul.nav.navbar-nav.navbar-right
+          if user
+            li
+              a(href='/') Home
+          else
+            li
+              a(href='/login') Login
+            li
+              a(href='/signup') Registrieren
+
+    #footer
+      .container
+        .callout.small-container
+          h1 Wir sind noch nicht ganz fertig.
+          h4 Während wir noch fleißig an der Website tüfteln, kannst Du uns ja schon mal besuchen kommen. Wir freuen uns auf Dich!
+
+        include partials/footer
+
+    include partials/analytics

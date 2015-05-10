@@ -1,4 +1,4 @@
-//= require css/paths.less.ejs
+//= require css/paths.css
 
 // Imports
 // --------------------------------
@@ -22,7 +22,7 @@
 
 // Components
 @import "../bower/bootstrap/less/component-animations.less";
-@import "../bower/bootstrap/less/glyphicons.less";
+//@import "../bower/bootstrap/less/glyphicons.less";
 @import "../bower/bootstrap/less/dropdowns.less";
 @import "../bower/bootstrap/less/button-groups.less";
 @import "../bower/bootstrap/less/input-groups.less";
@@ -40,18 +40,22 @@
 @import "../bower/bootstrap/less/media.less";
 @import "../bower/bootstrap/less/list-group.less";
 @import "../bower/bootstrap/less/panels.less";
-@import "../bower/bootstrap/less/wells.less";
+//@import "../bower/bootstrap/less/wells.less";
 @import "../bower/bootstrap/less/close.less";
 
 // Components w/ JavaScript
 @import "../bower/bootstrap/less/modals.less";
 @import "../bower/bootstrap/less/tooltip.less";
 @import "../bower/bootstrap/less/popovers.less";
-@import "../bower/bootstrap/less/carousel.less";
+//@import "../bower/bootstrap/less/carousel.less";
 
 // Utility classes
 @import "../bower/bootstrap/less/utilities.less";
 @import "../bower/bootstrap/less/responsive-utilities.less";
+
+// Third-party stuff
+@import "../bower/selectize/dist/less/selectize.less";
+@import "ui/selectize.less";
 
 // Other stuff
 @import "theme.less";
@@ -62,3 +66,14 @@
 // Our components
 @import "ui/icons.less";
 @import "ui/footer.less";
+@import "ui/floating-label.less";
+@import "ui/flash.less";
+@import "ui/markdown.less";
+@import "ui/markdown-editor.less";
+@import "ui/expander.less";
+@import "ui/panel-list.less";
+@import "ui/status-indicator.less";
+@import "ui/profile.less";
+
+@import "ui/account/sessions.less";
+@import "ui/account/history.less";

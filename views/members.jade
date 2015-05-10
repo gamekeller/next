@@ -1,0 +1,12 @@
+extends layout
+
+block content
+
+  include partials/flash
+
+  h1 Mitglieder
+
+  .row
+    each member in members
+      .col-md-3
+        +profileCard(member)(link=true)

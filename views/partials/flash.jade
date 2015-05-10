@@ -1,16 +1,17 @@
-#flash
-  if messages.errors
-    .alert.alert-danger
+mixin alert
+  if flash[attributes.type]
+    div(class!='alert alert-dismissible ' + attributes.class)
       button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
-      for error in messages.errors
-        div!= error.msg
-  if messages.info
-    .alert.alert-info
-      button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
-      for info in messages.info
-        div!= info.msg
-  if messages.success
-    .alert.alert-success
-      button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
-      for success in messages.success
-        div!= success.msg
+      if flash[attributes.type].length > 1
+        ul
+          each message in flash[attributes.type]
+            li!= message.msg
+      else
+        != flash[attributes.type][0].msg
+
+
+if flash.hasMessages
+  #flash
+    +alert(type='error', class='alert-danger')
+    +alert(type='info', class='alert-info')
+    +alert(type='success', class='alert-success')

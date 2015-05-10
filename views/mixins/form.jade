@@ -1,0 +1,7 @@
+mixin form
+  form(class=(attributes.type === 'horizontal' ? 'form-horizontal ' : '') + (attributes.class || ''), method=attributes.method || 'post', action=attributes.action || null, role='form')
+
+    input(type='hidden', name='_csrf', value=req.csrfToken())
+
+    if block
+      block

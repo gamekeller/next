@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+  .small-container
+
+    include partials/flash
+
+    .panel.panel-default.panel-lg
+
+      .panel-heading
+        h3.panel-title #{panelTitle || title}
+
+      .panel-body
+
+        +form
+
+          if preamble
+            p= preamble
+
+          .form-group
+            button.btn.btn-primary(type='submit')= buttonText

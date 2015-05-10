@@ -2,18 +2,12 @@ body {
   background-color: #1c1f24;
 }
 
-b,
-strong,
-label {
-  font-weight: 500;
-}
-
 #wrapper {
   padding-top: 40px;
-  background-color: #5d1402;
   background-repeat: no-repeat;
   background-position: center top;
   background-attachment: fixed;
+  background-size: cover;
 }
 
 #content-wrapper {
@@ -21,50 +15,96 @@ label {
   padding-bottom: 70px;
 }
 
-#content {
-  background-color: #fafafa;
+.panel-lg {
 
-  &.container {
-    padding-top: 20px;
+  .panel-heading {
+    padding: 30px 40px 0;
   }
+
+  .panel-body {
+    padding: 0 40px 30px;
+
+    &:first-child {
+      padding-top: 30px;
+    }
+
+    &:not(:last-child) {
+      padding-bottom: 20px;
+    }
+  }
+}
+
+.form-control.copy-field {
+  background-color: transparent;
+  cursor: copy;
+  transition: none;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.help {
+  cursor: help;
+}
+
+.btn-inline {
+  position: relative;
+  top: -1px;
+  margin: 0 4px;
+}
+
+.visually-disabled {
+  cursor: not-allowed;
+  opacity: .65;
 }
 
 .small-container {
   width: 100%;
   max-width: 780px;
   margin: 0 auto;
-  padding: 40px;
 }
 
-.form-control-prefix {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: (@grid-gutter-width / 2);
-  padding: (@padding-base-vertical + 1) (@padding-base-horizontal + 1);
-  color: @input-color-placeholder;
-  .user-select(none);
-}
+.help-block.fixed {
+  &,
+  .checkbox-inline {
+    color: #c0c0c0;
+  }
 
-.page-signup #username {
-  padding-left: 69px;
-}
+  .checkbox-inline {
+    display: block;
+    margin-top: 5px;
 
-.navbar {
-  border: none;
-  background-color: rgba(0, 0, 0, .75);
+    label {
+      font-weight: 400;
+      cursor: pointer;
+    }
+  }
 
-  .avatar {
-    width: 20px;
-    height: 20px;
-    margin: -2px 2px 0 0;
-    border-radius: 3px;
+  @media (min-width: @screen-sm-min) {
+    .checkbox-inline {
+      float: right;
+      margin-top: 0;
+      padding-top: 0;
+    }
   }
 }
 
-.navbar-nav > li > a,
-.navbar-brand {
-  .transition(color .15s ease);
+.help-block ul {
+  padding-left: 0;
+  list-style-position: inside;
+}
+
+.mini-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  margin: -2px 2px 0 0;
+}
+
+.navbar {
+  margin: 0;
+  border: none;
 }
 
 .navbar-brand {
@@ -74,8 +114,76 @@ label {
   color: @brand-primary;
 }
 
+@media (min-width: @grid-float-breakpoint) {
+  .navbar-header {
+    padding-left: 5px;
+  }
+}
+
 .navbar-inverse .navbar-brand {
   color: @brand-primary;
+}
+
+.navbar-nav.navbar-right {
+
+  @media (min-width: @grid-float-breakpoint) {
+    > li {
+      > a,
+      .btn-link {
+        padding: 10px 8px;
+      }
+    }
+
+    &:last-child {
+      padding-right: 5px;
+    }
+  }
+
+  .icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
+.small-pulled-right {
+  display: block;
+  line-height: 26px;
+  font-size: 12px;
+
+  @media (min-width: @screen-xs-min) {
+    float: right;
+  }
+}
+
+@media (max-width: @screen-xs-min) {
+  .btn + .btn {
+    margin-top: 15px;
+  }
+}
+
+.btn-pull-left,
+.btn-pull-right {
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: @screen-xs-min) {
+  .btn-pull-left,
+  .btn-pull-right {
+    width: auto;
+  }
+
+  .btn-pull-left {
+    float: left;
+  }
+
+  .btn-pull-right {
+    float: right;
+  }
 }
 
 .page-header {
@@ -84,4 +192,59 @@ label {
   h1 {
     margin-top: 0;
   }
+}
+
+.form-control-group {
+  position: relative;
+
+  &.has-right-icon {
+    .form-control {
+      padding-right: 38px;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.form-control-overlay {
+  position: absolute;
+  bottom: 0;
+
+  &.is-right {
+    right: 0;
+  }
+}
+
+.panel-title-right-btn {
+  padding: 0 4px 0 0;
+}
+
+@media (max-width: @screen-md-min) {
+  .column + .column {
+    margin-top: 20px;
+  }
+
+  .btn-title:after {
+    content: ' ' attr(title);
+  }
+
+  .reddit-title {
+    display: block;
+    margin: 4px 0;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: @screen-md-min) {
+  .panel-title-right-btn {
+    padding: 0;
+    vertical-align: top;
+  }
+
+  .sticky-sidebar > .list-group:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.img-flair {
+  margin-top: -3px;
 }

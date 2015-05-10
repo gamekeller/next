@@ -1,0 +1,166 @@
+.profile-usercard {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.profile-card {
+  display: inline-block;
+  width: 100%;
+  max-width: 256px;
+  padding: 0;
+  text-align: left;
+
+  .panel-body {
+    padding: 15px 20px;
+  }
+}
+
+.profile-info {
+
+  &:last-child {
+    margin: 0;
+  }
+
+  li {
+    margin-top: 5px;
+  }
+}
+
+.profile-avatar {
+  width: 100%;
+  max-width: 256px;
+}
+
+.profile-avatar-link {
+  display: block;
+}
+
+.profile-rank {
+  position: relative;
+  top: -1px;
+}
+
+.profile-username {
+  margin: 0 0 5px;
+  word-break: break-all;
+  font-weight: 400;
+
+  a {
+    color: inherit;
+  }
+}
+
+.profile.is-empty {
+  margin-top: 20px;
+
+  .profile-card {
+    max-width: 256px;
+  }
+
+  .profile-usercard {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: @screen-md-min) {
+    .profile-usercard {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.profile-teamspeak-toggle {
+  margin-bottom: 12px;
+}
+
+.profile-teamspeak-status {
+  margin: 0 -20px;
+  padding: 10px 20px;
+  background-color: @brand-success;
+
+  :last-child {
+    margin-bottom: 0;
+  }
+
+  .expander-target {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  dt {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: lighten(@brand-success, 35%);
+  }
+
+  dd {
+    word-break: break-all;
+    color: #fff;
+  }
+
+  .descending-details {
+    border-left-color: #96e5b7;
+
+    &:after {
+      background-color: #96e5b7;
+    }
+  }
+}
+
+.profile-teamspeak-connection {
+  margin-bottom: 0;
+
+  > dt {
+    padding: 5px 0;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: @screen-md-min) {
+  .profile-usercard {
+    margin-bottom: 0;
+    text-align: left;
+
+    ~ .list-group {
+      max-width: 256px;
+    }
+
+    + .list-group .list-group-item:first-child {
+      border-top-width: 1px;
+    }
+  }
+}
+
+.profile-unfriend {
+  padding: 0;
+  color: @brand-success;
+  white-space: normal;
+  text-align: left;
+  word-break: break-word;
+
+  &:after {
+    content: ' ' attr(data-text);
+  }
+
+  .icon {
+    &:extend(.icon-check all);
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+    color: @brand-danger;
+
+    &:after {
+      content: ' ' attr(data-hover-text);
+    }
+
+    .icon {
+      &:extend(.icon-cross all);
+    }
+  }
+}

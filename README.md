@@ -1,4 +1,4 @@
-# [next Gamekeller website](https://github.com/gamekeller/next/)
+# [Gamekeller website](http://gamekeller.net)
 [![dependency Status](https://david-dm.org/gamekeller/next/status.svg)](https://david-dm.org/gamekeller/next#info=dependencies)
 [![devDependency Status](https://david-dm.org/gamekeller/next/dev-status.svg)](https://david-dm.org/gamekeller/next#info=devDependencies)
 

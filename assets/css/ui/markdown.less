@@ -1,0 +1,329 @@
+// This is all stolen from GitHub for now to get some markdown styles going.
+
+.markdown-body {
+  overflow: hidden;
+  word-wrap: break-word;
+
+  > :first-child {
+    margin-top: 0 !important;
+  }
+
+  > :last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .absent {
+    color: #c00;
+  }
+
+  .anchor {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    padding-right: 6px;
+    padding-left: 30px;
+    margin-left: -30px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  h1, h2, h3,
+  h4, h5, h6 {
+    position: relative;
+    margin-top: 1em;
+    font-weight: bold;
+    line-height: 1.4;
+
+    tt,
+    code {
+      font-size: inherit;
+    }
+  }
+
+  h1 {
+    padding-bottom: .3em;
+    margin-bottom: 16px;
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+  }
+
+  h2 {
+    padding-bottom: .3em;
+    margin-bottom: 16px;
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+  }
+
+  h3 {
+    margin-bottom: 0;
+    font-size: 1.5em;
+    line-height: 1.43;
+  }
+
+  h4 {
+    margin-bottom: .1em;
+    font-size: 1.25em;
+  }
+
+  h5 {
+    margin-bottom: .2em;
+    font-size: 1em;
+  }
+
+  h6 {
+    margin-bottom: .2em;
+    font-size: 1em;
+    color: #777;
+  }
+
+  p,
+  blockquote,
+  ul,
+  ol,
+  dl,
+  table,
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  hr {
+    height: 4px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+  }
+
+  ul,
+  ol {
+    padding-left: 2em;
+
+    ul,
+    ol {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  dl {
+    padding: 0;
+
+    dt {
+      padding: 0;
+      margin-top: 16px;
+      font-size: 1em;
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    dd {
+      padding: 0 16px;
+      margin-bottom: 16px;
+    }
+  }
+
+  blockquote {
+    padding: 0 15px;
+    color: #777;
+    border-left: 4px solid #ddd;
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+
+    th {
+      font-weight: bold;
+    }
+
+    th,
+    td {
+      padding: 6px 13px;
+      border: 1px solid #ddd;
+    }
+
+    tr {
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+
+    tr:nth-child(2n) {
+      background-color: #f8f8f8;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  span.frame {
+    display: block;
+    overflow: hidden;
+
+    > span {
+      display: block;
+      float: left;
+      width: auto;
+      padding: 7px;
+      margin: 13px 0 0;
+      overflow: hidden;
+      border: 1px solid #ddd;
+    }
+
+    span img {
+      display: block;
+      float: left;
+    }
+
+    span span {
+      display: block;
+      padding: 5px 0 0;
+      clear: both;
+      color: #333;
+    }
+  }
+
+  span.align-center {
+    display: block;
+    overflow: hidden;
+    clear: both;
+
+    > span {
+      display: block;
+      margin: 13px auto 0;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    span img {
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+
+  span.align-right {
+    display: block;
+    overflow: hidden;
+    clear: both;
+
+    > span {
+      display: block;
+      margin: 13px 0 0;
+      overflow: hidden;
+      text-align: right;
+    }
+
+    span img {
+      margin: 0;
+      text-align: right;
+    }
+  }
+
+  span.float-left {
+    display: block;
+    float: left;
+    margin-right: 13px;
+    overflow: hidden;
+
+    span {
+      margin: 13px 0 0;
+    }
+  }
+
+  span.float-right {
+    display: block;
+    float: right;
+    margin-left: 13px;
+    overflow: hidden;
+
+    > span {
+      display: block;
+      margin: 13px auto 0;
+      overflow: hidden;
+      text-align: right;
+    }
+  }
+
+  code,
+  tt {
+    padding: 0;
+    padding-top: .2em;
+    padding-bottom: .2em;
+    margin: 0;
+    font-size: 85%;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+
+    &:before,
+    &:after {
+      letter-spacing: -.2em;
+      content: "\00a0";
+    }
+
+    br {
+      display: none;
+    }
+  }
+
+  del code {
+    text-decoration: inherit;
+    vertical-align: text-top;
+  }
+
+  pre > code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  .highlight pre,
+  pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    border-radius: 3px;
+  }
+
+  pre {
+    word-wrap: normal;
+
+    code,
+    tt {
+      display: inline;
+      max-width: initial;
+      padding: 0;
+      margin: 0;
+      overflow: initial;
+      line-height: inherit;
+      word-wrap: normal;
+      background-color: transparent;
+      border: 0;
+
+      &:before,
+      &:after {
+        content: normal;
+      }
+    }
+  }
+}

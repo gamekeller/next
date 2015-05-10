@@ -1,0 +1,76 @@
+mixin profileCard(profile)
+
+  //- Breaks block usage, see https://github.com/jadejs/jade/issues/1552
+  //- mixin avatar
+  //-  img.profile-avatar(src=profile.gravatarUrl(512), alt=profile.username)
+
+  .profile-usercard
+    .profile-card.panel.panel-default
+      if attributes.link
+        a.profile-avatar-link(href='/#{profile.username}')
+          img.profile-avatar(src=profile.gravatarUrl(512), alt=profile.username)
+      else
+        img.profile-avatar(src=profile.gravatarUrl(512), alt=profile.username)
+
+      .panel-body
+        if profile.teamspeakOnline
+          .js-expander-scope
+            h1.profile-username
+              button.status-indicator.status-indicator-active.status-indicator-lg.js-expander-toggle(type='button', title='#{profile.username} ist im Teamspeak online, klicke für mehr Details')
+              if attributes.link
+                a(href='/#{profile.username}')= profile.username
+              else
+                = profile.username
+
+            .profile-teamspeak-toggle.expander-target.js-expander-target
+              .profile-teamspeak-status
+                each con, i in profile.teamspeakConnections
+                  if profile.teamspeakConnections.length > 1
+                    dl.profile-teamspeak-connection.js-expander-scope
+                      dt.js-expander-toggle Verbindung #{i + 1}
+                      dd.expander-target.js-expander-target(class=i === 0 ? 'active' : '')
+                        dl.descending-details
+                          dt Online im Teamspeak als
+                          dd #{con.nickname}
+                          dt im Channel
+                          dd #{con.currentChannel.name}
+                          dt Verbunden
+                          dd: +timestamp(con.connectedAt)
+                  else
+                    dl
+                      dt Online im Teamspeak als
+                      dd #{con.nickname}
+                      dt im Channel
+                      dd #{con.currentChannel.name}
+                      dt Verbunden
+                      dd: +timestamp(con.connectedAt)
+        else
+          h1.profile-username
+            if attributes.link
+              a(href='/#{profile.username}')= profile.username
+            else
+              = profile.username
+
+        ul.profile-info.list-unstyled
+          if profile.teamspeakRank
+            li.help(title='Rang')
+              img.profile-rank(src=asset_path('img/ranks/#{profile.teamspeakRank.toLowerCase()}.png'), alt='Superadmin')
+              | #{profile.teamspeakRank}
+          li
+            | Registriert&nbsp;
+            +timestamp(profile.createdAt)
+          if user.username === profile.username && user.friends.length
+            li
+              a(href='/#{user.username}/friends') #{user.friends.length} #{'Freund' + (user.friends.length > 1 ? 'e' : '')}
+
+        if user.username !== profile.username
+          if user.friendsWith(profile.id)
+            +form(action=url('/#{profile.username}/unfriend'))
+              button.btn.btn-link.profile-unfriend.js-confirm(type='submit', data-text='Du bist mit #{profile.username} befreundet.', data-hover-text='#{profile.username} als Freund entfernen', data-confirm-text='Bist du dir sicher, dass du #{profile.username} als Freund entfernen möchtest?')
+                span.icon
+          else
+            +form(action=url('/#{profile.username}/befriend'))
+              button.btn.btn-primary(type='submit') Als Freund hinzufügen
+
+        if block
+          block

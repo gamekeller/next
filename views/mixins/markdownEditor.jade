@@ -1,0 +1,21 @@
+mixin markdownEditor
+  - var visible = attributes.visible != null ? attributes.visible : true
+  .form-group.markdown-editor
+    .tabnav
+      ul.nav.nav-tabs
+        li.active
+          a(href='#markdown-editor-write', role='tab', data-toggle='tab') Schreiben
+        li
+          a(href='#markdown-editor-preview', role='tab', data-toggle='tab') Vorschau
+
+      .tabnav-right
+        span.tabnav-small
+          span.icon.icon-markdown.icon-inline.icon-md
+          | Markdown nutzbar
+
+    .tab-content
+      #markdown-editor-write.tab-pane.active
+        textarea.markdown-editor-textarea.form-control(placeholder!=attributes.placeholder, name!=attributes.name, id!=attributes.id || attributes.name, class=visible ? 'js-autosize' : '')
+          if block
+            block
+      #markdown-editor-preview.tab-pane.markdown-editor-preview

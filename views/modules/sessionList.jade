@@ -1,0 +1,36 @@
+mixin sessionList(sessions)
+  if sessions.length
+    ul.account-sessions.panel-list
+      each session in sessions
+        - var current = session.id === req.session.id
+        li.account-session.panel-list-item(class=current ? 'active' : '', class=!session.recentlyUsed ? 'account-session-dormant' : '')
+          td
+            span.account-session-indicator(class=session.recentlyUsed ? 'active' : '')
+            span.account-session-icon.icon.icon-lg(class='icon-device-' + (session.isMobile ? 'mobile' : session.isTablet ? 'tablet' : 'desktop'))
+            if !current
+              +form(action=url('/session/#{session.id}/revoke'))
+                button.account-session-revoke.btn.btn-default.btn-sm(type='submit') Annullieren
+            .account-session-details.js-expander-scope
+              div
+                strong #{session.session.ipAddress}
+              if current
+                small.text-active Deine aktuelle Session
+              else
+                small
+                  | Zuletzt benutzt&nbsp;
+                  +timestamp(session.session.usedAt)
+              a.expander.js-expander-toggle(href='#') …
+              .account-session-info.expander-target.js-expander-target
+                p
+                  p.snuggle-down(title=session.platform.description)
+                    strong #{session.platform.name}
+                    | auf #{session.platform.os}
+                  small.text-muted #{session.session.userAgent}
+
+                dl
+                  dt Eingeloggt:
+                  dd
+                    +timestamp(session.session.createdAt)
+  else
+    .panel-body
+      p Keine Einträge vorhanden.

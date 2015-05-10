@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+
+  - var friendsCount = profile.friends.length
+
+  .profile.row
+    .col-md-3
+      .sticky-sidebar.js-sticky-sidebar
+        +profileCard(profile)
+
+    .col-md-9
+      include ../partials/flash
+
+      .panel.panel-default
+          .panel-heading
+            h3.panel-title Deine Freunde
+          .panel-body
+            if friendsCount
+              p Du bist mit #{friendsCount} #{'Mitglied' + (friendsCount > 1 ? 'ern' : '')} befreundet.
+            else
+              p Du hast noch keine Freunde hinzugefügt.
+          if friendsCount
+            .panel-list
+              each friend in profile.friends
+                a.panel-list-item(href='/#{friend.username}')
+                  img.mini-avatar(src=friend.gravatarUrl(40))
+                  | &nbsp;
+                  strong #{friend.username}
+                  .pull-right
+                    if friend.teamspeakLinked
+                      span.status-indicator(class=friend.teamspeakOnline ? 'status-indicator-active' : '')
+                      if friend.teamspeakOnline
+                        span.text-success Online als #{friend.teamspeakConnections[0].nickname}
+                      else
+                        span.text-muted Offline
+                    else
+                      span.text-muted.help(title='#{friend.username} hat seinen Account nicht mit einer Teamspeak-ID verknüpft.') Nicht verknüpft

@@ -1,0 +1,4 @@
+mixin nav(nav)
+  .list-group
+    each item in nav
+      a.list-group-item(class=utils.navItemIsActive(item) ? 'active' : '', href=item.href)= item.name
