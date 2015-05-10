@@ -125,7 +125,7 @@ app.use(csp({
   defaultSrc: ["'self'", 'serve.gamekeller.net'],
   scriptSrc: ["'self'", "'unsafe-inline'", 'www.google-analytics.com'],
   styleSrc: ["'self'", "'unsafe-inline'", 'fonts.googleapis.com'],
-  imgSrc: ["'self'", '0.gravatar.com', 'camo.gamekeller.net'],
+  imgSrc: ["'self'", '0.gravatar.com', 'camo.gamekeller.net', 'www.google-analytics.com'],
   fontSrc: ["'self'", 'fonts.googleapis.com', 'fonts.gstatic.com'],
   connectSrc: ["'self'", 'www.reddit.com'],
   sandbox: ['allow-forms', 'allow-same-origin', 'allow-scripts'],
