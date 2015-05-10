@@ -63,7 +63,7 @@ mixin profileCard(profile)
             li
               a(href='/#{user.username}/friends') #{user.friends.length} #{'Freund' + (user.friends.length > 1 ? 'e' : '')}
 
-        if user.username !== profile.username
+        if user && user.username !== profile.username
           if user.friendsWith(profile.id)
             +form(action=url('/#{profile.username}/unfriend'))
               button.btn.btn-link.profile-unfriend.js-confirm(type='submit', data-text='Du bist mit #{profile.username} befreundet.', data-hover-text='#{profile.username} als Freund entfernen', data-confirm-text='Bist du dir sicher, dass du #{profile.username} als Freund entfernen möchtest?')
