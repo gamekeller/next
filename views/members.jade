@@ -1,3 +1,8 @@
+mixin content(member)
+  if member
+    .col-md-3
+      +profileCard(member)(link=true)
+
 extends layout
 
 block content
@@ -6,7 +11,12 @@ block content
 
   h1 Mitglieder
 
-  .row
-    each member in members
-      .col-md-3
-        +profileCard(member)(link=true)
+  - var i = 0
+
+  while i < members.length
+    .member-row.row
+      +content(members[i])
+      +content(members[i + 1])
+      +content(members[i + 2])
+      +content(members[i + 3])
+    - i += 4
