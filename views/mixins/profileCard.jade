@@ -59,7 +59,7 @@ mixin profileCard(profile)
           li
             | Registriert&nbsp;
             +timestamp(profile.createdAt)
-          if user.username === profile.username && user.friends.length
+          if user && user.username === profile.username && user.friends.length
             li
               a(href='/#{user.username}/friends') #{user.friends.length} #{'Freund' + (user.friends.length > 1 ? 'e' : '')}
 
