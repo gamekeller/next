@@ -1,7 +1,7 @@
 /**
  * Dependencies
  */
-var assign         = require('lodash-node/modern/objects/assign')
+var _              = require('lodash')
 var bodyParser     = require('body-parser')
 var compress       = require('compression')
 var cookieParser   = require('cookie-parser')
@@ -12,7 +12,6 @@ var errorHandler   = require('errorhandler')()
 var express        = require('express')
 var favicon        = require('serve-favicon')
 var hbs            = require('hbs').__express
-var isRegExp       = require('lodash-node/modern/objects/isRegExp')
 var logger         = require('morgan')
 var methodOverride = require('method-override')
 var moment         = require('moment')
@@ -180,7 +179,7 @@ app.use(function(req, res, next) {
 app.use(function(req, res, next) {
   var user = req.user
 
-  assign(res.locals, {
+  _.assign(res.locals, {
     req: req,
     config: config,
     user: user,
@@ -190,7 +189,7 @@ app.use(function(req, res, next) {
   })
 
   utils.navItemIsActive = function(item) {
-    return item.active || (isRegExp(item.view) && item.view.test(res.activeView)) || item.view === res.activeView
+    return item.active || (_.isRegExp(item.view) && item.view.test(res.activeView)) || item.view === res.activeView
   }
 
   // Navigation items
