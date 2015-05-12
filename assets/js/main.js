@@ -1,4 +1,5 @@
 //= require bower/jquery/dist/jquery.js
+//= require bower/autofill-event/src/autofill-event.js
 //= require bower/validator-js/validator.js
 //= require bower/moment/moment.js
 //= require bower/moment/locale/de.js
@@ -17,7 +18,7 @@
   }
 
   $(document)
-    .on('focus blur', '.floating-label > .form-control', function(e) {
+    .on('focus blur change', '.floating-label > .form-control', function(e) {
       checkPopulation($(this).closest('.floating-label').toggleClass('floating-label-active', /^(focus|focusin)$/.test(e.type)).end())
     })
     .on('reset', 'form', function() {

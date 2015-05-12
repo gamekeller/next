@@ -13,6 +13,7 @@
     "jquery": "~2.1.4",
     "moment": "~2.10.2",
     "ExpandingTextareas": "bgrins/ExpandingTextareas",
-    "validator-js": "~3.39.0"
+    "validator-js": "~3.39.0",
+    "autofill-event": "~1.0.0"
   }
 }
