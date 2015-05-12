@@ -18,7 +18,7 @@
     "express-validator": "^2.8.0",
     "gamekeller-error-pages": "git://github.com/gamekeller/error-pages.git#1.0.3",
     "gkmail": "git://github.com/gamekeller/mail.git#1.0.1",
-    "hbs": "^2.8.0",
+    "hbs": "^3.0.1",
     "helmet-csp": "^0.2.0",
     "jade": "^1.9.1",
     "markdown-it": "^3.0.4",
@@ -26,7 +26,7 @@
     "method-override": "^2.3.1",
     "mincer": "^1.2.2",
     "moment": "^2.9.0",
-    "mongoose": "~3.8.22",
+    "mongoose": "^4.0.2",
     "mongoose-merge-plugin": "^0.0.5",
     "mongoose-unique-validator": "^0.4.1",
     "morgan": "^1.5.1",
@@ -48,7 +48,7 @@
     "grunt": "^0.4.5",
     "grunt-external-daemon": "^1.1.0",
     "grunt-nodemon": "^0.4.0",
-    "less": "^1.7.5",
+    "less": "^2.5.0",
     "uglify-js": "^2.4.16"
   },
   "engines": {
