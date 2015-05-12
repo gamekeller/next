@@ -8,7 +8,6 @@
 //= require bower/bootstrap/js/tooltip.js
 //= require bower/bootstrap/js/tab.js
 //= require js/lib/patchedAlert.js
-//= require bower/selectize/dist/js/standalone/selectize.js
 //= require bower/ExpandingTextareas/expanding.js
 //= require js/lib/markdownEditor.js
 
@@ -129,5 +128,4 @@
 !function($) {
   $('.js-tooltip').tooltip()
   $('.js-autosize').expanding()
-  $('select').selectize()
 }($);
