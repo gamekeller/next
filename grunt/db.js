@@ -7,9 +7,10 @@ var User
 module.exports = function(grunt) {
   function connect(callback) {
     if(!connected) {
+      mongoose.connect(secrets.db)
       redis = require('../lib/redis')
-      User  = require('../lib/models/User')
       mongoose.connection.on('open', function() {
+        User = require('../lib/models/User')
         connected = true
         callback()
       })
