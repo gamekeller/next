@@ -1,7 +1,7 @@
 //= require bower/jquery/dist/jquery.js
 //= require bower/validator-js/validator.js
 //= require bower/moment/moment.js
-//= require bower/moment/lang/de.js
+//= require bower/moment/locale/de.js
 //= require bower/bootstrap/js/transition.js
 //= require bower/bootstrap/js/collapse.js
 //= require bower/bootstrap/js/dropdown.js
