@@ -92,7 +92,7 @@ app.moment = moment
 if(app.get('env') === 'production')
   app.enable('trust proxy')
 app.disable('x-powered-by')
-app.set('port', config.port + (process.env.NODE_APP_INSTANCE || 0))
+app.set('port', _.parseInt(config.port) + (_.parseInt(process.env.NODE_APP_INSTANCE) || 0))
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
 app.engine('html', hbs)
