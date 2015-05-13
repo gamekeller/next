@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict'
 
+var _        = require('lodash')
 var repl     = require('repl')
 var mongoose = require('mongoose')
 var redis    = require('../lib/redis')
@@ -26,32 +27,61 @@ function toggleAdmin(state) {
 }
 
 function logoutUser(username, cb) {
-  User.findOne({ username: username }, 'sessions', function(err, user) {
-    if(err)
-      return cb('Something went wrong: ' + err)
-    if(!user)
-      return cb('User "' + username + '" was not found!')
-
-    var cmds = []
-
-    user.sessions.forEach(function(id) {
-      cmds.push(['del', 'sess:' + id])
-    })
-
-    redis.$.multi(cmds).exec(function(err, res) {
+  if(username.trim() === '*') {
+    User.find({}, 'sessions', function(err, users) {
       if(err)
         return cb('Something went wrong: ' + err)
+      if(!users.length)
+        return cb('No users found.')
 
-      user.sessions = []
+      var sessions = _(users)
+        .map('sessions')
+        .flatten()
+        .map(function(id) {
+          return 'sess:' + id
+        })
+        .value()
 
-      user.save(function(err) {
+      redis.$.del(sessions, function(err, res) {
         if(err)
           return cb('Something went wrong: ' + err)
 
-        cb('Successfully logged "' + username + '" out.')
+        User.update({}, { sessions: [] }, { multi: true }, function(err) {
+          if(err)
+            return cb('Something went wrong: ' + err)
+
+          cb('Successfully logged everyone out.')
+        })
       })
     })
-  })
+  } else {
+    User.findOne({ username: username }, 'sessions', function(err, user) {
+      if(err)
+        return cb('Something went wrong: ' + err)
+      if(!user)
+        return cb('User "' + username + '" was not found!')
+      if(!user.sessions.length)
+        return cb('User "' + username + '" is not logged in!')
+
+      var sessions = _.map(user.sessions, function(id) {
+        return 'sess:' + id
+      })
+
+      redis.$.del(sessions, function(err, res) {
+        if(err)
+          return cb('Something went wrong: ' + err)
+
+        user.sessions = []
+
+        user.save(function(err) {
+          if(err)
+            return cb('Something went wrong: ' + err)
+
+          cb('Successfully logged "' + username + '" out.')
+        })
+      })
+    })
+  }
 }
 
 var commands = {
@@ -67,7 +97,7 @@ var commands = {
   },
   'logout': {
     help: 'Destroy all sessions of a user.',
-    args: '<username>',
+    args: '<username|*>',
     fn: logoutUser
   },
   'set-password': {
