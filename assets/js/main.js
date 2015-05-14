@@ -4,11 +4,11 @@
 //= require bower/moment/moment.js
 //= require bower/moment/locale/de.js
 //= require bower/bootstrap/js/transition.js
+//= require bower/bootstrap/js/alert.js
 //= require bower/bootstrap/js/collapse.js
 //= require bower/bootstrap/js/dropdown.js
 //= require bower/bootstrap/js/tooltip.js
 //= require bower/bootstrap/js/tab.js
-//= require js/lib/patchedAlert.js
 //= require bower/ExpandingTextareas/expanding.js
 //= require js/lib/markdownEditor.js
 
