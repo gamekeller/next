@@ -10,15 +10,11 @@
     }
   },
   "teamspeak": {
-    "url": "gamekeller.net",
-    "port": 9987,
-    "host": "localhost",
-    "retry": true,
-    "sid": 1,
-    "auth": {
-      "user": "",
-      "pass": ""
+    "yodel": {
+      "port": 5004,
+      "retry": true
     },
+    "url": "gamekeller.net",
     "relevantRanks": ["6", "7", "9", "10", "11", "13"],
     "rankImages": ["user", "stammuser", "veteran", "moderator", "admin", "superadmin"],
     "ranks": {

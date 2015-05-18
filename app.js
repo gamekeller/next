@@ -20,9 +20,9 @@ var nodemailer     = require('nodemailer')
 var passport       = require('passport')
 var redis          = require('./lib/redis')
 var session        = require('express-session')
-var teamspeak      = require('./lib/teamspeak')
 var utils          = require('./lib/utils')
 var validator      = require('express-validator')
+var yodel          = require('./lib/yodel')
 var RedisStore     = require('connect-redis')(session)
 
 /**
@@ -64,18 +64,22 @@ mongoose.connection.on('error', function() {
 })
 
 /**
- * Teamspeak config
+ * TeamSpeak RPC config
  */
-teamspeak.connect(config.teamspeak)
-teamspeak.on('connect', function() {
-  console.log('✔ TeamSpeak Server Query connection established.')
+yodel.connect(config.teamspeak.yodel)
+yodel.on('connect', function() {
+  console.log('✔ TeamSpeak RPC connection established.')
 })
-teamspeak.on('error', function() {
-  console.error('✗ Unable to connect to the TeamSpeak Server Query.')
+yodel.on('end', function() {
+  console.error('✗ TeamSpeak RPC connection lost.')
+})
+yodel.on('error', function(err) {
+  if(err.code === 'ECONNREFUSED')
+    console.error('✗ Unable to connect to TeamSpeak RPC server.')
+  else
+    console.error('✗ TeamSpeak RPC error:', err)
 })
 
-if(!module.parent)
-  require('./lib/teamspeak/statusMonitor')
 
 /**
  * moment
