@@ -55,7 +55,7 @@ redis.$.on('error', function() {
 /**
  * Mongoose config
  */
-mongoose.connect(config.secrets.db)
+mongoose.connect('mongodb://' + config.mongo.host + ':' + config.mongo.port + '/' + config.mongo.db)
 mongoose.connection.on('connected', function() {
   console.log('✔ MongoDB connection established.')
 })
