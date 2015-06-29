@@ -38,7 +38,7 @@ function logoutUser(username, cb) {
         .map('sessions')
         .flatten()
         .map(function(id) {
-          return 'sess:' + id
+          return redis.prefix + 'sess:' + id
         })
         .value()
 
@@ -64,7 +64,7 @@ function logoutUser(username, cb) {
         return cb('User "' + username + '" is not logged in!')
 
       var sessions = _.map(user.sessions, function(id) {
-        return 'sess:' + id
+        return redis.prefix + 'sess:' + id
       })
 
       redis.$.del(sessions, function(err, res) {

@@ -121,7 +121,8 @@ app.use(session({
   secret: config.secrets.session,
   genid: function() { return '' + new mongoose.Types.ObjectId },
   store: new RedisStore({
-    client: redis.$
+    client: redis.$,
+    prefix: redis.prefix + 'sess:'
   })
 }))
 app.use(csp({
