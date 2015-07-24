@@ -233,7 +233,7 @@ function startRepl() {
   })
 }
 
-mongoose.connect(config.secrets.db)
+mongoose.connect('mongodb://' + config.mongo.host + ':' + config.mongo.port + '/' + config.mongo.db)
 
 mongoose.connection.on('error', function() {
   console.error('✗ Unable to connect to MongoDB.')
