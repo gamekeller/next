@@ -21,7 +21,7 @@
     "gkmail": "git://github.com/gamekeller/mail.git#1.0.1",
     "hbs": "^3.0.1",
     "helmet-csp": "^0.2.0",
-    "jade": "^1.9.1",
+    "jade": "^1.11.0",
     "lodash": "^3.8.0",
     "markdown-it": "^4.2.1",
     "method-override": "^2.3.1",

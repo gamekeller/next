@@ -1,16 +1,15 @@
 mixin profileCard(profile)
 
-  //- Breaks block usage, see https://github.com/jadejs/jade/issues/1552
-  //- mixin avatar
-  //-  img.profile-avatar(src=profile.gravatarUrl(512), alt=profile.username)
+  mixin avatar
+    img.profile-avatar(src=profile.gravatarUrl(512), alt=profile.username)
 
   .profile-usercard
     .profile-card.panel.panel-default
       if attributes.link
         a.profile-avatar-link(href='/#{profile.username}')
-          img.profile-avatar(src=profile.gravatarUrl(512), alt=profile.username)
+          +avatar
       else
-        img.profile-avatar(src=profile.gravatarUrl(512), alt=profile.username)
+        +avatar
 
       .panel-body
         if profile.teamspeakOnline
