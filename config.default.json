@@ -26,15 +26,13 @@
       "retry": true
     },
     "url": "gamekeller.net",
-    "relevantRanks": ["6", "7", "9", "10", "11", "13"],
-    "rankImages": ["user", "stammuser", "veteran", "moderator", "admin", "superadmin"],
+    "relevantRanks": ["6", "7", "9", "10", "11"],
     "ranks": {
-      "6": "Superadmin",
+      "6": "Admin",
       "7": "User",
       "9": "Stammuser",
       "10": "Veteran",
-      "11": "Moderator",
-      "13": "Admin"
+      "11": "Moderator"
     }
   },
   "secrets": {
