@@ -27,6 +27,7 @@
     },
     "url": "gamekeller.net",
     "relevantRanks": ["6", "7", "9", "10", "11"],
+    "rankImages": ["user", "stammuser", "veteran", "moderator", "admin"],
     "ranks": {
       "6": "Admin",
       "7": "User",
