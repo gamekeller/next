@@ -39,6 +39,19 @@ module.exports = function(grunt) {
         cmd: 'mongod',
         args: ['--dbpath', '/usr/local/var/mongodb']
       }
+    },
+
+    'ftp-deploy': {
+      deploy: {
+        auth: {
+          host: 'ftp.keycdn.com',
+          port: 21,
+          authKey: 'keycdn'
+        },
+        src: 'public/assets',
+        dest: 'gk/assets',
+        exclusions: ['public/assets/manifest.json']
+      }
     }
 
   })
@@ -49,6 +62,7 @@ module.exports = function(grunt) {
   // Load necessary plugins.
   grunt.loadNpmTasks('grunt-nodemon')
   grunt.loadNpmTasks('grunt-external-daemon')
+  grunt.loadNpmTasks('grunt-ftp-deploy')
 
   // Development server task.
   grunt.registerTask('server', ['revupdate', 'external_daemon', 'nodemon:server'])
@@ -60,6 +74,9 @@ module.exports = function(grunt) {
   grunt.registerTask('db', ['external_daemon', 'dropDB', 'seedDB'])
   grunt.registerTask('db.drop', ['external_daemon', 'dropDB'])
   grunt.registerTask('db.seed', ['external_daemon', 'seedDB'])
+
+  // Deploy task.
+  grunt.registerTask('deploy', ['bower', 'precompile', 'ftp-deploy', 'revupdate'])
 
   // Default task.
   grunt.registerTask('default', ['server'])

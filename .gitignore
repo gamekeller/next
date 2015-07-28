@@ -67,5 +67,4 @@ views/partials/rev.jade
 config.local.json
 
 ###Deploy###
-deploy/key.rsa
-deploy/key.rsa.pub
+.ftppass

@@ -47,8 +47,10 @@
     "csswring": "^3.0.0",
     "grunt": "^0.4.5",
     "grunt-external-daemon": "^1.1.0",
+    "grunt-ftp-deploy": "^0.1.10",
     "grunt-nodemon": "^0.4.0",
     "less": "^2.5.0",
+    "rimraf": "^2.4.2",
     "uglify-js": "^2.4.16"
   },
   "engines": {

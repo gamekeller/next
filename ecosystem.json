@@ -1,0 +1,23 @@
+{
+  "apps": [{
+    "name": "gamekeller",
+    "script": "app.js",
+    "exec_mode": "cluster_mode",
+    "instances": 2,
+    "log_date_format": "YYYY-MM-DD HH:mm Z",
+    "env": {
+      "NODE_ENV": "production",
+      "LOGFORMAT": "combined"
+    }
+  }],
+  "deploy": {
+    "production": {
+      "user": "node",
+      "host": "web.hosts.gamekeller.net",
+      "ref": "origin/master",
+      "repo": "https://github.com/gamekeller/next.git",
+      "path": "/home/node/gamekeller",
+      "post-deploy": "npm install && grunt deploy && sudo -H /usr/bin/pm2 startOrRestart ecosystem.json"
+    }
+  }
+}

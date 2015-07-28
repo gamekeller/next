@@ -1,11 +1,14 @@
 var fs     = require('fs')
 var path   = require('path')
+var rimraf = require('rimraf')
 var Mincer = require('mincer')
 
 module.exports = function(grunt) {
   grunt.registerTask('precompile', 'precompile assets for production', function() {
     var done = this.async()
     var cwd  = process.cwd()
+
+    rimraf.sync(path.resolve(cwd, 'public/assets'))
 
     Mincer.MacroProcessor.configure(['.less', '.js'])
     Mincer.Autoprefixer.configure('last 2 version')
