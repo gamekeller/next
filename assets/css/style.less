@@ -1,12 +1,11 @@
 body {
-  background-color: #1c1f24;
+  background-color: @brand-dark;
 }
 
 #wrapper {
   padding-top: 40px;
   background-repeat: no-repeat;
   background-position: center top;
-  background-attachment: fixed;
   background-size: cover;
 }
 
@@ -105,6 +104,8 @@ body {
 .navbar {
   margin: 0;
   border: none;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .navbar-brand {
