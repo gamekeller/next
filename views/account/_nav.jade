@@ -1,6 +1,5 @@
-.col-md-3
-  .sticky-sidebar.js-sticky-sidebar
-    +profileCard(user)
-      a(href='/#{user.username}') Zu deinem Profil &rarr;
+.col-md-3.sticky-sidebar.js-sticky
+  +profileCard(user)
+    a(href='/#{user.username}') Zu deinem Profil &rarr;
 
-    +nav(accountNav)
+  +nav(accountNav)

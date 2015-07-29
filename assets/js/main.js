@@ -1,4 +1,5 @@
 //= require bower/jquery/dist/jquery.js
+//= require bower/Stickyfill/dist/stickyfill.js
 //= require bower/autofill-event/src/autofill-event.js
 //= require bower/validator-js/validator.js
 //= require bower/moment/moment.js
@@ -92,41 +93,7 @@
 }($);
 
 !function($) {
-  var $win  = $(window)
-  var $wrap = $('#content-wrapper')
-
-  $win.on('scroll resize', function() {
-    var scrollTop  = $win.scrollTop()
-    var wrapHeight = $wrap.height()
-    var winWidth   = $win.width()
-
-    $('.js-sticky-sidebar').each(function() {
-      var $this  = $(this)
-      var height = $this.outerHeight()
-
-      if(winWidth <= 992 || height >= wrapHeight)
-        return $this.css({
-          position: '',
-          top: '',
-          width: ''
-        })
-
-      if(height + scrollTop > wrapHeight)
-        $this.css({
-          position: 'absolute',
-          top: wrapHeight - height
-        })
-      else
-        $this.css({
-          position: 'fixed',
-          top: '',
-          width: $this.parent().width()
-        })
-    })
-  }).trigger('scroll')
-}($);
-
-!function($) {
+  $('.js-sticky').Stickyfill()
   $('.js-tooltip').tooltip()
   $('.js-autosize').expanding()
 }($);
