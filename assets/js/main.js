@@ -68,7 +68,7 @@
       if(e.type === 'keydown' && !/32|13/.test(e.which)) return
       e.preventDefault()
       $target.add($toggle).toggleClass('active')
-      $win.trigger('resize')
+      Stickyfill.rebuild()
     })
   })
 }($);
