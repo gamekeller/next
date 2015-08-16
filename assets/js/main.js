@@ -96,4 +96,7 @@
   $('.js-sticky').Stickyfill()
   $('.js-tooltip').tooltip()
   $('.js-autosize').expanding()
+  $(window).on('load', function() {
+    Stickyfill.rebuild()
+  })
 }($);
