@@ -50,6 +50,7 @@
   },
   "profile": {
     "bio": {
+      "maxLength": 8192,
       "messages": {
         "successfullySaved": "Biografie erfolgreich geändert."
       }
