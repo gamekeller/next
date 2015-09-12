@@ -3,7 +3,7 @@
     "name": "gamekeller",
     "script": "app.js",
     "exec_mode": "cluster_mode",
-    "instances": 2,
+    "instances": 1,
     "log_date_format": "YYYY-MM-DD HH:mm Z",
     "env": {
       "NODE_ENV": "production",
