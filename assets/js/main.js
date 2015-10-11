@@ -4,6 +4,8 @@
 //= require bower/validator-js/validator.js
 //= require bower/moment/moment.js
 //= require bower/moment/locale/de.js
+//= require bower/tablesort/src/tablesort.js
+//= require bower/tablesort/src/sorts/tablesort.numeric.js
 //= require bower/bootstrap/js/transition.js
 //= require bower/bootstrap/js/alert.js
 //= require bower/bootstrap/js/collapse.js
@@ -96,6 +98,9 @@
   $('.js-sticky').Stickyfill()
   $('.js-tooltip').tooltip()
   $('.js-autosize').expanding()
+  $('.js-tablesort').each(function () {
+    new Tablesort(this)
+  })
   $(window).on('load', function() {
     Stickyfill.rebuild()
   })

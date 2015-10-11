@@ -15,6 +15,7 @@
     "ExpandingTextareas": "bgrins/ExpandingTextareas",
     "validator-js": "~3.39.0",
     "autofill-event": "~1.0.0",
-    "Stickyfill": "~1.1.2"
+    "Stickyfill": "~1.1.2",
+    "tablesort": "tristen/tablesort#~3.1.0"
   }
 }

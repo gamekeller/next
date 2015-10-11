@@ -259,3 +259,37 @@ body {
 .member-row:not(:last-child) {
   margin-bottom: 40px;
 }
+
+th.sort-header {
+  cursor: pointer;
+
+  &::selection {
+    background: transparent;
+  }
+
+  &::after {
+    content: '';
+    float: right;
+    margin-top: 7px;
+    border-width: 0 4px 4px;
+    border-style: solid;
+    border-color: #404040 transparent;
+    visibility: hidden;
+  }
+
+  &:hover::after {
+    visibility: visible;
+  }
+
+  &.sort-up::after,
+  &.sort-down::after,
+  &.sort-down:hover::after {
+    visibility: visible;
+    opacity: 0.4;
+  }
+
+  &.sort-up::after {
+    border-bottom: none;
+    border-width: 4px 4px 0;
+  }
+}
