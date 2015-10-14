@@ -10,11 +10,23 @@ block content
         table.table.table-striped.table-hover.table-bordered.js-tablesort
           thead
             tr
-              th Username
+              th(width='64px') Rang
+              th Nutzername
               th Admin
+              th Teamspeak verknüpft
+              th Aktive Zeit im Teamspeak
           tbody
             each user in users
+              - var rankImage = user.getRankIcon()
+              - var activeTime = user.teamspeakTracking && user.teamspeakTracking.activeTime ? user.teamspeakTracking.activeTime : 0
               tr
+                td(data-sort=user.getRankValue(), title=user.teamspeakRank, class=user.teamspeakRank ? 'help' : '')
+                  if rankImage
+                    img(src=asset_path(rankImage), alt=user.teamspeakRank)
+                  else
+                    | -
                 td
                   a(href=url('./user/#{user._id}'), title=user._id)= user.username
                 td= user.admin ? 'Ja' : 'Nein'
+                td= user.teamspeakLinked ? 'Ja' : 'Nein'
+                td(data-sort=activeTime)= activeTime ? moment.duration(activeTime).humanize() : '-'

@@ -51,17 +51,23 @@ mixin profileCard(profile)
               = profile.username
 
         ul.profile-info.list-unstyled
+          //- Rank -//
           if profile.teamspeakRank
             li.help(title='Rang')
               img.profile-rank(src=asset_path('img/ranks/#{profile.teamspeakRank.toLowerCase()}.png'), alt='Superadmin')
               | #{profile.teamspeakRank}
+
+          //- Registered -//
           li
             | Registriert&nbsp;
             +timestamp(profile.createdAt)
+
+          //- Friends link -//
           if user && user.username === profile.username && user.friends.length
             li
               a(href='/#{user.username}/friends') #{user.friends.length} #{'Freund' + (user.friends.length > 1 ? 'e' : '')}
 
+        //- Friend button -//
         if user && user.username !== profile.username
           if user.friendsWith(profile.id)
             +form(action=url('/#{profile.username}/unfriend'))

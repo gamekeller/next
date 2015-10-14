@@ -100,7 +100,7 @@ block content
             .form-group.floating-label.floating-label-populated
               label Biografie
               .floating-label-body
-                +markdownEditor(placeholder='Biografie...', name='user[profile][bio][source]')
+                +markdownEditor(placeholder='Biografie...', name='user[bio][source]')
                   if profile.bio.source
                     != profile.bio.source
 

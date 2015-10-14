@@ -34,6 +34,13 @@
       "9": "Stammuser",
       "10": "Veteran",
       "11": "Moderator"
+    },
+    "rankValues": {
+      "Admin": 5,
+      "Moderator": 4,
+      "Veteran": 3,
+      "Stammuser": 2,
+      "User": 1
     }
   },
   "secrets": {
