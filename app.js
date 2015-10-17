@@ -132,7 +132,7 @@ app.use(csp({
   imgSrc: ["'self'", '0.gravatar.com', 'camo.gamekeller.net', 'www.google-analytics.com', config.assetHost],
   fontSrc: ["'self'", 'fonts.googleapis.com', 'fonts.gstatic.com', config.assetHost],
   connectSrc: ["'self'", 'www.reddit.com'],
-  sandbox: ['allow-forms', 'allow-same-origin', 'allow-scripts'],
+  sandbox: ['allow-forms', 'allow-same-origin', 'allow-scripts', 'allow-modals'],
   reportUri: '/report-csp-violation'
 }))
 app.post('/report-csp-violation', function(req, res) {
