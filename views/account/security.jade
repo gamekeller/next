@@ -24,4 +24,4 @@ block content
           h3.panel-title Sicherheitsverlauf
         .panel-body
           p Ein Verlauf aller wichtigen Ereignisse, in die dein Account involviert ist.
-        +securityLog(user.history.reverse().splice(0, 100))
+        +securityLog(history)

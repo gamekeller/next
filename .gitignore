@@ -63,6 +63,7 @@ Desktop.ini
 $RECYCLE.BIN/
 
 ###App###
+migrations/.migrate
 views/partials/rev.jade
 config.local.json
 
