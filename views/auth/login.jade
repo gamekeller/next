@@ -26,6 +26,10 @@ block content
 
             .form-group
               button.btn.btn-primary.btn-pull-left(type='submit') Einloggen
+              .checkbox.checkbox-inline.btn-pull-left.btn.btn-link
+                label(for='remember')
+                  input(type='checkbox', id='remember', name='remember', tabindex='-1')
+                  | Eingeloggt bleiben
               a.btn.btn-link.btn-pull-right(href='/forgot') Passwort vergessen
 
         else

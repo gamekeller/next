@@ -116,7 +116,7 @@ app.use(methodOverride())
 app.use('/api', require('./lib/controllers/api'))
 app.use(session({
   name: 'sid',
-  resave: true,
+  resave: false,
   saveUninitialized: true,
   secret: config.secrets.session,
   genid: function() { return '' + new mongoose.Types.ObjectId },
@@ -175,6 +175,9 @@ app.use(function(req, res, next) {
 
   if(!sess.createdAt)
     sess.createdAt = now
+
+  if(req.isAuthenticated() && req.session.remember)
+    req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000
 
   sess.save(next)
 })
