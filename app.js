@@ -127,9 +127,9 @@ app.use(session({
 }))
 app.use(csp({
   defaultSrc: ["'self'", 'serve.gamekeller.net'],
-  scriptSrc: ["'self'", "'unsafe-inline'", 'www.google-analytics.com', config.assetHost],
+  scriptSrc: ["'self'", "'unsafe-inline'", 'www.google-analytics.com', 'nectar.ninja', config.assetHost],
   styleSrc: ["'self'", "'unsafe-inline'", 'fonts.googleapis.com', config.assetHost],
-  imgSrc: ["'self'", '0.gravatar.com', 'camo.gamekeller.net', 'www.google-analytics.com', config.assetHost],
+  imgSrc: ["'self'", 'data:', '0.gravatar.com', 'camo.gamekeller.net', 'www.google-analytics.com', config.assetHost],
   fontSrc: ["'self'", 'fonts.googleapis.com', 'fonts.gstatic.com', config.assetHost],
   connectSrc: ["'self'", 'www.reddit.com'],
   sandbox: ['allow-forms', 'allow-same-origin', 'allow-scripts', 'allow-modals'],

@@ -293,3 +293,21 @@ th.sort-header {
     border-width: 4px 4px 0;
   }
 }
+
+.sentry__button.sentry__more,
+.sentry__button.sentry__close {
+  font: 0/0 a !important;
+
+  &::after {
+    font: 400 14px/50px Roboto;
+    text-transform: uppercase;
+  }
+}
+
+.sentry__button.sentry__more::after {
+  content: 'Mehr Infos';
+}
+
+.sentry__button.sentry__close::after {
+  content: 'Schliessen';
+}
