@@ -131,7 +131,7 @@ app.use(csp({
   styleSrc: ["'self'", "'unsafe-inline'", 'fonts.googleapis.com', config.assetHost],
   imgSrc: ["'self'", 'data:', '0.gravatar.com', 'camo.gamekeller.net', 'www.google-analytics.com', config.assetHost],
   fontSrc: ["'self'", 'fonts.googleapis.com', 'fonts.gstatic.com', config.assetHost],
-  connectSrc: ["'self'", 'www.reddit.com'],
+  connectSrc: ["'self'", 'www.reddit.com', 'nectar.ninja'],
   sandbox: ['allow-forms', 'allow-same-origin', 'allow-scripts', 'allow-modals'],
   reportUri: '/report-csp-violation'
 }))
