@@ -25,6 +25,11 @@
       "port": 5004,
       "retry": true
     },
+    "link": {
+      "key": "key",
+      "channelId": 1,
+      "channelName": ""
+    },
     "url": "gamekeller.net",
     "relevantRanks": ["6", "7", "9", "10", "11"],
     "rankImages": ["user", "stammuser", "veteran", "moderator", "admin"],
@@ -75,22 +80,20 @@
     "messages": {
       "alreadyVerified": "E-Mail-Adresse ist bereits verifiziert.",
       "resendOnCooldown": "Wir haben die letzte Verifizierungsmail vor weniger als fünf Minuten gesendet. Bitte versuche es später erneut.",
-      "resendThresholdDepleted": "Keine weitere Verifizierungsversuche übrig. Bitte wende dich an einen Admin im Teamspeak.",
+      "resendThresholdDepleted": "Keine weitere Verifizierungsversuche übrig. Bitte wende dich an einen Admin im TeamSpeak.",
       "emailSent": "Wir haben eine E-Mail mit dem Verifizierungslink an ${ email } gesendet.",
       "successfulVerification": "**Juhu!** Deine E-Mail-Adresse wurde erfolgreich bestätigt."
     }
   },
   "teamspeakLink": {
-    "title": "Teamspeak-Verknüpfung herstellen",
+    "title": "TeamSpeak-Verknüpfung herstellen",
     "messages": {
-      "unavailble": "Die Teamspeak-Verknüpfung ist derzeit nicht verfügbar.",
-      "alreadyLinked": "Dein Account ist bereits mit einer Teamspeak-Identität verknüpft.",
-      "idAlreadyLinked": "Diese Teamspeak-Identität wurde bereits mit einem anderen Account verknüpft.",
-      "failedLink": "Du bist entweder nicht online oder hast deinen Nickname noch nicht geändert.",
-      "successfulLink": "**Yay!** Deine Teamspeak-Identität wurde erfolgreich verknüpft.",
-      "nothingToUnlink": "Du hast keine Teamspeak-Identität mit deinem Account verknüpft.",
-      "successfulUnlink": "Die Teamspeak-Verknüpfung wurde erfolgreich aufgehoben.",
-      "codeRegenerated": "Ein neuer Code wurde generiert."
+      "unavailble": "Die TeamSpeak-Verknüpfung ist derzeit nicht verfügbar.",
+      "alreadyLinked": "Dein Account ist bereits mit einer TeamSpeak-Identität verknüpft.",
+      "idAlreadyLinked": "Diese TeamSpeak-Identität wurde bereits mit einem anderen Account verknüpft.",
+      "successfulLink": "**Yay!** Deine TeamSpeak-Identität wurde erfolgreich verknüpft.",
+      "nothingToUnlink": "Du hast keine TeamSpeak-Identität mit deinem Account verknüpft.",
+      "successfulUnlink": "Die TeamSpeak-Verknüpfung wurde erfolgreich aufgehoben."
     }
   },
   "forgotPassword": {
@@ -99,7 +102,7 @@
     "messages": {
       "tokenExpired": "Das Zurücksetzungstoken ist ausgelaufen. Bitte beantrage ein neues.",
       "resendOnCooldown": "Die letzte Rücksetzungsanfrage wurde vor weniger als fünf Minuten gesendet. Bitte versuche es später erneut.",
-      "resendThresholdDepleted": "Keine weiteren Rücksetzungsanfragen übrig. Bitte wende dich an einen Admin im Teamspeak.",
+      "resendThresholdDepleted": "Keine weiteren Rücksetzungsanfragen übrig. Bitte wende dich an einen Admin im TeamSpeak.",
       "emailSent": "Wir haben eine E-Mail mit dem Zurücksetzungslink an ${ email } gesendet.",
       "successfulChange": "Das Passwort für den Account \"${ username }\" wurde erfolgreich geändert."
     }
