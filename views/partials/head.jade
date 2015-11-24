@@ -5,7 +5,7 @@ if title === 'Gamekeller'
   title Gamekeller
 else
   title #{title} · Gamekeller
-link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,500italic,700,700italic')
+link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,500italic,700,700italic')
 link(rel='apple-touch-icon', sizes='57x57', href='/apple-touch-icon-57x57.png')
 link(rel='apple-touch-icon', sizes='114x114', href='/apple-touch-icon-114x114.png')
 link(rel='apple-touch-icon', sizes='72x72', href='/apple-touch-icon-72x72.png')
@@ -25,4 +25,4 @@ meta(name='msapplication-TileImage', content='/mstile-144x144.png')
 if customCss
   != css('css/pages/' + customCss + '.css')
 script.
-  window.GK={assetHost:'#{config.assetHost ? "//" + config.assetHost : ""}'};document.documentElement.classList.add('js')
+  window.GK={assetHost:'#{config.assetHost ? "https://" + config.assetHost : ""}'};document.documentElement.classList.add('js')
