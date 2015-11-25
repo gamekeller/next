@@ -33,7 +33,7 @@ block content
               small.help-block
                 | Passwort zuletzt geändert&nbsp;
                 +timestamp(profile.passwordChangedAt)
-                button.btn.btn-default.btn-xs.btn-pull-right(type='submit', formaction=url('./sendPasswordReset')) Zurücksetzungsemail senden
+                button.btn.btn-default.btn-xs.btn-pull-right(type='submit', formaction=url('../sendPasswordReset')) Zurücksetzungsemail senden
 
             if profile.forgotPassword.code
               .form-group.floating-label.floating-label-populated
@@ -62,7 +62,7 @@ block content
                       input(type='checkbox', name='user[emailVerified]', checked=profile.emailVerified)
                       if !profile.emailVerified
                         | &nbsp;
-                        button.btn.btn-default.btn-sm.btn-inline(type='submit', formaction=url('./sendEmailVerification')) E-Mail erneut senden
+                        button.btn.btn-default.btn-xs.btn-inline(type='submit', formaction=url('../sendEmailVerification')) E-Mail erneut senden
                     dt Letzte E-Mail gesendet
                     dd
                       +timestamp(profile.emailVerification.sentAt)
@@ -78,7 +78,7 @@ block content
                         input(type='checkbox', name='user[emailVerified]', checked=profile.emailVerified)
                         | Verifiziert
                   li
-                    a.btn.btn-default.btn-sm(href=url('./sendEmailVerification')) Bestätigungsmail senden
+                    a.btn.btn-default.btn-xs(href=url('../sendEmailVerification')) Bestätigungsmail senden
 
             .form-group.floating-label(class=profile.teamspeakLinked ? 'floating-label-populated' : '')
               label(for='teamspeakUid') Teamspeak-Verknüpfung
@@ -106,3 +106,4 @@ block content
 
             .form-group
               button.btn.btn-primary(type='submit') User speichern
+              button.btn.btn-link.btn-pull-right(type='submit', formaction=url('../delete'), onclick='return prompt(\'Um diesen Account zu löschen, gib bitte den Username ein.\')===\'#{profile.username}\'') Account löschen
