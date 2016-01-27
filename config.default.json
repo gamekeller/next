@@ -3,6 +3,7 @@
   "url": "http://localhost:3000",
   "assetHost": "",
   "userContentHost": "",
+  "avatarsPath": "avatars",
   "ftp": {
     "host": "",
     "user": "",
