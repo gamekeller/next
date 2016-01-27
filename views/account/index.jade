@@ -19,14 +19,17 @@ block content
               +form(action=url('./avatar/upload'), enctype='multipart/form-data')
 
                 .form-group
-                  input(type='file', name='avatar', id='avatar')
+                  input(type='file', name='avatar', id='avatar', accept='.jpg,.jpeg,.png', required)
+
+                .form-group
+                  p JPEG oder PNG, unter 2 MB, im Idealfall 512x512 Pixel
 
                 .form-group
                   button.btn.btn-primary.u-btn-inline(type='submit') Avatar #{hasCustomAvatar ? 'ändern' : 'hochladen'}
                   if hasCustomAvatar || user.avatar.type === 'gravatar'
-                    button.btn.btn-default.btn-sm.u-btn-inline(type='submit', formaction=url('./avatar/delete'), formenctype='application/x-www-form-urlencoded') Avatar entfernen
+                    button.btn.btn-default.btn-sm.u-btn-inline(type='submit', formaction=url('./avatar/delete'), formenctype='application/x-www-form-urlencoded', formnovalidate) Avatar entfernen
                   if user.avatar.type !== 'gravatar'
-                    button.btn.btn-default.btn-sm.u-btn-inline(type='submit', formaction=url('./avatar/gravatar'), formenctype='application/x-www-form-urlencoded') Gravatar benutzen
+                    button.btn.btn-default.btn-sm.u-btn-inline(type='submit', formaction=url('./avatar/gravatar'), formenctype='application/x-www-form-urlencoded', formnovalidate) Gravatar benutzen
 
           .panel.panel-default
             .panel-heading
