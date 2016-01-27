@@ -168,6 +168,7 @@ body {
 
 .small-pulled-right {
   display: block;
+  font-weight: 400;
   line-height: 26px;
   font-size: 12px;
 
@@ -336,5 +337,24 @@ th.sort-header {
 
   .sentry__button.sentry__send::after {
     content: 'Senden';
+  }
+}
+
+.panel-error-status {
+  position: relative;
+  font-size: 14px;
+  font-weight: 400;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -3px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 6px 6px;
+    border-color: transparent transparent @brand-danger transparent;
   }
 }

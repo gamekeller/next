@@ -32,7 +32,7 @@ block content
             .panel-heading
               h3.panel-title
                 | E-Mail-Adresse
-                span.small-pulled-right(class=user.emailVerified ? 'text-success' : 'text-danger account-email-unverified')
+                span.small-pulled-right(class=user.emailVerified ? 'text-success' : 'text-danger panel-error-status')
                   if user.emailVerified
                     span.icon.icon-check.icon-inline
                     | Bestätigt
@@ -72,7 +72,7 @@ block content
             .panel-heading
               h3.panel-title
                 | Passwort
-                small.small-pulled-right.text-muted
+                span.small-pulled-right.text-muted
                   | geändert&nbsp;
                   +timestamp(user.passwordChangedAt)
             .panel-body
@@ -96,24 +96,30 @@ block content
 
           .panel.panel-default
             .panel-heading
-              h3.panel-title TeamSpeak-Verknüpfung
+              h3.panel-title
+                | TeamSpeak-ID
+                span.small-pulled-right(class=user.teamspeakLinked ? 'text-success' : 'text-danger panel-error-status')
+                  if user.teamspeakLinked
+                    span.icon.icon-check.icon-inline
+                    | Verknüpft
+                  else
+                    span.icon.icon-cross.icon-inline
+                    | Nicht verknüpft
             .panel-body
               if user.teamspeakLinked
                 +form(type='horizontal')
 
-                  .form-group
-                    label.col-sm-3.control-label Teamspeak-ID
-                    .col-sm-9
-                      p.form-control-static= user.teamspeakUid
+                  dl
+                    dt Verknüpfte TeamSpeak-Identität:
+                    dd= user.teamspeakUid
 
-                  .form-group
-                    .col-sm-offset-3.col-sm-9
-                      button.btn.btn-default(type='submit', formaction='/account/teamspeak/unlink') Verknüpfung aufheben
+                  button.btn.btn-default.btn-sm(type='submit', formaction='/account/teamspeak/unlink') Verknüpfung aufheben
               else
-                p.text-danger
-                  span.icon.icon-cross.icon-inline(style='position:relative;top:1px')
-                  | Keine TeamSpeak-Identität verknüpft
-                p Um deine TeamSpeak-Identität mit deinem gamekeller.net-Account zu verknüpfen, betrete den Channel "#{config.teamspeak.link.channelName}" im TeamSpeak und folge den Anweisungen, die dir dort zugeschickt werden.
+                .alert.alert-danger.alert-panel
+                  p
+                    b Achtung!
+                    |  Du hast noch keine TeamSpeak-Identität mit deinem Account verknüpft!
+                p Um deine Identität zu verknüpfen, betrete den Channel "#{config.teamspeak.link.channelName}" und folge den Anweisungen, die dir dort zugeschickt werden.
                 a.btn.btn-primary(href='ts3server://' + config.teamspeak.url + '?port=9987&cid=' + config.teamspeak.link.channelId) Channel "#{config.teamspeak.link.channelName}" betreten
 
           a.text-dark.pull-right(href=url('./delete')) Account löschen
