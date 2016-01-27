@@ -1,7 +1,7 @@
 mixin profileCard(profile)
 
   mixin avatar
-    img.profile-avatar(src=profile.gravatarUrl(512), alt=profile.username)
+    != utils.avatarElement(profile, 512, 'profile-avatar')
 
   .profile-usercard
     .profile-card.panel.panel-default

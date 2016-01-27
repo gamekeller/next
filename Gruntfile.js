@@ -10,8 +10,9 @@ module.exports = function(grunt) {
     nodemon: {
       server: {
         script: 'app.js',
+        debug: true,
         options: {
-          ignoredFiles: ['assets/**', 'public/**']
+          ignoredFiles: ['assets/**', 'public/**', 'uploads/**', 'node_modules/**']
         }
       },
       prod: {

@@ -2,6 +2,12 @@
   "port": 3000,
   "url": "http://localhost:3000",
   "assetHost": "",
+  "userContentHost": "",
+  "ftp": {
+    "host": "",
+    "user": "",
+    "pass": ""
+  },
   "mail": {
     "service": "Mailgun",
     "auth": {
@@ -78,10 +84,10 @@
   "emailVerification": {
     "resendCooldown": 300,
     "messages": {
-      "alreadyVerified": "E-Mail-Adresse ist bereits verifiziert.",
-      "resendOnCooldown": "Wir haben die letzte Verifizierungsmail vor weniger als fünf Minuten gesendet. Bitte versuche es später erneut.",
-      "resendThresholdDepleted": "Keine weitere Verifizierungsversuche übrig. Bitte wende dich an einen Admin im TeamSpeak.",
-      "emailSent": "Wir haben eine E-Mail mit dem Verifizierungslink an ${ email } gesendet.",
+      "alreadyVerified": "E-Mail-Adresse ist bereits bestätigt.",
+      "resendOnCooldown": "Wir haben die letzte Bestätigungsmail vor weniger als fünf Minuten gesendet. Bitte versuche es später erneut.",
+      "resendThresholdDepleted": "Keine weitere Bestätigungsversuche übrig. Bitte wende dich an einen Admin im TeamSpeak.",
+      "emailSent": "Wir haben eine E-Mail mit dem Bestätigungslink an ${ email } gesendet.",
       "successfulVerification": "**Juhu!** Deine E-Mail-Adresse wurde erfolgreich bestätigt."
     }
   },

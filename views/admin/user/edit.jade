@@ -78,7 +78,7 @@ block content
                         input(type='checkbox', name='user[emailVerified]', checked=profile.emailVerified)
                         | Verifiziert
                   li
-                    a.btn.btn-default.btn-xs(href=url('../sendEmailVerification')) Bestätigungsmail senden
+                    button.btn.btn-default.btn-xs(type='submit', formaction=url('../sendEmailVerification')) Bestätigungsmail senden
 
             .form-group.floating-label(class=profile.teamspeakLinked ? 'floating-label-populated' : '')
               label(for='teamspeakUid') Teamspeak-Verknüpfung

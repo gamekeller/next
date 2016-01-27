@@ -23,7 +23,7 @@ block content
             .panel-list
               each friend in profile.friends
                 a.panel-list-item(href='/#{friend.username}')
-                  img.mini-avatar(src=friend.gravatarUrl(40))
+                  != utils.avatarElement(friend, 40, 'mini-avatar')
                   | &nbsp;
                   strong #{friend.username}
                   .pull-right

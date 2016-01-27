@@ -2,6 +2,7 @@
  * Dependencies
  */
 var _              = require('lodash')
+var avatar         = require('./lib/controllers/account/avatar')
 var bodyParser     = require('body-parser')
 var compress       = require('compression')
 var cookieParser   = require('cookie-parser')
@@ -55,13 +56,12 @@ redis.$.on('error', function() {
 /**
  * Mongoose config
  */
-mongoose.connect('mongodb://' + config.mongo.host + ':' + config.mongo.port + '/' + config.mongo.db)
-mongoose.connection.on('connected', function() {
-  console.log('✔ MongoDB connection established.')
-})
-mongoose.connection.on('error', function() {
-  console.error('✗ Unable to connect to MongoDB.')
-})
+require('./lib/mongo')
+
+/**
+ * FTP setup
+ */
+app.ftp = require('./lib/ftp')
 
 /**
  * TeamSpeak RPC config
@@ -79,7 +79,6 @@ yodel.on('error', function(err) {
   else
     console.error('✗ TeamSpeak RPC error:', err)
 })
-
 
 /**
  * moment
@@ -114,6 +113,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(validator())
 app.use(methodOverride())
 app.use('/api', require('./lib/controllers/api'))
+
+// Session
+// --------------------------------
 app.use(session({
   name: 'sid',
   resave: false,
@@ -125,6 +127,9 @@ app.use(session({
     prefix: redis.prefix + 'sess:'
   })
 }))
+
+// CSP
+// --------------------------------
 app.use(csp({
   defaultSrc: ["'self'", 'serve.gamekeller.net'],
   scriptSrc: ["'self'", "'unsafe-inline'", 'www.google-analytics.com', 'nectar.ninja', config.assetHost],
@@ -142,18 +147,22 @@ app.post('/report-csp-violation', function(req, res) {
   console.error('CSP Violation:', JSON.stringify(req.body, null, 2))
   res.status(200).end()
 })
-app.use(csrf())
-
-// Mailer
-// --------------------------------
-var Mailer = require('./lib/mailer')
-app.mailer = new Mailer(nodemailer.createTransport(config.mail), app.render.bind(app))
 
 // Passport
 // --------------------------------
 app.use(passport.initialize())
 app.use(passport.session())
 require('./lib/helpers/auth')(app)
+
+// CSRF
+// --------------------------------
+avatar.upload(app)
+app.use(csrf())
+
+// Mailer
+// --------------------------------
+var Mailer = require('./lib/mailer')
+app.mailer = new Mailer(nodemailer.createTransport(config.mail), app.render.bind(app))
 
 // Asset configuration
 // --------------------------------
@@ -215,7 +224,7 @@ app.use(function(req, res, next) {
       nav.main.push({ href: '/admin', name: 'Administration', view: /^admin/ })
 
     nav.right.push(
-      { href: '/' + user.username, content: '<img class="mini-avatar" src="' + user.gravatarUrl(40) + '"> ' + user.username },
+      { href: '/' + user.username, content: utils.avatarElement(user, 40, 'mini-avatar') + ' ' + user.username },
       { href: '/account', content: '<span class="icon icon-gear"></span>', title: 'Einstellungen' },
       { href: '/logout', form: true, content: '<button type="submit" class="btn btn-link" title="Ausloggen"><span class="icon icon-logout"></span></button>' }
     )

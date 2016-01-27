@@ -6,88 +6,114 @@ block content
     include _nav
 
     .col-md-9
+      .row
 
-      include ../partials/flash
+        include ../partials/flash
 
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title E-Mail-Adresse
-        .panel-body
-          +form(type='horizontal')
+        .account-column-left.col-md-6
+          - var hasCustomAvatar = user.avatar.type === 'upload'
+          .panel.panel-default
+            .panel-heading
+              h3.panel-title Avatar #{hasCustomAvatar ? 'ändern' : 'hochladen'}
+            .panel-body
+              +form(action=url('./avatar/upload'), enctype='multipart/form-data')
 
-            .form-group
-              label.col-sm-3.control-label E-Mail-Adresse
-              .col-sm-9
-                input.form-control(type='email', name='account[email]', value=user.email)
+                .form-group
+                  input(type='file', name='avatar', id='avatar')
 
-            .form-group
-              label.col-sm-3.control-label Status
-              .col-sm-9
-                p.form-control-static
+                .form-group
+                  button.btn.btn-primary.u-btn-inline(type='submit') Avatar #{hasCustomAvatar ? 'ändern' : 'hochladen'}
+                  if hasCustomAvatar || user.avatar.type === 'gravatar'
+                    button.btn.btn-default.btn-sm.u-btn-inline(type='submit', formaction=url('./avatar/delete'), formenctype='application/x-www-form-urlencoded') Avatar entfernen
+                  if user.avatar.type !== 'gravatar'
+                    button.btn.btn-default.btn-sm.u-btn-inline(type='submit', formaction=url('./avatar/gravatar'), formenctype='application/x-www-form-urlencoded') Gravatar benutzen
+
+          .panel.panel-default
+            .panel-heading
+              h3.panel-title
+                | E-Mail-Adresse
+                span.small-pulled-right(class=user.emailVerified ? 'text-success' : 'text-danger account-email-unverified')
                   if user.emailVerified
-                    span.icon.icon-check.icon-inline.text-success
-                    | Verifiziert
+                    span.icon.icon-check.icon-inline
+                    | Bestätigt
                   else
-                    span.icon.icon-cross.icon-inline.text-danger
-                    | Unverifiziert&nbsp;
-                    if user.emailVerification.resendTries <= 0
-                      button.btn.btn-default.btn-sm.btn-inline.visually-disabled.js-tooltip(type='button', tabindex='-1', title=config.emailVerification.messages.resendThresholdDepleted) E-Mail erneut senden
-                    else if Date.now() - user.emailVerification.sentAt <= config.emailVerification.resendCooldown * 1e3
-                      button.btn.btn-default.btn-sm.btn-inline.visually-disabled.js-tooltip.js-resend-cooldown(type='button', tabindex='-1', title=config.emailVerification.messages.resendOnCooldown, data-ready-at='#{user.emailVerification.sentAt + config.emailVerification.resendCooldown * 1e3}') E-Mail erneut senden
-                    else
-                      button.btn.btn-default.btn-sm.btn-inline(type='submit', formaction=url('./verify/email/resend')) E-Mail erneut senden
+                    span.icon.icon-cross.icon-inline
+                    | Unbestätigt
+
+            .panel-body
+              +form
+
+                if !user.emailVerified
+                  - var btnClasses = 'btn btn-default btn-xs btn-inline'
+                  .alert.alert-danger.alert-panel
+                    p
+                      b Achtung!
+                      |  Deine E-Mail-Adresse ist noch nicht bestätigt. Folge den Anweisungen in der E-Mail, die wir dir gesendet haben.
+                    p
+                      b.u-vam Keine E-Mail bekommen?&nbsp;
+                      if user.emailVerification.resendTries <= 0
+                        button.visually-disabled.js-tooltip(class=btnClasses, type='button', tabindex='-1', title=config.emailVerification.messages.resendThresholdDepleted) E-Mail erneut senden
+                      else if Date.now() - user.emailVerification.sentAt <= config.emailVerification.resendCooldown * 1e3
+                        button.visually-disabled.js-tooltip.js-resend-cooldown(class=btnClasses, type='button', tabindex='-1', data-placement='bottom', title=config.emailVerification.messages.resendOnCooldown, data-ready-at='#{user.emailVerification.sentAt + config.emailVerification.resendCooldown * 1e3}') E-Mail erneut senden
+                      else
+                        button(class=btnClasses, type='submit', formaction=url('./verify/email/resend')) E-Mail erneut senden
 
 
-            .form-group
-              .col-sm-offset-3.col-sm-9
-                button.btn.btn-primary(type='submit') E-Mail-Adresse ändern
+                .form-group.floating-label.floating-label-populated
+                  label(for='email') Aktuelle E-Mail-Adresse
+                  input.form-control(type='email', id='email', name='account[email]', value=user.email)
 
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title
-            | Passwort
-            small.small-pulled-right
-              | Passwort zuletzt geändert&nbsp;
-              +timestamp(user.passwordChangedAt)
-        .panel-body
-          +form
+                .form-group
+                  button.btn.btn-primary(type='submit') E-Mail-Adresse ändern
 
-            .form-group.floating-label
-              label(for='currentPassword') Aktuelles Passwort
-              input.form-control(type='password', id='currentPassword', name='currentPassword', placeholder='Aktuelles Passwort', data-placeholder='••••••••••••••••••••••••')
+        .account-column-right.col-md-6
 
-            .form-group.floating-label
-              label(for='newPassword') Neues Passwort
-              input.form-control.js-password(type='password', id='newPassword', name='account[password]', placeholder='Neues Passwort', data-placeholder='••••••••••••••••••••••••')
+          .panel.panel-default
+            .panel-heading
+              h3.panel-title
+                | Passwort
+                small.small-pulled-right.text-muted
+                  | geändert&nbsp;
+                  +timestamp(user.passwordChangedAt)
+            .panel-body
+              +form
 
-            .form-group.floating-label
-              label(for='newPasswordConfirmation') Neues Passwort wiederholen
-              input.form-control.js-confirm-password(type='password', id='newPasswordConfirmation', name='confirmPassword', placeholder='Neues Passwort wiederholen', data-placeholder='••••••••••••••••••••••••')
+                .form-group.floating-label
+                  label(for='currentPassword') Aktuelles Passwort
+                  input.form-control(type='password', id='currentPassword', name='currentPassword', placeholder='Aktuelles Passwort', data-placeholder='••••••••••••••••••••••••')
 
-            .form-group
-              button.btn.btn-primary.btn-pull-left(type='submit') Passwort ändern
-              a.btn.btn-default.btn-pull-right(href='/forgot') Passwort vergessen
+                .form-group.floating-label
+                  label(for='newPassword') Neues Passwort
+                  input.form-control.js-password(type='password', id='newPassword', name='account[password]', placeholder='Neues Passwort', data-placeholder='••••••••••••••••••••••••')
 
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title TeamSpeak-Verknüpfung
-        .panel-body
-          if user.teamspeakLinked
-            +form(type='horizontal')
+                .form-group.floating-label
+                  label(for='newPasswordConfirmation') Neues Passwort wiederholen
+                  input.form-control.js-confirm-password(type='password', id='newPasswordConfirmation', name='confirmPassword', placeholder='Neues Passwort wiederholen', data-placeholder='••••••••••••••••••••••••')
 
-              .form-group
-                label.col-sm-3.control-label Teamspeak-ID
-                .col-sm-9
-                  p.form-control-static= user.teamspeakUid
+                .form-group
+                  button.btn.btn-primary.btn-pull-left(type='submit') Passwort ändern
+                  a.btn.btn-default.btn-pull-right(href='/forgot') Passwort vergessen
 
-              .form-group
-                .col-sm-offset-3.col-sm-9
-                  button.btn.btn-default(type='submit', formaction='/account/teamspeak/unlink') Verknüpfung aufheben
-          else
-            p.text-danger
-              span.icon.icon-cross.icon-inline(style='position:relative;top:1px')
-              | Keine TeamSpeak-Identität verknüpft
-            p Um deine TeamSpeak-Identität mit deinem gamekeller.net-Account zu verknüpfen, betrete den Channel "#{config.teamspeak.link.channelName}" im TeamSpeak und folge den Anweisungen, die dir dort zugeschickt werden.
-            a.btn.btn-primary(href='ts3server://' + config.teamspeak.url + '?port=9987&cid=' + config.teamspeak.link.channelId) Channel "#{config.teamspeak.link.channelName}" betreten
+          .panel.panel-default
+            .panel-heading
+              h3.panel-title TeamSpeak-Verknüpfung
+            .panel-body
+              if user.teamspeakLinked
+                +form(type='horizontal')
 
-      a.text-dark.pull-right(href=url('./delete')) Account löschen
+                  .form-group
+                    label.col-sm-3.control-label Teamspeak-ID
+                    .col-sm-9
+                      p.form-control-static= user.teamspeakUid
+
+                  .form-group
+                    .col-sm-offset-3.col-sm-9
+                      button.btn.btn-default(type='submit', formaction='/account/teamspeak/unlink') Verknüpfung aufheben
+              else
+                p.text-danger
+                  span.icon.icon-cross.icon-inline(style='position:relative;top:1px')
+                  | Keine TeamSpeak-Identität verknüpft
+                p Um deine TeamSpeak-Identität mit deinem gamekeller.net-Account zu verknüpfen, betrete den Channel "#{config.teamspeak.link.channelName}" im TeamSpeak und folge den Anweisungen, die dir dort zugeschickt werden.
+                a.btn.btn-primary(href='ts3server://' + config.teamspeak.url + '?port=9987&cid=' + config.teamspeak.link.channelId) Channel "#{config.teamspeak.link.channelName}" betreten
+
+          a.text-dark.pull-right(href=url('./delete')) Account löschen

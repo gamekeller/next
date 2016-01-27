@@ -5,7 +5,7 @@
 
   if($resendBtn.length) {
     setTimeout(function() {
-      $resendBtn.replaceWith('<a href="/account/verify/email/resend" class="btn btn-default btn-sm btn-inline">E-Mail erneut senden</a>')
+      $resendBtn.replaceWith('<button type="submit" formaction="/account/verify/email/resend" class="btn btn-default btn-xs btn-inline">E-Mail erneut senden</a>')
     }, parseInt($resendBtn.data('ready-at'), 10) - Date.now())
   }
 
