@@ -5,9 +5,10 @@ include mixins/nav
 include mixins/profileCard
 
 doctype html
-html(lang='de')
+html(lang='de', prefix='og: http://ogp.me/ns#')
   head
     include partials/head
+    block head
   body
 
     #wrapper
