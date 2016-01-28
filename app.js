@@ -94,6 +94,8 @@ app.moment = moment
 // --------------------------------
 if(app.get('env') === 'production')
   app.enable('trust proxy')
+if(app.get('env') === 'development')
+  app.locals.pretty = true
 app.disable('x-powered-by')
 app.set('port', _.parseInt(config.port) + (_.parseInt(process.env.NODE_APP_INSTANCE) || 0))
 app.set('views', __dirname + '/views')
