@@ -45,19 +45,20 @@ html(lang='de')
         .section-heading
           h3.section-heading-title Aktivitäten
         .activities
+          - var localAssetPath = asset_path('img/landing.svg').replace(/^http(s?):\/\//, '').replace(config.assetHost, '')
           a.activity.activity-league.landing-box(href='http://lol.gamekeller.net')
             svg.activity-icon
-              use(xlink:href=asset_path('img/landing.svg') + '#lol')
+              use(xlink:href=localAssetPath + '#lol')
             h4 League of Legends
             p Regelmäßige Turniere und Spiele auf täglicher Basis.
           a.activity.activity-steam.landing-box(href='https://steamcommunity.com/groups/gamekeller')
             svg.activity-icon
-              use(xlink:href=asset_path('img/landing.svg') + '#steam')
+              use(xlink:href=localAssetPath + '#steam')
             h4 Steam Gruppe
             p Egal zu welcher Uhrzeit, hier findest du immer jemanden zum Spielen.
           a.activity.activity-full.activity-mafia.landing-box(href='http://mafia.gamekeller.net')
             svg.activity-mafia-guy
-              use(xlink:href=asset_path('img/landing.svg') + '#mafia-guy')
+              use(xlink:href=localAssetPath + '#mafia-guy')
             h4 TeamSpeak-Mafia
             p Das berühmte Partyspiel, jeden Samstag ab 19 Uhr.
 
