@@ -4,36 +4,92 @@ html(lang='de')
     include partials/head
   body
 
-    .masthead
-      .inner
-        .content.small-container
-          h1.title
-            span.icon.icon-gamekeller
-            span.sr-only Gamekeller
-          h2.slogan Dein Zuhause im Internet
-          h3.details.
-            Wir sind eine multinationale Gaming-Community, die sich auf maximalen Komfort konzentriert.
-          .buttons
-            a#teamspeak-btn.btn(href='ts3server://gamekeller.net?port=9987') Schau auf unserem Teamspeak vorbei!
+    #wrapper
+      .masthead
+        h1.masthead-title
+          span.icon.icon-gamekeller
+          span.sr-only Gamekeller
+        h2.masthead-slogan Dein Zuhause im Internet
+        h3.masthead-details
+          | Wir sind eine multinationale Gaming-Community, die sich auf maximalen Komfort konzentriert.
+        .masthead-buttons
+          a.masthead-btn.btn.btn-primary(href='/signup') Account erstellen
+          span.masthead-buttons-sep.masthead-btn oder
+          a.masthead-btn.btn.btn-default.btn-sm(href='/login') Einloggen
 
-    #actions
-      .container
-        ul.nav.navbar-nav.navbar-right
-          if user
-            li
-              a(href='/') Home
-          else
-            li
-              a(href='/login') Login
-            li
-              a(href='/signup') Registrieren
+    .landing
+      h1.facts-title
+        span.icon.icon-gamekeller
+        | Gamekeller
 
-    #footer
-      .container
-        .callout.small-container
-          h1 Wir sind noch nicht ganz fertig.
-          h4 Während wir noch fleißig an der Website tüfteln, kannst Du uns ja schon mal besuchen kommen. Wir freuen uns auf Dich!
+      section.facts.section
+        .fact
+          h4 150+ aktive User
+          p Mit über 150 aktiven Nutzern ist bei uns immer etwas los – von Gaming bis hin zu intensiven Debatte!
+        .fact
+          h4 150.000+ Stunden
+          p Über 3000 unterschiedliche User haben seit August 2015 über 150.000 Stunden Onlinezeit angehäuft.
+        .fact
+          h4 Gegründet in 2006
+          p Gamekeller existiert in der einen oder anderen Form schon seit 2006 und es ist kein Ende in Sicht!
 
+      section.buttons.section
+        a.btn.btn-primary.btn-inline(href='ts3server://#{config.teamspeak.url}?port=9987')
+          | TeamSpeak-Server betreten
+          //- span.btn-more
+          //-   b 60
+          //-   |  User jetzt online
+        //- a.btn.btn-link.btn-inline(href='/signup') Account erstellen
+
+      section.section
+        .section-heading
+          h3.section-heading-title Aktivitäten
+        .activities
+          a.activity.activity-league.landing-box(href='http://lol.gamekeller.net')
+            svg.activity-icon
+              use(xlink:href=asset_path('img/landing.svg') + '#lol')
+            h4 League of Legends
+            p Regelmäßige Turniere und Spiele auf täglicher Basis.
+          a.activity.activity-steam.landing-box(href='https://steamcommunity.com/groups/gamekeller')
+            svg.activity-icon
+              use(xlink:href=asset_path('img/landing.svg') + '#steam')
+            h4 Steam Gruppe
+            p Egal zu welcher Uhrzeit, hier findest du immer jemanden zum Spielen.
+          a.activity.activity-full.activity-mafia.landing-box(href='http://mafia.gamekeller.net')
+            svg.activity-mafia-guy
+              use(xlink:href=asset_path('img/landing.svg') + '#mafia-guy')
+            h4 TeamSpeak-Mafia
+            p Das berühmte Partyspiel, jeden Samstag ab 19 Uhr.
+
+      section.section
+        .section-heading
+          h3.section-heading-title News
+
+        noscript.news-nojs JavaScript wird benötigt, um die News anzuzeigen.
+
+      .clearfix
         include partials/footer
 
     include partials/analytics
+    //-
+      GK.newsFetched=function(data) {
+        if(!data.response || !data.response.posts) return
+
+        var germanMonths = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
+        var posts = data.response.posts
+        var el = document.createElement('div')
+        el.className = 'news'
+
+        for(var i = 0; i < posts.length; i++) {
+          var post = posts[i]
+          var date = new Date(post.date)
+
+          el.insertAdjacentHTML('beforeend', '<article class="news-item"><div class="news-meta"><a href="' + post.post_url + '"><time datetime="' + date.toISOString() + '" class="news-date">' + date.getDate() + '. ' + germanMonths[date.getMonth()] + ' ' + date.getFullYear() + '</time></a></div><div class="news-body"><h4 class="news-heading"><a href="' + post.post_url + '">' + post.title + '</a></h4>' + post.body + '</div></article>')
+        }
+
+        document.querySelector('.news-nojs').parentNode.appendChild(el)
+      }
+    script.
+      GK.newsFetched=function(a){if(a.response&&a.response.posts){var f="Januar Februar M\u00e4rz April Mai Juni Juli August September Oktober November Dezember".split(" ");a=a.response.posts;var d=document.createElement("div");d.className="news";for(var e=0;e<a.length;e++){var b=a[e],c=new Date(b.date);d.insertAdjacentHTML("beforeend",'<article class="news-item"><div class="news-meta"><a href="'+b.post_url+'"><time datetime="'+c.toISOString()+'" class="news-date">'+c.getDate()+". "+f[c.getMonth()]+" "+
+      c.getFullYear()+'</time></a></div><div class="news-body"><h4 class="news-heading"><a href="'+b.post_url+'">'+b.title+"</a></h4>"+b.body+"</div></article>")}document.querySelector(".news-nojs").parentNode.appendChild(d)}};
+    script(src='https://api.tumblr.com/v2/blog/news.gamekeller.net/posts?api_key=oCVDNDmkss1Ug6XKNOkNiBmX6Idd29jXey5pRj0SUfISvQ0m0a&limit=3&callback=GK.newsFetched')
