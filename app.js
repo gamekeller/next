@@ -132,15 +132,13 @@ app.use(session({
 
 // CSP
 // --------------------------------
-var cspDefaultSrc = ["'self'", 'https://serve.gamekeller.net']
-if(config.assetHost) cspDefaultSrc.push('https://' + config.assetHost)
 app.use(csp({
   directives: {
-    defaultSrc: cspDefaultSrc,
-    scriptSrc: ["'self'", "'unsafe-inline'", 'https://www.google-analytics.com', 'https://nectar.ninja', 'https://api.tumblr.com'],
-    styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-    imgSrc: ["'self'", 'data:', 'https://0.gravatar.com', 'https://camo.gamekeller.net', 'https://www.google-analytics.com'],
-    fontSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
+    defaultSrc: ["'self'", 'https://serve.gamekeller.net', 'https://' + config.assetHost],
+    scriptSrc: ["'self'", "'unsafe-inline'", 'https://www.google-analytics.com', 'https://nectar.ninja', 'https://api.tumblr.com', 'https://' + config.assetHost],
+    styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://' + config.assetHost],
+    imgSrc: ["'self'", 'data:', 'https://0.gravatar.com', 'https://camo.gamekeller.net', 'https://www.google-analytics.com', 'https://' + config.assetHost],
+    fontSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'https://' + config.assetHost],
     connectSrc: ["'self'", 'https://www.reddit.com', 'https://nectar.ninja'],
     reportUri: '/report-csp-violation'
   }
