@@ -11,7 +11,7 @@
 
     $loading.removeClass('hide')
 
-    $.ajax('//www.reddit.com/r/gamekeller/new.json?limit=3', {
+    $.ajax('https://www.reddit.com/r/gamekeller/new.json?limit=3', {
       cache: false
     })
       .done(function(res) {
