@@ -17,7 +17,6 @@ var logger         = require('morgan')
 var methodOverride = require('method-override')
 var moment         = require('moment')
 var mongoose       = require('mongoose')
-var nodemailer     = require('nodemailer')
 var passport       = require('passport')
 var redis          = require('./lib/redis')
 var session        = require('express-session')
@@ -165,7 +164,7 @@ app.use(csrf())
 // Mailer
 // --------------------------------
 var Mailer = require('./lib/mailer')
-app.mailer = new Mailer(nodemailer.createTransport(config.mail), app.render.bind(app))
+app.mailer = new Mailer(_.bind(app.render, app))
 
 // Asset configuration
 // --------------------------------

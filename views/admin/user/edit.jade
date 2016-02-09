@@ -100,9 +100,7 @@ block content
             .form-group.floating-label.floating-label-populated
               label Biografie
               .floating-label-body
-                +markdownEditor(placeholder='Biografie...', name='user[bio][source]')
-                  if profile.bio.source
-                    != profile.bio.source
+                +markdownEditor(placeholder='Biografie...', name='user[bio][source]', value=profile.bio.source)
 
             .form-group
               button.btn.btn-primary(type='submit') User speichern

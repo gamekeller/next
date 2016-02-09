@@ -10,10 +10,16 @@
     "pass": ""
   },
   "mail": {
-    "service": "Mailgun",
-    "auth": {
-      "user": "",
-      "pass": ""
+    "senders": {
+      "accounts": "gamekeller.net Accounts <accounts@gamekeller.net>"
+    },
+    "subjects": {
+      "emailVerification": "Bestätige deine E-Mail-Adresse",
+      "forgotPassword": "Zurücksetzen deines gamekeller.net-Account-Passworts"
+    },
+    "mailgun": {
+      "apiKey": "",
+      "domain": ""
     }
   },
   "mongo": {

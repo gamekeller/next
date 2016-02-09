@@ -15,7 +15,7 @@ mixin markdownEditor
 
     .tab-content
       #markdown-editor-write.tab-pane.active
-        textarea.markdown-editor-textarea.form-control(placeholder!=attributes.placeholder, name!=attributes.name, id!=attributes.id || attributes.name, class=visible ? 'js-autosize' : '')
+        textarea.markdown-editor-textarea.form-control(placeholder!=attributes.placeholder, name!=attributes.name, id!=attributes.id || attributes.name, class=visible ? 'js-autosize' : '')!=attributes.value
           if block
             block
       #markdown-editor-preview.tab-pane.markdown-editor-preview
