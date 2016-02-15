@@ -4,8 +4,8 @@
 //= require bower/validator-js/validator.js
 //= require bower/moment/moment.js
 //= require bower/moment/locale/de.js
-//= require bower/tablesort/src/tablesort.js
-//= require bower/tablesort/src/sorts/tablesort.numeric.js
+//= require bower/table.sort/src/tablesort.js
+//= require bower/table.sort/src/sorts/tablesort.number.js
 //= require bower/bootstrap/js/transition.js
 //= require bower/bootstrap/js/alert.js
 //= require bower/bootstrap/js/collapse.js
