@@ -35,7 +35,8 @@ module.exports = function(grunt) {
         options: {
           startCheck: function(stdout, stderr) {
             return /waiting for connections/.test(stdout)
-          }
+          },
+          startCheckTimeout: 30
         },
         cmd: 'mongod',
         args: ['--dbpath', '/usr/local/var/mongodb']
