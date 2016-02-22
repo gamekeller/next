@@ -27,16 +27,16 @@
     "helmet-csp": "^1.0.3",
     "identicon-github": "0.0.1",
     "jade": "^1.11.0",
-    "lodash": "^4.3.0",
+    "lodash": "^4.5.0",
     "mailgun-js": "^0.7.7",
     "markdown-it": "^6.0.0",
     "method-override": "^2.3.5",
     "mincer": "^1.4.1",
     "moment": "^2.11.2",
-    "mongoose": "^4.4.3",
+    "mongoose": "^4.4.4",
     "mongoose-merge-plugin": "0.0.5",
     "mongoose-unique-validator": "^1.0.0",
-    "morgan": "^1.6.1",
+    "morgan": "^1.7.0",
     "multer": "^1.1.0",
     "multer-ftp": "^1.2.0",
     "passport": "^0.3.2",
@@ -46,7 +46,7 @@
     "serve-favicon": "^2.3.0",
     "soak": "^0.3.0",
     "uuid": "^2.0.1",
-    "validator": "^4.8.0"
+    "validator": "^4.9.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.3",
