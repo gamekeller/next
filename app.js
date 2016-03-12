@@ -140,7 +140,8 @@ app.use(csp({
     fontSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'https://' + config.assetHost],
     connectSrc: ["'self'", 'https://www.reddit.com', 'https://nectar.ninja'],
     reportUri: '/report-csp-violation'
-  }
+  },
+  browserSniff: false
 }))
 app.post('/report-csp-violation', function(req, res) {
   if(req.headers['content-type'] !== 'application/csp-report')
