@@ -14,9 +14,7 @@ mixin bio(verb, visible)
 
   p Hier hast du die Möglichkeit deinem Profil etwas Substanz zu verleihen.
   +form
-    +markdownEditor(placeholder='Ein paar Worte zur Lage der Nation...', name='profile[bio]', visible=visible)
-      if hasContent
-        != profile.bio.source
+    +markdownEditor(placeholder='Ein paar Worte zur Lage der Nation...', name='profile[bio]', visible=visible, value=profile.bio.source)
 
     .form-group
       button.btn.btn-primary(type='submit')= 'Biografie ' + verb
