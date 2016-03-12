@@ -269,17 +269,32 @@ app.use('/session', require('./lib/controllers/session'))
 app.use('/admin', require('./lib/controllers/admin'))
 app.use(require('./lib/controllers/profile'))
 
-// 404
-app.use(function(req, res, next) {
-  return next(new error.NotFound)
-})
-
 // Error handling
 // --------------------------------
+function outputError(err, req, res) {
+  var isApi = req.url.indexOf('/api') === 0
+
+  res.status(err.status)
+
+  if(req.accepts('html') && !isApi)
+    res.type('html').send(err.toHTMLString())
+  else if(req.accepts('json'))
+    res.json(err)
+  else
+    res.type('txt').send(err.toString())
+}
+
+// Not found
+app.use(function(req, res) {
+  outputError(new error.NotFound(), req, res)
+})
+
+// Opbeat
 if(config.opbeat.active)
   app.use(opbeat.middleware.express())
 
-app.use(function(err, req, res, next) {
+// Final error handler
+app.use(function(err, req, res) {
   if(err.code === 'EBADCSRFTOKEN')
     err = new error.Forbidden('Invalid CSRF token')
 
@@ -291,16 +306,7 @@ app.use(function(err, req, res, next) {
       return errorHandler.apply(null, Array.prototype.slice.call(arguments))
     }
 
-  var isApi = req.url.indexOf('/api') === 0
-
-  res.status(err.status)
-
-  if(req.accepts('html') && !isApi)
-    res.type('html').send(err.toHTMLString())
-  else if(req.accepts('json'))
-    res.json(err)
-  else
-    res.type('txt').send(err.toString())
+  outputError(err, req, res)
 })
 
 /**
