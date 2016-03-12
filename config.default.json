@@ -32,6 +32,14 @@
     "host": "127.0.0.1",
     "prefix": "GKN:"
   },
+  "opbeat": {
+    "active": false,
+    "credentials": {
+      "appId": "",
+      "organizationId": "",
+      "secretToken": ""
+    }
+  },
   "teamspeak": {
     "yodel": {
       "host": "127.0.0.1",

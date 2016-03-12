@@ -4,6 +4,7 @@
 var _              = require('lodash')
 var avatar         = require('./lib/controllers/account/avatar')
 var bodyParser     = require('body-parser')
+var config         = require('./lib/config')
 var compress       = require('compression')
 var cookieParser   = require('cookie-parser')
 var csp            = require('helmet-csp')
@@ -25,6 +26,10 @@ var validator      = require('express-validator')
 var yodel          = require('./lib/yodel')
 var RedisStore     = require('connect-redis')(session)
 
+if(config.opbeat.active) {
+  var opbeat = require('opbeat').start(config.opbeat.credentials)
+}
+
 /**
  * Create Express server
  */
@@ -39,7 +44,7 @@ require('./lib/helpers/render')(app)
 /**
  * Configuration
  */
-var config = app.config = require('./lib/config')
+app.config = config
 var mincer = require('./lib/mincer')
 
 /**
@@ -269,8 +274,11 @@ app.use(function(req, res, next) {
   return next(new error.NotFound)
 })
 
-// Error handler
+// Error handling
 // --------------------------------
+if(config.opbeat.active)
+  app.use(opbeat.middleware.express())
+
 app.use(function(err, req, res, next) {
   if(err.code === 'EBADCSRFTOKEN')
     err = new error.Forbidden('Invalid CSRF token')
