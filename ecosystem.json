@@ -17,7 +17,7 @@
       "ref": "origin/master",
       "repo": "https://github.com/gamekeller/next.git",
       "path": "/home/node/gamekeller",
-      "post-deploy": "npm install && grunt deploy && migrate up && sudo -H /usr/bin/pm2 startOrRestart ecosystem.json"
+      "post-deploy": "npm install && grunt deploy && migrate up && sudo -H /usr/bin/pm2 startOrRestart ecosystem.json && ./bin/post-deploy"
     }
   }
 }
