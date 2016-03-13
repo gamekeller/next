@@ -25,5 +25,6 @@ html(lang='de', prefix='og: http://ogp.me/ns#')
     != js('js/main.js')
     if customJs
       != js('js/pages/' + customJs + '.js')
+    block footer
 
     include partials/analytics
