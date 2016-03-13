@@ -13,7 +13,7 @@ block content
               th(width='64px') Rang
               th Nutzername
               th Admin
-              th Teamspeak verknüpft
+              th(width='300px') TeamSpeak-ID
               th Aktive Zeit im Teamspeak
           tbody
             each user in users
@@ -28,5 +28,9 @@ block content
                 td
                   a(href=url('./user/#{user._id}'), title=user._id)= user.username
                 td= user.admin ? 'Ja' : 'Nein'
-                td= user.teamspeakLinked ? 'Ja' : 'Nein'
+                td(data-sort=user.teamspeakUid ? 1 : 0)
+                  if user.teamspeakUid
+                    samp= user.teamspeakUid
+                  else
+                    | -
                 td(data-sort=activeTime)= activeTime ? moment.duration(activeTime).humanize() : '-'
