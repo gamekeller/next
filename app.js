@@ -223,24 +223,29 @@ app.use(function(req, res, next) {
     right: []
   }
 
+  // Logged-in
   if(user) {
     nav.main.push(
+      // { href: '/groups', name: 'Gruppen', view: /^groups/ },
       { href: '/members', name: 'Mitglieder', view: 'members' }
     )
 
-    if(user.admin)
+    // Admin
+    if(user.admin) {
       nav.main.push({ href: '/admin', name: 'Administration', view: /^admin/ })
+    }
 
     nav.right.push(
       { href: '/' + user.username, content: utils.avatarElement(user, 40, 'mini-avatar') + ' ' + user.username },
       { href: '/account', content: '<span class="icon icon-gear"></span>', title: 'Einstellungen' },
       { href: '/logout', form: true, content: '<button type="submit" class="btn btn-link" title="Ausloggen"><span class="icon icon-logout"></span></button>' }
     )
-  } else
+  } else { // Not logged-in
     nav.right.push(
       { href: '/login', name: 'Login' },
       { href: '/signup', name: 'Registrieren' }
     )
+  }
 
   // Return path
   var route = req.path.split('/')[1]
@@ -267,7 +272,8 @@ app.use('/forgot', require('./lib/controllers/auth/forgot'))
 app.use('/account', require('./lib/controllers/account'))
 app.use('/session', require('./lib/controllers/session'))
 app.use('/admin', require('./lib/controllers/admin'))
-app.use(require('./lib/controllers/profile'))
+// app.use('/groups', require('./lib/controllers/group/overview'))
+app.use(require('./lib/controllers/handle'))
 
 // Error handling
 // --------------------------------
