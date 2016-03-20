@@ -300,7 +300,7 @@ if(config.opbeat.active)
   app.use(opbeat.middleware.express())
 
 // Final error handler
-app.use(function(err, req, res) {
+app.use(function(err, req, res, next) {
   if(err.code === 'EBADCSRFTOKEN')
     err = new error.Forbidden('Invalid CSRF token')
 
