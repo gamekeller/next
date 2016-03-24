@@ -1,0 +1,19 @@
+version: v1
+ignore: {}
+patch:
+  'npm:uglify-js:20150824':
+    - 'hbs > handlebars > uglify-js':
+        patched: '2016-03-23T16:43:41.262Z'
+    - 'jade > transformers > uglify-js':
+        patched: '2016-03-23T16:43:41.262Z'
+  'npm:uglify-js:20151024':
+    - 'hbs > handlebars > uglify-js':
+        patched: '2016-03-23T16:43:41.262Z'
+    - 'jade > transformers > uglify-js':
+        patched: '2016-03-23T16:43:41.262Z'
+  'npm:hawk:20160119':
+    - 'grunt-nodemon > nodemon > chokidar > fsevents > node-pre-gyp > request > hawk':
+        patched: '2016-03-23T16:43:41.262Z'
+  'npm:is-my-json-valid:20160118':
+    - 'grunt-nodemon > nodemon > chokidar > fsevents > node-pre-gyp > request > har-validator > is-my-json-valid':
+        patched: '2016-03-23T16:43:41.262Z'
