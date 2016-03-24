@@ -4,11 +4,15 @@ patch:
   'npm:uglify-js:20150824':
     - 'hbs > handlebars > uglify-js':
         patched: '2016-03-23T16:43:41.262Z'
+      'jade > transformers > uglify-js':
+        patched: '2016-03-24T15:53:08.973Z'
     - 'jade > transformers > uglify-js':
         patched: '2016-03-23T16:43:41.262Z'
   'npm:uglify-js:20151024':
     - 'hbs > handlebars > uglify-js':
         patched: '2016-03-23T16:43:41.262Z'
+      'jade > transformers > uglify-js':
+        patched: '2016-03-24T15:53:08.973Z'
     - 'jade > transformers > uglify-js':
         patched: '2016-03-23T16:43:41.262Z'
   'npm:hawk:20160119':
