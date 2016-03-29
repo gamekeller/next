@@ -13,7 +13,7 @@
   "deploy": {
     "production": {
       "user": "node",
-      "host": "web.hosts.gamekeller.net",
+      "host": "web.hosts.gk",
       "ref": "origin/master",
       "repo": "https://github.com/gamekeller/next.git",
       "path": "/home/node/gamekeller",
