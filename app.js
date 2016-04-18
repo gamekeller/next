@@ -253,7 +253,7 @@ app.use(function(req, res, next) {
   if(req.method === 'POST' || /login|logout|signup|session|forgot/i.test(route) || app.get('env') === 'development' && /apple-touch-icon|browserconfig|favicon|mstile|robots|assets/.test(route))
     return next()
 
-  req.session.returnTo = req.path
+  req.session.returnTo = req.originalUrl
 
   next()
 })
