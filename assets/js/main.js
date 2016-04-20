@@ -85,6 +85,15 @@
 }($);
 
 !function($) {
+  $(document).on('submit', '.js-hero-close-form', function(e) {
+    var $form = $(this)
+    e.preventDefault()
+    $.post($form.attr('action'), $form.serialize())
+    $form.closest('.hero').remove()
+  })
+}($);
+
+!function($) {
   $('.js-confirm').each(function() {
     var $this = $(this)
 

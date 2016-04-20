@@ -1,0 +1,184 @@
+.hero {
+  padding-top: 6px;
+  color: @brand-text;
+  background-color: @brand-darkest;
+  counter-reset: hero-progress;
+
+  &-inner {
+    position: relative;
+    padding: 20px 40px 20px @grid-gutter-width / 2;
+    border-top: 1px solid @brand-darker;
+  }
+
+  button&-close {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    padding: 10px;
+    font-size: 30px;
+    line-height: 20px;
+    font-weight: 300;
+    color: @brand-text;
+    opacity: 1;
+    user-select: none;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: @brand-text-light;
+      opacity: 1;
+    }
+  }
+
+  &-icon {
+    margin-right: 12px;
+    height: 48px;
+    vertical-align: top;
+  }
+
+  &-item,
+  &-header {
+    display: flex;
+  }
+
+  &-header {
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border: solid @brand-darker;
+    border-width: 0 0 1px 0;
+
+    &:last-child {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  &-item {
+    counter-increment: hero-progress;
+
+    &::before {
+      content: counter(hero-progress);
+      align-self: center;
+      margin-right: 8px;
+      width: 32px;
+      font-size: 48px;
+      line-height: 0.8;
+      font-weight: 300;
+      color: darken(@brand-text, 15%);
+    }
+
+    &-done {
+      .hero-progress-desc {
+        opacity: 0.6;
+      }
+
+      &::before {
+        content: none;
+        display: none;
+      }
+    }
+
+    &-icon {
+      align-self: center;
+      margin-right: 10px;
+      width: 30px;
+      height: 40px;
+      opacity: 0.8;
+      fill: @brand-success;
+    }
+  }
+
+  &-name {
+    color: @brand-text-light;
+  }
+
+  h1 {
+    margin: 0 0 4px;
+    font-size: 20px;
+    color: @brand-text-light;
+  }
+
+  h2 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    color: @brand-text-light;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: @brand-text;
+    border-bottom: 1px solid darken(@brand-text, 15%);
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: @brand-text-light;
+      border-bottom-color: currentColor;
+    }
+  }
+
+  @media (max-width: (@screen-sm-min - 1)) {
+    &-item:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (min-width: @screen-sm-min) {
+    &-inner {
+      display: flex;
+      margin: 0 auto;
+      padding-right: 0;
+      padding-left: 0;
+      width: 100%;
+      max-width: @container-tablet - @grid-gutter-width;
+      border-top: 1px solid @brand-darker;
+
+      &-center {
+        justify-content: center;
+      }
+    }
+
+    &-header {
+      margin: 0 20px 0 0;
+      padding: 0 30px 0 0;
+      border-width: 0 1px 0 0;
+    }
+
+    &-list {
+      display: flex;
+      justify-content: space-around;
+      flex: 1;
+    }
+
+    &-item {
+      margin: 0 10px 0 0;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+
+    button&-close {
+      top: 20px;
+      right: 0;
+      padding: 0;
+    }
+  }
+
+  @media (min-width: @screen-md-min) {
+    &-inner {
+      max-width: @container-desktop - @grid-gutter-width;
+    }
+  }
+
+  @media (min-width: @screen-lg-min) {
+    &-inner {
+      max-width: @container-large-desktop - @grid-gutter-width;
+    }
+  }
+}

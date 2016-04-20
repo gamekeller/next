@@ -28,6 +28,12 @@ block content
               label(for='username') Username
               input.form-control(type='text', id='username', name='user[username]', placeholder='Username', value!=profile.username)
 
+            .form-group.floating-label.floating-label-populated
+              label Rang
+              select(name='user[rank]')
+                each name, id in config.ranks
+                  option(value='#{id}', selected=(id == profile.rank ? true : null))= name
+
             .form-group.floating-label
               label(for='password') Passwort ändern
               input.form-control(type='password', id='password', name='user[password]', placeholder='Passwort')

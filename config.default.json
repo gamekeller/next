@@ -4,6 +4,14 @@
   "assetHost": "",
   "userContentHost": "",
   "avatarsPath": "avatars",
+  "ranks": {
+    "0": "Gast",
+    "1": "User",
+    "2": "Stammuser",
+    "3": "Veteran",
+    "4": "Moderator",
+    "5": "Admin"
+  },
   "ftp": {
     "host": "",
     "user": "",
@@ -52,7 +60,6 @@
       "channelName": ""
     },
     "url": "gamekeller.net",
-    "relevantRanks": ["6", "7", "9", "10", "11"],
     "rankImages": ["user", "stammuser", "veteran", "moderator", "admin"],
     "ranks": {
       "6": "Admin",
@@ -61,12 +68,13 @@
       "10": "Veteran",
       "11": "Moderator"
     },
-    "rankValues": {
-      "Admin": 5,
-      "Moderator": 4,
-      "Veteran": 3,
-      "Stammuser": 2,
-      "User": 1
+    "ranksToGroups": {
+      "0": 8,
+      "1": 7,
+      "2": 9,
+      "3": 10,
+      "4": 11,
+      "5": 6
     }
   },
   "secrets": {

@@ -1,21 +1,16 @@
 extends layout
 
 mixin message
-  if !user.teamspeakLinked || !hasFriends
+  if !hasFriends
     .panel.panel-default
       .panel-heading
         h3.panel-title Erste Schritte
       .panel-body
         p
-          | Willkommen auf der Homepage von Gamekeller!
+          | Willkommen auf der Website von Gamekeller!
         p
           | Hier ein paar Vorschläge, die du jetzt auf der Website erledigen kannst:
           ul
-            if !user.teamspeakLinked
-              li
-                a(href='') Verknüpfe deinen Account mit deiner Teamspeak-Identität
-                br
-                | Durch die Verknüpfung wird dein Teamspeak-Rang auch auf <a href="/#{user.username}">deinem Profil</a> angezeigt.
             if !hasFriends
               li
                 b Füge jemanden als Freund hinzu
@@ -55,8 +50,8 @@ mixin friendsOnTeamspeak
         each friend in friendsOnTeamspeak
           each con in friend.teamspeakConnections
             li.panel-list-item
-              if friend.teamspeakRank
-                img.img-flair(src=asset_path('img/ranks/#{friend.teamspeakRank.toLowerCase()}.png'))
+              if friend.rank
+                img.img-flair(src=asset_path(friend.getRankIcon()))
                 | &nbsp;
               a(href='/#{friend.username}') #{friend.username}
               |  im Channel #{con.currentChannel.name} als #{con.nickname}

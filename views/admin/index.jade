@@ -20,9 +20,9 @@ block content
               - var rankImage = user.getRankIcon()
               - var activeTime = user.teamspeakTracking && user.teamspeakTracking.activeTime ? user.teamspeakTracking.activeTime : 0
               tr
-                td(data-sort=user.getRankValue(), title=user.teamspeakRank, class=user.teamspeakRank ? 'help' : '')
+                td(data-sort=user.getRankValue(), title=user.getRankName(), class=user.rank ? 'help' : '')
                   if rankImage
-                    img(src=asset_path(rankImage), alt=user.teamspeakRank)
+                    img(src=asset_path(rankImage), alt=user.getRankName())
                   else
                     | -
                 td

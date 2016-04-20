@@ -52,10 +52,10 @@ mixin profileCard(profile)
 
         ul.profile-info.list-unstyled
           //- Rank -//
-          if profile.teamspeakRank
+          if profile.rank
             li.help(title='Rang')
-              img.profile-rank(src=asset_path('img/ranks/#{profile.teamspeakRank.toLowerCase()}.png'), alt='Superadmin')
-              | #{profile.teamspeakRank}
+              img.profile-rank(src=asset_path(profile.getRankIcon()), alt=profile.getRankName())
+              | #{profile.getRankName()}
 
           //- Registered -//
           li
