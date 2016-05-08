@@ -23,7 +23,6 @@ var redis          = require('./lib/redis')
 var session        = require('express-session')
 var utils          = require('./lib/utils')
 var validator      = require('express-validator')
-var yodel          = require('./lib/yodel')
 var RedisStore     = require('connect-redis')(session)
 
 if(config.opbeat.active) {
@@ -66,23 +65,6 @@ require('./lib/mongo')
  * FTP setup
  */
 app.ftp = require('./lib/ftp')
-
-/**
- * TeamSpeak RPC config
- */
-yodel.connect(config.teamspeak.yodel)
-yodel.on('connect', function() {
-  console.log('✔ TeamSpeak RPC connection established.')
-})
-yodel.on('end', function() {
-  console.error('✗ TeamSpeak RPC connection lost.')
-})
-yodel.on('error', function(err) {
-  if(err.code === 'ECONNREFUSED')
-    console.error('✗ Unable to connect to TeamSpeak RPC server.')
-  else
-    console.error('✗ TeamSpeak RPC error:', err)
-})
 
 /**
  * moment

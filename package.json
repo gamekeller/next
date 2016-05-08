@@ -14,7 +14,6 @@
     "cookie-parser": "^1.4.1",
     "csrf": "^3.0.1",
     "csurf": "^1.8.3",
-    "dnode": "^1.2.2",
     "errorhandler": "^1.4.3",
     "express": "^4.13.4",
     "express-session": "^1.13.0",

@@ -49,11 +49,6 @@
     }
   },
   "teamspeak": {
-    "yodel": {
-      "host": "127.0.0.1",
-      "port": 5004,
-      "retry": true
-    },
     "link": {
       "key": "key",
       "channelId": 1,
