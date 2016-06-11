@@ -6,6 +6,13 @@ block content
 
     include ../partials/flash
 
+    if teamspeakName
+      .panel.panel-default.panel-lg
+        .panel-heading
+          h1.panel-title Willkommen zu der Accounterstellung, #{teamspeakName}!
+        .panel-body
+          | Wir werden nach der Eröffnung deines Accounts automatisch deine TeamSpeak-ID mit diesem verknüpfen. Dies spart dir einen Schritt bei der Bestätigung deines neuen Accounts!
+
     .panel.panel-default.panel-lg
 
       .panel-heading
@@ -18,7 +25,7 @@ block content
 
             .form-group.floating-label
               label(for='username') gamekeller.net/Username
-              input.form-control.js-input.js-username(type='text', id='username', name='username', placeholder='Username', autocorrect='off', autocapitalize='off')
+              input.form-control.js-input.js-username(type='text', id='username', name='username', placeholder='Username', autocorrect='off', autocapitalize='off', value=teamspeakName ? teamspeakName : null)
 
             .form-group.floating-label
               label(for='email') E-Mail-Adresse

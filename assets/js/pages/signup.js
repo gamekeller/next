@@ -86,7 +86,7 @@
       if(!validator.isLength(name, 0, 16))
         errs.push('Nutzername darf nicht länger als 16 Zeichen sein.')
       if(!validator.matches(name, /^[\w-]+$/))
-        errs.push('Nutzername muss dem Muster [A-Za-z0-9_-] folgen.')
+        errs.push('Nutzername darf nur die Zeichen A-Z, a-z, 0-9, - und _ enthalten.')
     })
   })
 
