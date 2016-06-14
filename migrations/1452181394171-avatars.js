@@ -6,7 +6,6 @@ var utils = require('../lib/utils')
 var config = require('../lib/config')
 var User = require('../lib/models/User')
 var connection = require('../lib/mongo')
-var ftp = require('../lib/ftp')
 
 exports.up = function(next) {
   connection
@@ -14,30 +13,28 @@ exports.up = function(next) {
     return User.find({})
   })
   .then(function(users) {
-    ftp.once('ready', function() {
-      var done = _.map(users, function(user) {
-        return new Promise(function(resolve, reject) {
-          console.log('processing user:', user.username)
+    var done = _.map(users, function(user) {
+      return new Promise(function(resolve, reject) {
+        console.log('processing user:', user.username)
 
-          user.initAvatar(function(err) {
+        user.initAvatar(function(err) {
+          if(err)
+            return reject(err)
+
+          user.set('gravatarId', undefined, { strict: false })
+
+          user.save(function(err) {
             if(err)
               return reject(err)
 
-            user.set('gravatarId', undefined, { strict: false })
-
-            user.save(function(err) {
-              if(err)
-                return reject(err)
-
-              resolve()
-            })
+            resolve()
           })
         })
       })
+    })
 
-      Promise.all(done).then(function() {
-        next()
-      })
+    Promise.all(done).then(function() {
+      next()
     })
   })
   .catch(function(err) {

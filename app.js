@@ -62,11 +62,6 @@ redis.$.on('error', function() {
 require('./lib/mongo')
 
 /**
- * FTP setup
- */
-app.ftp = require('./lib/ftp')
-
-/**
  * moment
  */
 moment.locale('de')

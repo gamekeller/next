@@ -12,10 +12,12 @@
     "4": "Moderator",
     "5": "Admin"
   },
-  "ftp": {
-    "host": "",
-    "user": "",
-    "pass": ""
+  "aws": {
+    "accessKeyId": "",
+    "secretAccessKey": "",
+    "buckets": {
+      "userContent": ""
+    }
   },
   "mail": {
     "senders": {
