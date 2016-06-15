@@ -15,7 +15,8 @@ module.exports = function(grunt) {
         bucket: 'gamekeller',
         region: 'eu-central-1',
         gzip: false,
-        overwrite: false
+        overwrite: false,
+        access: 'private'
       },
       assets: {
         cwd: 'public/',
