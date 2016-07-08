@@ -138,7 +138,7 @@ var commands = {
         if(!user)
           return cb('The Teamspeak-ID "' + id + '" isn\'t used.')
 
-        user.teamspeakUid = ''
+        user.teamspeakUid = undefined
 
         user.save(function(err) {
           if(err)
