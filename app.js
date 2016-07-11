@@ -91,7 +91,6 @@ app.use(logger(process.env.LOGFORMAT || 'dev', {
 }))
 app.use(cookieParser())
 app.use(bodyParser.json())
-app.use(bodyParser.json({ type: 'application/csp-report' }))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(validator())
 app.use(methodOverride())
@@ -121,17 +120,10 @@ app.use(csp({
     imgSrc: ["'self'", 'data:', 'https://0.gravatar.com', 'https://camo.gamekeller.net', 'https://www.google-analytics.com', 'https://' + config.assetHost, 'https://' + config.userContentHost],
     fontSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'https://' + config.assetHost],
     connectSrc: ["'self'", 'https://www.reddit.com', 'https://nectar.ninja'],
-    reportUri: '/report-csp-violation'
+    reportUri: config.cspReportUri
   },
   browserSniff: false
 }))
-app.post('/report-csp-violation', function(req, res) {
-  if(req.headers['content-type'] !== 'application/csp-report')
-    return res.status(400).end()
-
-  console.error('CSP Violation:', JSON.stringify(req.body, null, 2))
-  res.status(200).end()
-})
 
 // Passport
 // --------------------------------

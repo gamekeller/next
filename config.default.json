@@ -4,6 +4,7 @@
   "assetHost": "",
   "userContentHost": "",
   "avatarsPath": "avatars",
+  "cspReportUri": "",
   "ranks": {
     "0": "Gast",
     "1": "User",
