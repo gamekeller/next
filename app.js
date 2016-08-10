@@ -4,8 +4,8 @@
 var _              = require('lodash')
 var avatar         = require('./lib/controllers/account/avatar')
 var bodyParser     = require('body-parser')
-var config         = require('./lib/config')
 var compress       = require('compression')
+var config         = require('./lib/config')
 var cookieParser   = require('cookie-parser')
 var csp            = require('helmet-csp')
 var csrf           = require('csurf')
@@ -22,6 +22,7 @@ var passport       = require('passport')
 var redis          = require('./lib/redis')
 var session        = require('express-session')
 var utils          = require('./lib/utils')
+var uuid           = require('node-uuid')
 var validator      = require('express-validator')
 var RedisStore     = require('connect-redis')(session)
 
@@ -112,11 +113,18 @@ app.use(session({
 
 // CSP
 // --------------------------------
+app.use(function(req, res, next) {
+  res.locals.nonce = uuid.v4()
+  next()
+})
+function acceptNonce(req, res) {
+  return "'nonce-" + res.locals.nonce + "'"
+}
 app.use(csp({
   directives: {
     defaultSrc: ["'self'", 'https://serve.gamekeller.net', 'https://' + config.assetHost],
-    scriptSrc: ["'self'", "'unsafe-inline'", 'https://www.google-analytics.com', 'https://nectar.ninja', 'https://api.tumblr.com', 'https://' + config.assetHost],
-    styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://' + config.assetHost],
+    scriptSrc: ["'self'", 'https://www.google-analytics.com', 'https://nectar.ninja', 'https://api.tumblr.com', 'https://' + config.assetHost, acceptNonce, "'unsafe-inline'"],
+    styleSrc: ["'self'", 'https://fonts.googleapis.com', 'https://' + config.assetHost, acceptNonce, "'unsafe-inline'"],
     imgSrc: ["'self'", 'data:', 'https://0.gravatar.com', 'https://camo.gamekeller.net', 'https://www.google-analytics.com', 'https://' + config.assetHost, 'https://' + config.userContentHost],
     fontSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'https://' + config.assetHost],
     connectSrc: ["'self'", 'https://www.reddit.com', 'https://nectar.ninja'],

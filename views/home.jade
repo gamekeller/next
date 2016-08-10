@@ -27,7 +27,7 @@ mixin reddit
             span.icon.icon-reload
 
     .panel-body
-      noscript: style .js-reddit-error { display: block !important; }
+      noscript: style(nonce=nonce) .js-reddit-error{display:block!important}.js-reddit-loading{display:none}
       p.snuggle-down.text-danger.js-reddit-error.hide Beiträge konnten nicht geladen werden.
       p.snuggle-down.text-muted.js-reddit-loading Laden...
       p.js-reddit-info.hide

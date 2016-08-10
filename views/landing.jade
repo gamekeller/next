@@ -90,6 +90,6 @@ html(lang='de')
 
         document.querySelector('.news-nojs').parentNode.appendChild(el)
       }
-    script.
+    script(nonce=nonce).
       GK.newsFetched=function(a){if(a.response&&a.response.posts){var f="Januar Februar M\u00e4rz April Mai Juni Juli August September Oktober November Dezember".split(" ");a=a.response.posts;var d=document.createElement("div");d.className="news";for(var e=0;e<a.length;e++){var b=a[e],c=new Date(1E3*b.timestamp);d.insertAdjacentHTML("beforeend",'<article class="news-item"><div class="news-meta"><a href="'+b.post_url+'" target="_blank"><time datetime="'+c.toISOString()+'" class="news-date">'+c.getDate()+". "+f[c.getMonth()]+" "+c.getFullYear()+'</time></a></div><div class="news-body"><h4 class="news-heading"><a href="'+b.post_url+'" target="_blank">'+b.title+"</a></h4>"+b.body+"</div></article>")}document.querySelector(".news-nojs").parentNode.appendChild(d)}};
     script(src='https://api.tumblr.com/v2/blog/news.gamekeller.net/posts?api_key=oCVDNDmkss1Ug6XKNOkNiBmX6Idd29jXey5pRj0SUfISvQ0m0a&limit=3&callback=GK.newsFetched')

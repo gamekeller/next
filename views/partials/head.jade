@@ -21,5 +21,5 @@ meta(name='msapplication-TileImage', content='/mstile-144x144.png')
 != css('css/main.css')
 if customCss
   != css('css/pages/' + customCss + '.css')
-script.
+script(nonce=nonce).
   window.GK={assetHost:'#{config.assetHost ? "https://" + config.assetHost : ""}'};document.documentElement.classList.add('js')
