@@ -260,7 +260,7 @@ function outputError(err, req, res) {
   res.status(err.status)
 
   if(req.accepts('html') && !isApi)
-    res.type('html').send(err.toHTMLString())
+    res.type('html').send(err.toHTMLString(res.locals.nonce))
   else if(req.accepts('json'))
     res.json(err)
   else
