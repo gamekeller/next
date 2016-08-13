@@ -22,7 +22,7 @@ var passport       = require('passport')
 var redis          = require('./lib/redis')
 var session        = require('express-session')
 var utils          = require('./lib/utils')
-var uuid           = require('node-uuid')
+var uuid           = require('uuid')
 var validator      = require('express-validator')
 var RedisStore     = require('connect-redis')(session)
 
