@@ -31,6 +31,7 @@
     "mailgun-js": "^0.7.11",
     "markdown-it": "^7.0.0",
     "markdown-it-anchor": "^2.5.0",
+    "markdown-it-attrs": "^0.6.0",
     "markdown-it-implicit-figures": "^0.3.2",
     "method-override": "^2.3.6",
     "mincer": "^1.4.1",

@@ -59,9 +59,18 @@
         margin-top: 15px;
         padding: 0;
         list-style: none;
+
+        p {
+          margin-bottom: 10px;
+        }
+
+        :last-child {
+          margin-bottom: 0;
+        }
       }
 
-      p, ul, ol, pre, table, blockquote, figure {
+      p, ul, ol, pre,
+      table, blockquote, figure {
         margin-bottom: 20px;
       }
 
@@ -73,13 +82,14 @@
 
       ul {
         margin-left: 10px;
+
+        li {
+          margin-bottom: 8px;
+        }
       }
 
-      ul li {
-        margin-bottom: 8px;
-      }
-
-      ul ul, ol ol, ul ol, ol ul {
+      ul ul, ol ol,
+      ul ol, ol ul {
         margin: 0;
       }
 
@@ -141,7 +151,7 @@
 
         li {
           position: relative;
-          margin-bottom: 10px;
+          margin-bottom: 15px;
           padding: 5px 0 5px 50px;
 
           &::before {
