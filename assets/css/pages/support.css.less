@@ -15,8 +15,13 @@
 
       &s {
         display: flex;
-        align-items: center;
+        flex-direction: column;
         margin-bottom: 10px;
+
+        @media (min-width: @screen-xs-min) {
+          flex-direction: row;
+          align-items: center;
+        }
       }
 
       &:not(:last-child)::after {
@@ -75,7 +80,6 @@
 
       img {
         max-width: 100%;
-        border: 1px solid @brand-darker;
       }
 
       a:hover img,
@@ -85,6 +89,10 @@
 
       figure a {
         background: none;
+      }
+
+      figure img {
+        border: 1px solid @brand-darker;
       }
 
       figcaption {
@@ -234,39 +242,55 @@
   &-team {
 
     &-horizontal {
-      display: flex;
-      margin: 80px 0 40px;
-      padding-top: 80px;
+      margin: 20px 0;
+      padding-top: 20px;
       border-top: 1px solid @brand-darker;
 
       .support-team {
-        &-preface {
-          align-self: flex-start;
-          width: 100%;
-          max-width: 30%;
-          margin-right: 15px;
-          padding-right: 30px;
-          text-align: right;
-          border-right: 1px solid @brand-darker;
-
-          :last-child {
-            margin-bottom: 0;
-          }
+        &-item {
+          padding: 12px 0;
         }
+      }
 
-        &-list {
+      @media (min-width: @screen-sm-min) {
+        .support-team-list {
           display: flex;
           flex-wrap: wrap;
-          margin-top: 0;
+          margin: 0 -15px;
         }
 
-        &-item {
-          width: calc(50% ~"-" 30px);
+        .support-team-item {
           margin: 0 15px;
-          padding: 12px 0;
+          width: calc(50% ~"-" 30px);
 
           &:nth-child(-n+2) {
             padding-top: 0;
+          }
+        }
+      }
+
+      @media (min-width: @screen-md-min) {
+        display: flex;
+        margin: 80px 0 40px;
+        padding-top: 80px;
+
+        .support-team {
+          &-preface {
+            align-self: flex-start;
+            width: 100%;
+            max-width: 30%;
+            margin: 0 15px 0 0;
+            padding: 0 30px 0 0;
+            text-align: right;
+            border-right: 1px solid @brand-darker;
+
+            :last-child {
+              margin-bottom: 0;
+            }
+          }
+
+          &-list {
+            margin: 0;
           }
         }
       }

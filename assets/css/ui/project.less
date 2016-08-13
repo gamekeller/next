@@ -92,9 +92,13 @@
     }
 
     h1& {
-      font-size: 64px;
+      font-size: 32px;
       font-weight: 300;
       text-align: center;
+
+      @media (min-width: @screen-xs-min) {
+        font-size: 64px;
+      }
     }
 
     &s {
