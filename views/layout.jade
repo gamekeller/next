@@ -9,16 +9,17 @@ html(lang='de', prefix='og: http://ogp.me/ns#')
   head
     include partials/head
     block head
-  body
+  body(class=bodyClass || null)
 
     #wrapper
       include partials/nav
 
       include partials/accountProgress
 
-      #content-wrapper
-        #content.container
-          block content
+      block content-body
+        #content-wrapper
+          #content.container
+            block content
 
     #footer
       .container

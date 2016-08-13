@@ -182,6 +182,7 @@ app.use(function(req, res, next) {
   var user = req.user
 
   _.assign(res.locals, {
+    _: _,
     req: req,
     config: config,
     user: user,
@@ -204,12 +205,21 @@ app.use(function(req, res, next) {
   if(user) {
     nav.main.push(
       // { href: '/groups', name: 'Gruppen', view: /^groups/ },
+      { href: '/support', name: 'Support', view: /^support/ },
       { href: '/members', name: 'Mitglieder', view: 'members' }
     )
 
     // Admin
     if(user.admin) {
-      nav.main.push({ href: '/admin', name: 'Administration', view: /^admin/ })
+      nav.main.push({
+        content: 'Administration',
+        view: /^admin/,
+        dropdown: true,
+        items: [
+          { href: '/admin/user', name: 'User' },
+          { href: '/admin/kb', name: 'Knowledgebase' }
+        ]
+      })
     }
 
     nav.right.push(
@@ -249,6 +259,7 @@ app.use('/forgot', require('./lib/controllers/auth/forgot'))
 app.use('/account', require('./lib/controllers/account'))
 app.use('/session', require('./lib/controllers/session'))
 app.use('/admin', require('./lib/controllers/admin'))
+app.use('/support', require('./lib/controllers/support'))
 // app.use('/groups', require('./lib/controllers/group/overview'))
 app.use(require('./lib/controllers/handle'))
 

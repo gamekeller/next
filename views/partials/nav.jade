@@ -2,7 +2,7 @@ mixin _list(items, dontCheckActive)
   each item in items
     if item.dropdown
 
-      - var hasActive = false
+      - var hasActive = item.view ? utils.navItemIsActive(item) : false
 
       if !dontCheckActive
         each dItem in item.items
@@ -10,8 +10,8 @@ mixin _list(items, dontCheckActive)
 
       li.dropdown(class=hasActive ? 'active' : '')
         a.dropdown-toggle(href='#', data-toggle='dropdown')
-          != item.content
-          i.caret
+          != item.content + ' '
+          span.caret
         ul.dropdown-menu
           each dItem in item.items
             if dItem.divider

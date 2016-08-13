@@ -1,8 +1,8 @@
-extends ../layout
+extends ../../layout
 
 block content
 
-  include ../partials/flash
+  include ../../partials/flash
 
   .row
     .col-md-12
@@ -26,7 +26,7 @@ block content
                   else
                     | -
                 td
-                  a(href=url('./user/#{user._id}'), title=user._id)= user.username
+                  a(href=url('./#{user._id}'), title=user._id)= user.username
                 td= user.admin ? 'Ja' : 'Nein'
                 td(class=user.teamspeakUid ? 'js-select-input' : null, data-sort=user.teamspeakUid ? 1 : 0)
                   if user.teamspeakUid
@@ -36,7 +36,7 @@ block content
                 td(data-sort=activeTime)= activeTime ? moment.duration(activeTime).humanize() : '-'
 
 block footer
-  script.
+  script(nonce=nonce).
     $(document).on('click', '.js-select-input', function() {
       var input = $(this).find('input[readonly]').first()[0]
       input.setSelectionRange(0, input.value.length)

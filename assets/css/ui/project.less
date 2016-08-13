@@ -1,0 +1,248 @@
+.project-page #wrapper {
+  background-image: none;
+}
+
+.project {
+  position: relative;
+  min-height: 500px;
+  color: @brand-text;
+
+  a {
+    color: @brand-text;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: @brand-text-light;
+    }
+  }
+
+  h1, h2, h3,
+  h4, h5, h6 {
+    color: #fff;
+  }
+
+  &-box {
+    display: block;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.125);
+
+    &-heading {
+      margin-top: 0;
+    }
+  }
+
+  &-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 500px;
+    z-index: -10;
+    overflow: hidden;
+
+    &-image {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      opacity: 0.5;
+    }
+
+    @supports (object-fit: cover) {
+      &-image {
+        position: static;
+        top: auto;
+        transform: none;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50%;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 400px;
+      background-image: linear-gradient(rgba(28, 31, 36, 0) 0, rgba(28, 31, 36, .6) 30%, rgba(28, 31, 36, .85) 60%, @brand-darkest 100%);
+    }
+  }
+
+  &-logo {
+    display: block;
+    margin: 0 auto;
+    width: 50vw;
+    max-width: 520px;
+    color: #fff;
+
+    a {
+      color: inherit;
+
+      &:hover,
+      &:focus {
+        color: #fff;
+        border-bottom: 2px solid fade(@brand-text, 50%);
+      }
+    }
+
+    h1& {
+      font-size: 64px;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    &s {
+      margin: 100px 0 80px;
+    }
+
+    &-gamekeller {
+      position: relative;
+      display: block;
+      margin: 0 auto 14px;
+      width: 20px;
+      height: 20px;
+      color: rgba(255, 255, 255, 0.45);
+
+      &::before,
+      &::after {
+        position: absolute;
+        top: 0;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+      }
+
+      &::before {
+        content: 'Game';
+        left: 0;
+        margin-left: -6px;
+        transform: translateX(-100%);
+      }
+
+      &::after {
+        content: 'keller';
+        margin-left: 10px;
+      }
+
+      .icon {
+        font-size: 20px;
+      }
+    }
+  }
+
+  &-sidebar {
+    padding-left: 0;
+    padding-right: @grid-gutter-width;
+  }
+
+  &-nav {
+    display: flex;
+    flex-direction: column;
+
+    &-item {
+      padding: 10px 0;
+      border-bottom: 1px solid @brand-darker;
+
+      &.active {
+        color: @brand-text-light;
+      }
+
+      &:first-child {
+        margin-top: -10px;
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  &-news {
+
+    &-item {
+      display: flex;
+      min-height: 100px;
+      margin-bottom: 60px;
+    }
+
+    &-meta {
+      margin-right: 20px;
+      width: 150px;
+      text-align: right;
+    }
+
+    &-date {
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid @brand-darker;
+    }
+
+    &-colophon {
+      position: relative;
+      margin-top: 15px;
+      padding-top: 15px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 70px;
+        height: 1px;
+        background-color: @brand-darker;
+      }
+    }
+
+    &-author {
+      display: inline-flex;
+
+      &:hover,
+      &:focus,
+      &:active {
+        .project-news-author-avatar {
+          opacity: 1;
+        }
+      }
+
+      &-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 3px;
+        opacity: 0.5;
+      }
+
+      &-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 6px;
+        line-height: 1;
+        text-align: left;
+
+        small {
+          display: block;
+          margin-bottom: 3px;
+          font-weight: 500;
+          font-size: 10px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          opacity: .6;
+        }
+      }
+    }
+
+    &-body {
+      flex: 1;
+    }
+
+    &-title {
+      margin-top: 0;
+      color: @brand-text-light;
+    }
+  }
+}

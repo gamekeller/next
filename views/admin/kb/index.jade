@@ -1,0 +1,28 @@
+extends ../../layout
+
+block content
+
+  include ../../partials/flash
+
+  .row.u-mb
+    .col-md-12
+      a.btn.btn-default.pull-right(href=url('./new')) Neuen Eintrag erstellen
+
+  .row
+    .col-md-12
+      .panel.panel-default
+        table.table.table-striped.table-hover.table-bordered.js-tablesort
+          thead
+            tr
+              th(width='300px') Kategorie
+              th Titel
+              th(width='100px') Order-Wert
+              th(width='100px') Showcase
+          tbody
+            each article in articles
+              tr
+                td= article.category || 'Keine Kategorie'
+                td
+                  a(href=url('./#{article._id}'), title=article._id)= article.title
+                td= article.order
+                td= article.showcase.active ? 'Ja' : 'Nein'

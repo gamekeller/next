@@ -1,0 +1,65 @@
+extends ../../layout
+
+block content
+
+  .small-container
+
+    include ../../partials/flash
+
+    .panel.panel-default.panel-lg
+
+      .panel-heading
+        h1.panel-title
+          if article
+            | Knowledgebase-Eintrag bearbeiten
+          else
+            | Neuen Eintrag in die Knowledgebase erstellen
+
+      .panel-body
+
+        +form
+
+          .form-group.floating-label
+            label(for='title') Titel
+            input.form-control(type='text', id='title', name='article[title]', placeholder='Artikeltitel', autocorrect='off', autocapitalize='off', value=_.get(article, 'title'))
+
+          .form-group.floating-label
+            label(for='slug') URL-Slug
+            input.form-control(type='text', id='slug', name='article[slug]', placeholder='url-freundliche-version-des-titels', value=_.get(article, 'slug'))
+
+          .form-group.floating-label
+            label(for='category') Kategorie
+            input.form-control(type='text', id='category', name='article[category]', placeholder='Kategorienamen', value=_.get(article, 'category'))
+
+          .form-group.floating-label.floating-label-populated
+            label(for='order') Order-Zahl
+            input.form-control(type='text', id='order', name='article[order]', placeholder='0', value=_.get(article, 'order') || '0')
+            small.help-block 0 = neutral; je größer diese Zahl, desto höher wird der Eintrag in der Übersicht aufgelistet; kann auch negativ sein
+
+
+          .form-group.floating-label.floating-label-populated
+            label Inhalt
+            .floating-label-body
+              +markdownEditor(placeholder='Text...', name='article[text][source]', rows='15', value=_.get(article, 'text.source'))
+
+          .form-group.floating-label.floating-label-populated
+            label Showcase
+            .floating-label-body
+              dl.dl-horizontal
+                dt
+                  label(for='showcase-active') Aktiv?
+                dd
+                  input(type='checkbox', id='showcase-active', name='article[showcase][active]', checked=_.get(article, 'showcase.active'), value=_.get(article, 'showcase.active') ? 'on' : null)
+                dt
+                  label(for='showcase-title') Showcase-Titel
+                dd
+                  input.form-control(type='text', id='showcase-title', name='article[showcase][title]', value=_.get(article, 'showcase.title'))
+                dt
+                  label(for='showcase-guide') Guide?
+                dd
+                  input(type='checkbox', id='showcase-guide', name='article[showcase][guide]', checked=_.get(article, 'showcase.guide'), value=_.get(article, 'showcase.guide') ? 'on' : null)
+
+          .form-group
+            button.btn.btn-primary.btn-pull-left(type='submit') Eintrag #{article ? 'bearbeiten' : 'erstellen'}
+            if article
+              button.btn.btn-default.btn-pull-right(type='submit', formaction=url('./delete')) Eintrag löschen

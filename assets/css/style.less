@@ -2,6 +2,10 @@ body {
   background-color: @brand-darkest;
 }
 
+.u-mb {
+  margin-bottom: 20px;
+}
+
 .u-vam {
   vertical-align: middle;
 }
@@ -30,6 +34,48 @@ body {
 #content-wrapper {
   padding-top: 30px;
   padding-bottom: 70px;
+}
+
+.header-anchor {
+  float: left;
+  margin-left: -22px;
+  padding-right: 6px;
+  line-height: 1;
+
+  &-heading:hover &-icon {
+    visibility: visible;
+  }
+
+  h1&-heading & {
+    line-height: 0.85;
+  }
+
+  h4&-heading & {
+    line-height: 1.2;
+  }
+
+  h6&-heading & {
+    margin-top: -2px;
+  }
+
+  &-icon {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    visibility: hidden;
+  }
+
+  &:focus &-icon,
+  &:active &-icon {
+    visibility: visible;
+  }
+
+  &-target {
+    position: relative;
+    top: -@navbar-height;
+    display: block;
+    pointer-events: none;
+  }
 }
 
 .panel-lg {

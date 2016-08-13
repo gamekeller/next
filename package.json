@@ -30,6 +30,8 @@
     "lodash": "^4.13.1",
     "mailgun-js": "^0.7.11",
     "markdown-it": "^7.0.0",
+    "markdown-it-anchor": "^2.5.0",
+    "markdown-it-implicit-figures": "^0.3.2",
     "method-override": "^2.3.6",
     "mincer": "^1.4.1",
     "moment": "^2.14.1",
@@ -48,6 +50,7 @@
     "shortid": "^2.2.6",
     "snyk": "^1.17.1",
     "soak": "^0.3.0",
+    "speakingurl": "^9.0.0",
     "uuid": "^2.0.2",
     "validator": "^5.5.0"
   },
