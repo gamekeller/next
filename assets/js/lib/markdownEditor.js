@@ -7,7 +7,7 @@
     this.$textarea    = $el.find('.markdown-editor-textarea')
     this.$preview     = $el.find('.markdown-editor-preview')
     this.$previewLink = $el.find('[href="#markdown-editor-preview"]')
-    this.jqXHR
+    this.xhr
 
     this.init()
   }
@@ -36,23 +36,28 @@
 
     this.$preview.html('Vorschau wird geladen...')
 
-    this.jqXHR = $.ajax('/api/markdown', {
-      type: 'POST',
-      data: {
-        text: this.$textarea.val()
-      },
-      success: $.proxy(this.handleSuccess, this),
-      error: $.proxy(this.handleError, this)
-    })
+    var xhr = this.xhr = new XMLHttpRequest()
+
+    xhr.addEventListener('load', $.proxy(function(e) {
+      if(xhr.status >= 200 && xhr.status < 300) {
+        this.handleSuccess(xhr.responseText)
+      } else {
+        this.handleError(xhr)
+      }
+    }, this))
+
+    xhr.open('POST', '/api/markdown')
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.send(JSON.stringify({ text: this.$textarea.val() }))
   }
 
-  MarkdownEditor.prototype.handleSuccess = function(data, status) {
+  MarkdownEditor.prototype.handleSuccess = function(data) {
     var text = !data ? '<p>Nichts zu rendern.</p>' : data
     this.$preview.html('<div class="markdown-body">' + text + '</div>')
   }
 
-  MarkdownEditor.prototype.handleError = function(ajax, status, error) {
-    this.$preview.html('<p><span class="text-danger">Etwas ging schief!</span><br>Error ' + ajax.status + ': ' + ajax.statusText + '</p>')
+  MarkdownEditor.prototype.handleError = function(xhr) {
+    this.$preview.html('<p><span class="text-danger">Etwas ging schief!</span><br>Error ' + xhr.status + ': ' + xhr.statusText + '</p>')
   }
 
   $.fn.markdownEditor = function() {

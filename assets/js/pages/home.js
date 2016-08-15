@@ -11,11 +11,11 @@
 
     $loading.removeClass('hide')
 
-    $.ajax('https://www.reddit.com/r/gamekeller/new.json?limit=3', {
-      cache: false
-    })
-      .done(function(res) {
-        $.each(res.data.children, function(i) {
+    var xhr = new XMLHttpRequest()
+
+    xhr.addEventListener('load', function(e) {
+      if(xhr.status >= 200 && xhr.status < 300) {
+        $.each(JSON.parse(xhr.responseText).data.children, function(i) {
           var data = this.data
           var rank = data.author_flair_text && data.author_flair_text.toLowerCase()
           var hasRank = data.author_flair_text && ranks.indexOf(rank) !== -1
@@ -32,13 +32,15 @@
         })
 
         $target.add($info).removeClass('hide')
-      })
-      .fail(function() {
+      } else {
         $error.removeClass('hide')
-      })
-      .always(function() {
-        $loading.addClass('hide')
-      })
+      }
+
+      $loading.addClass('hide')
+    })
+
+    xhr.open('GET', 'https://www.reddit.com/r/gamekeller/new.json?limit=3')
+    xhr.send()
   }
 
   $('.js-reddit').each(function() {
