@@ -1,3 +1,5 @@
+//= require bower/validator-js/validator.js
+
 !function($, window, document) {
   'use strict';
 

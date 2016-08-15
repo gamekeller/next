@@ -1,9 +1,6 @@
-//= require bower/jquery/dist/jquery.js
+//= require bower/jquery/dist/jquery.slim.js
 //= require bower/Stickyfill/dist/stickyfill.js
 //= require bower/autofill-event/src/autofill-event.js
-//= require bower/validator-js/validator.js
-//= require bower/moment/moment.js
-//= require bower/moment/locale/de.js
 //= require bower/table.sort/src/tablesort.js
 //= require bower/table.sort/src/sorts/tablesort.number.js
 //= require bower/bootstrap/js/transition.js
@@ -12,7 +9,8 @@
 //= require bower/bootstrap/js/dropdown.js
 //= require bower/bootstrap/js/tooltip.js
 //= require bower/bootstrap/js/tab.js
-//= require bower/ExpandingTextareas/expanding.js
+//= require bower/autosize/dist/autosize.js
+//= require js/lib/fromNow.js
 //= require js/lib/markdownEditor.js
 
 !function($) {
@@ -43,19 +41,19 @@
   })
 }($);
 
-!function($, moment) {
+!function($) {
   var $timestamps = $('.js-timestamp')
 
   function updateTimestamps() {
     $timestamps.each(function() {
       var $this = $(this)
-      $this.text(moment(parseInt($this.attr('data-unix'), 10)).fromNow($this.attr('data-suffix') === 'false'))
+      $this.text(fromNow(parseInt($this.attr('data-unix'), 10), $this.attr('data-suffix') === 'false'))
     })
   }
 
   updateTimestamps()
   setInterval(updateTimestamps, 60000)
-}($, moment);
+}($);
 
 
 !function($) {
@@ -106,7 +104,7 @@
 !function($) {
   $('.js-sticky').Stickyfill()
   $('.js-tooltip').tooltip()
-  $('.js-autosize').expanding()
+  autosize($('.js-autosize'))
   $('.js-tablesort').each(function () {
     new Tablesort(this)
   })
