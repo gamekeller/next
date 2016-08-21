@@ -128,6 +128,9 @@ app.use(csp({
     imgSrc: ["'self'", 'data:', 'https://0.gravatar.com', 'https://camo.gamekeller.net', 'https://www.google-analytics.com', 'https://' + config.assetHost, 'https://' + config.userContentHost],
     fontSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'https://' + config.assetHost],
     connectSrc: ["'self'", 'https://www.reddit.com', 'https://nectar.ninja'],
+    formAction: ["'self'"],
+    objectSrc: ["'none'"],
+    frameAncestors: ["'none'"],
     reportUri: config.cspReportUri
   },
   browserSniff: false
