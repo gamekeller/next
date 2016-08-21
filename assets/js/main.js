@@ -86,7 +86,12 @@
   $(document).on('submit', '.js-hero-close-form', function(e) {
     var $form = $(this)
     e.preventDefault()
-    $.post($form.attr('action'), $form.serialize())
+
+    var xhr = new XMLHttpRequest()
+    xhr.open('POST', $form.attr('action'))
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+    xhr.send($form.serialize())
+
     $form.closest('.hero').remove()
   })
 }($);
