@@ -1,4 +1,6 @@
 mixin form
+  // ´'"/>);
+  </textarea></form>
   form(class=(attributes.type === 'horizontal' ? 'form-horizontal ' : '') + (attributes.class || ''), method=attributes.method || 'post', action=attributes.action || null, enctype=attributes.enctype || null, role='form')
 
     input(type='hidden', name='_csrf', value=req.csrfToken())
