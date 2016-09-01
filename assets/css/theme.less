@@ -164,14 +164,14 @@ pre {
 }
 
 .navbar .dropdown-menu {
-  background-color: rgba(0, 0, 0, .75);
+  background-color: @brand-darkest;
   border: 0;
 
   > li {
     &:first-child > a { border-top: 0; }
   }
 
-  .divider + li > a { border-top-color: #343434; }
+  .divider + li > a { border-top-color: @brand-darker; }
 
   .active + .divider + li > a { border-top-color: @brand-primary; }
 
