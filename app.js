@@ -123,11 +123,11 @@ function acceptNonce(req, res) {
 app.use(csp({
   directives: {
     defaultSrc: ["'self'", 'https://serve.gamekeller.net', 'https://' + config.assetHost],
-    scriptSrc: ["'self'", 'https://www.google-analytics.com', 'https://nectar.ninja', 'https://api.tumblr.com', 'https://' + config.assetHost, acceptNonce, "'unsafe-inline'"],
+    scriptSrc: ["'self'", 'https://www.google-analytics.com', 'https://api.tumblr.com', 'https://' + config.assetHost, acceptNonce, "'unsafe-inline'"],
     styleSrc: ["'self'", 'https://fonts.googleapis.com', 'https://' + config.assetHost, acceptNonce, "'unsafe-inline'"],
     imgSrc: ["'self'", 'data:', 'https://0.gravatar.com', 'https://camo.gamekeller.net', 'https://www.google-analytics.com', 'https://' + config.assetHost, 'https://' + config.userContentHost],
     fontSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'https://' + config.assetHost],
-    connectSrc: ["'self'", 'https://www.reddit.com', 'https://nectar.ninja'],
+    connectSrc: ["'self'", 'https://www.reddit.com'],
     formAction: ["'self'"],
     objectSrc: ["'none'"],
     frameAncestors: ["'none'"],
