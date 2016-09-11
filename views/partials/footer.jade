@@ -1,31 +1,27 @@
-.footer
-  a.gamekeller(href='/')
-    span.icon.icon-gamekeller
-    | Gamekeller
-  ul.links
-    li
-      a(href='/support') Support
-    li
-      a(href='/privacy') Datenschutz
-    li
-      a(href='/imprint') Impressum
-  .clearfix
-  ul.info
-    li
-      include rev
-  ul.social
-    li
-      a(href='https://twitter.com/gamekeller')
-        span.icon.icon-twitter
-    li
-      a(href='https://facebook.com/gamekeller')
-        span.icon.icon-facebook
-    li
-      a(href='https://plus.google.com/110036342393009438781', rel='publisher')
-        span.icon.icon-google-plus
-    li
-      a(href='https://www.reddit.com/r/gamekeller')
-        span.icon.icon-reddit
-    li
-      a(href='https://github.com/gamekeller')
-        span.icon.icon-github
+.footer.container
+  .footer-row.footer-fold
+    a.footer-brand(href='/')
+      span.icon.icon-gamekeller
+      | Gamekeller
+    ul.footer-nav
+      li: a(href='/support') Support
+      li: a(href='/privacy') Datenschutz
+      li: a(href='/imprint') Impressum
+  .footer-row
+    include rev
+    ul.footer-social
+      li
+        a(href='https://twitter.com/gamekeller')
+          span.icon.icon-twitter
+      li
+        a(href='https://facebook.com/gamekeller')
+          span.icon.icon-facebook
+      li
+        a(href='https://plus.google.com/110036342393009438781', rel='publisher')
+          span.icon.icon-google-plus
+      li
+        a(href='https://www.reddit.com/r/gamekeller')
+          span.icon.icon-reddit
+      li
+        a(href='https://github.com/gamekeller')
+          span.icon.icon-github

@@ -1,16 +1,32 @@
 .footer {
-  margin: 20px 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
   font-size: 14px;
   color: lighten(@brand-darker, 15%);
 
-  ul {
+  &-brand {
+    line-height: 32px;
+    font-size: 16px;
+
+    .icon {
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 6px;
+      font-size: 32px;
+      color: @brand-primary;
+    }
+  }
+
+  &-nav,
+  &-social {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   li a,
-  .gamekeller {
+  &-brand,
+  &-rev {
     display: block;
     padding: 10px 15px;
     text-align: center;
@@ -26,23 +42,21 @@
     }
   }
 
-  .links {
+  &-fold {
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid @brand-darker;
   }
 
-  .info {
+  &-rev {
     display: none;
-
-    a {
-      font-size: 10px;
-      color: #2a2d30;
-      line-height: 17px;
-    }
+    padding-left: 0;
+    font-size: 10px;
+    color: #2a2d30;
+    line-height: 17px;
   }
 
-  .social {
+  &-social {
     display: table;
     width: 100%;
     font-size: 16px;
@@ -59,23 +73,9 @@
   }
 }
 
-.gamekeller {
-  line-height: 32px;
-  font-size: 16px;
-
-  .icon {
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 6px;
-    font-size: 32px;
-    color: @brand-primary;
-  }
-}
-
 @media (min-width: @grid-float-breakpoint) {
   .footer {
-    border-bottom: 1px solid @brand-darker;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
     font-size: 12px;
 
     li {
@@ -88,8 +88,16 @@
       }
     }
 
-    .gamekeller {
-      float: left;
+    &-row {
+      display: flex;
+    }
+
+    &-fold {
+      margin: 0;
+      padding: 0;
+    }
+
+    &-brand {
       padding: 11px 10px 10px 0;
       line-height: 16px;
       font-size: 12px;
@@ -101,31 +109,20 @@
       }
     }
 
-    .links {
-      float: right;
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: 0;
-
-      li {
-        float: left;
-      }
+    &-nav,
+    &-social {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1;
     }
 
-    .info {
+    &-rev {
       display: block;
-      float: left;
     }
 
-    .social {
-      float: right;
+    &-social li {
       display: block;
-      width: auto;
-
-      li {
-        display: inline-block;
-        font-size: 100%;
-      }
+      font-size: 100%;
     }
   }
 }
