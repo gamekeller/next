@@ -9,21 +9,16 @@ html(lang='de', prefix='og: http://ogp.me/ns#')
   head
     include partials/head
     block head
-  body(class=bodyClass || null)
+  body
+    include partials/nav
+    include partials/accountProgress
 
-    #wrapper
-      include partials/nav
+    block content-body
+      #wrapper
+        .container
+          block content
 
-      include partials/accountProgress
-
-      block content-body
-        #content-wrapper
-          #content.container
-            block content
-
-    #footer
-      .container
-        include partials/footer
+    include partials/footer
 
     != js('js/main.js')
     if customJs

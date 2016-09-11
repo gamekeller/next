@@ -1,4 +1,5 @@
 body {
+  padding-top: 40px;
   background-color: @brand-darkest;
 }
 
@@ -25,15 +26,10 @@ body {
 }
 
 #wrapper {
-  padding-top: 40px;
+  padding: 30px 0 70px;
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
-}
-
-#content-wrapper {
-  padding-top: 30px;
-  padding-bottom: 70px;
 }
 
 .header-anchor {
@@ -163,10 +159,6 @@ body {
   height: 20px;
   border-radius: 3px;
   margin: -2px 2px 0 0;
-}
-
-.default-avatar {
-  image-rendering: pixelated;
 }
 
 .navbar {
@@ -325,6 +317,10 @@ body {
   margin-top: -3px;
 }
 
+.img-pixelated {
+  image-rendering: pixelated;
+}
+
 .member-row:not(:last-child) {
   margin-bottom: 40px;
 }
@@ -360,35 +356,6 @@ th.sort-header {
   &.sort-up::after {
     border-bottom: none;
     border-width: 4px 4px 0;
-  }
-}
-
-.sentry-v1 {
-  border: 0 !important;
-  font-weight: 400 !important;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.125) !important;
-
-  .sentry__button.sentry__more,
-  .sentry__button.sentry__close,
-  .sentry__button.sentry__send {
-    font: 0/0 a !important;
-
-    &::after {
-      font: 400 14px/50px Roboto;
-      text-transform: uppercase;
-    }
-  }
-
-  .sentry__button.sentry__more::after {
-    content: 'Mehr Infos';
-  }
-
-  .sentry__button.sentry__close::after {
-    content: 'Schliessen';
-  }
-
-  .sentry__button.sentry__send::after {
-    content: 'Senden';
   }
 }
 

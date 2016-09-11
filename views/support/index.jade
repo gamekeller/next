@@ -4,17 +4,17 @@ block content-body
 
   include ../partials/flash
 
-  .project
+  .vista
 
-    .project-backdrop
-      img.project-backdrop-image(sizes='100vw', srcset='#{asset_path("img/support/pioneer10-1024.jpg")} 1024w, #{asset_path("img/support/pioneer10-1600.jpg")} 1600w, #{asset_path("img/support/pioneer10-2048.jpg")} 2048w', src='#{asset_path("img/support/pioneer10-1024.jpg")}')
+    .vista-backdrop
+      img.vista-backdrop-image(sizes='100vw', srcset='#{asset_path("img/support/pioneer10-1024.jpg")} 1024w, #{asset_path("img/support/pioneer10-1600.jpg")} 1600w, #{asset_path("img/support/pioneer10-2048.jpg")} 2048w', src='#{asset_path("img/support/pioneer10-1024.jpg")}')
 
-    .project-wrapper.container
+    .container
 
-      .project-logos
-        .project-logo-gamekeller
+      .vista-logos
+        .vista-logo-gamekeller
           span.icon.icon-gamekeller
-        h1.project-logo
+        h1.vista-logo
           a(href='/support') Support
 
       block support
@@ -29,8 +29,8 @@ block content-body
               .row
                 each article in showcaseArticles
                   .col-md-4
-                    a.support-quick.project-box(href=url('./#{article.slug}'))
-                      h4.support-quick-heading.project-box-heading= article.showcase.title || article.title
+                    a.support-quick.vista-box(href=url('./#{article.slug}'))
+                      h4.support-quick-heading.vista-box-heading= article.showcase.title || article.title
                       .support-quick-action #{article.showcase.guide ? 'Anleitung' : 'Antwort'} ansehen
 
               each articles, category in articlesByCategory
@@ -45,9 +45,9 @@ block content-body
                     a.support-article-list-item(href=url('./#{article.slug}'))= article.title
 
           .col-md-4
-            .project-box.support-team
+            .vista-box.support-team
               .support-team-preface
-                h3.support-team-heading.project-box-heading Unser Team
+                h3.support-team-heading.vista-box-heading Unser Team
                 p Du findest uns auch regelmäßig auf unserem TeamSpeak-Server. Zögere nicht uns zu kontaktieren—wir helfen gerne!
               .support-team-list
                 each member in team

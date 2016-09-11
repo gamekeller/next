@@ -1,8 +1,4 @@
-.project-page #wrapper {
-  background-image: none;
-}
-
-.project {
+.vista {
   position: relative;
   min-height: 500px;
   color: @brand-text;
@@ -20,6 +16,10 @@
   h1, h2, h3,
   h4, h5, h6 {
     color: #fff;
+  }
+
+  hr {
+    border-color: @brand-darker;
   }
 
   &-box {
@@ -139,114 +139,114 @@
     }
   }
 
-  &-sidebar {
-    padding-left: 0;
-    padding-right: @grid-gutter-width;
-  }
+  // &-sidebar {
+  //   padding-left: 0;
+  //   padding-right: @grid-gutter-width;
+  // }
 
-  &-nav {
-    display: flex;
-    flex-direction: column;
+  // &-nav {
+  //   display: flex;
+  //   flex-direction: column;
 
-    &-item {
-      padding: 10px 0;
-      border-bottom: 1px solid @brand-darker;
+  //   &-item {
+  //     padding: 10px 0;
+  //     border-bottom: 1px solid @brand-darker;
 
-      &.active {
-        color: @brand-text-light;
-      }
+  //     &.active {
+  //       color: @brand-text-light;
+  //     }
 
-      &:first-child {
-        margin-top: -10px;
-      }
+  //     &:first-child {
+  //       margin-top: -10px;
+  //     }
 
-      &:last-child {
-        border-bottom: 0;
-      }
-    }
-  }
+  //     &:last-child {
+  //       border-bottom: 0;
+  //     }
+  //   }
+  // }
 
-  &-news {
+  // &-news {
 
-    &-item {
-      display: flex;
-      min-height: 100px;
-      margin-bottom: 60px;
-    }
+  //   &-item {
+  //     display: flex;
+  //     min-height: 100px;
+  //     margin-bottom: 60px;
+  //   }
 
-    &-meta {
-      margin-right: 20px;
-      width: 150px;
-      text-align: right;
-    }
+  //   &-meta {
+  //     margin-right: 20px;
+  //     width: 150px;
+  //     text-align: right;
+  //   }
 
-    &-date {
-      margin-bottom: 15px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid @brand-darker;
-    }
+  //   &-date {
+  //     margin-bottom: 15px;
+  //     padding-bottom: 10px;
+  //     border-bottom: 1px solid @brand-darker;
+  //   }
 
-    &-colophon {
-      position: relative;
-      margin-top: 15px;
-      padding-top: 15px;
+  //   &-colophon {
+  //     position: relative;
+  //     margin-top: 15px;
+  //     padding-top: 15px;
 
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 70px;
-        height: 1px;
-        background-color: @brand-darker;
-      }
-    }
+  //     &::before {
+  //       content: '';
+  //       position: absolute;
+  //       top: 0;
+  //       left: 0;
+  //       width: 70px;
+  //       height: 1px;
+  //       background-color: @brand-darker;
+  //     }
+  //   }
 
-    &-author {
-      display: inline-flex;
+  //   &-author {
+  //     display: inline-flex;
 
-      &:hover,
-      &:focus,
-      &:active {
-        .project-news-author-avatar {
-          opacity: 1;
-        }
-      }
+  //     &:hover,
+  //     &:focus,
+  //     &:active {
+  //       .vista-news-author-avatar {
+  //         opacity: 1;
+  //       }
+  //     }
 
-      &-avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 3px;
-        opacity: 0.5;
-      }
+  //     &-avatar {
+  //       width: 32px;
+  //       height: 32px;
+  //       border-radius: 3px;
+  //       opacity: 0.5;
+  //     }
 
-      &-details {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-left: 6px;
-        line-height: 1;
-        text-align: left;
+  //     &-details {
+  //       display: flex;
+  //       flex-direction: column;
+  //       justify-content: center;
+  //       margin-left: 6px;
+  //       line-height: 1;
+  //       text-align: left;
 
-        small {
-          display: block;
-          margin-bottom: 3px;
-          font-weight: 500;
-          font-size: 10px;
-          letter-spacing: 1px;
-          text-transform: uppercase;
-          opacity: .6;
-        }
-      }
-    }
+  //       small {
+  //         display: block;
+  //         margin-bottom: 3px;
+  //         font-weight: 500;
+  //         font-size: 10px;
+  //         letter-spacing: 1px;
+  //         text-transform: uppercase;
+  //         opacity: .6;
+  //       }
+  //     }
+  //   }
 
-    &-body {
-      flex: 1;
-    }
+  //   &-body {
+  //     flex: 1;
+  //   }
 
-    &-title {
-      margin-top: 0;
-      color: @brand-text-light;
-    }
-  }
+  //   &-title {
+  //     margin-top: 0;
+  //     color: @brand-text-light;
+  //   }
+  // }
 }
