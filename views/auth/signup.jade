@@ -1,54 +1,77 @@
 extends ../layout
 
-block content
+block content-body
 
-  .small-container
+  .vista.signup
 
-    include ../partials/flash
+    .vista-backdrop
+      img.vista-backdrop-image(sizes='100vw', srcset='#{asset_path("img/signup/dorado-1024.jpg")} 1024w, #{asset_path("img/signup/dorado-1920.jpg")} 1920w', src='#{asset_path("img/signup/dorado-1024.jpg")}')
 
-    if teamspeakName
-      .panel.panel-default.panel-lg
-        .panel-heading
-          h1.panel-title Willkommen zu der Accounterstellung, #{teamspeakName}!
-        .panel-body
-          | Wir werden nach der Eröffnung deines Accounts automatisch deine TeamSpeak-ID mit diesem verknüpfen. Dies spart dir einen Schritt bei der Bestätigung deines neuen Accounts!
+    .container
 
-    .panel.panel-default.panel-lg
+      .vista-logos
+        .vista-logo-gamekeller
+          span.icon.icon-gamekeller
+        h1.vista-logo Account erstellen
 
-      .panel-heading
-        h1.panel-title Account erstellen
 
-      .panel-body
+      .signup-row.row
+        .signup-copy.col-md-3.col-md-offset-1
+          section
+            img.img-pixelated.img-glow(src=asset_path('img/ranks/user.png'), width=32)
+            h3 Werde zum User
+            p Steige zum User auf und genieße mehr Rechte auf dem TeamSpeak.
+          hr
+          section
+            h4 Trete Gruppen bei
+            p Schließe dich mit Freunden zusammen oder finde neue für gemeinsamen Spaß!
+          //- hr
+          //- section
+          //-   h4 Sammle XP und erhöhe dein Level
+          //-   p Steige in unseren Ranglisten auf und arbeite auf Beförderungen hin!
 
-        if config.flags.registration
-          +form(class='js-form')
+        .col-md-6.col-md-offset-1
+          include ../partials/flash
 
-            .form-group.floating-label
-              label(for='username') gamekeller.net/Username
-              input.form-control.js-input.js-username(type='text', id='username', name='username', placeholder='Username', autocorrect='off', autocapitalize='off', value=teamspeakName ? teamspeakName : null)
+          if teamspeakName
+            .panel.panel-dark.panel-lg
+              .panel-heading
+                h1.panel-title Hallo, #{teamspeakName}!
+              .panel-body
+                | Wir werden automatisch deine TeamSpeak-ID verknüpfen. Das spart dir einen Schritt bei der Bestätigung deines Accounts.
 
-            .form-group.floating-label
-              label(for='email') E-Mail-Adresse
-              input.form-control.js-input.js-email(type='email', id='email', name='email', placeholder='username@example.com')
+          .panel.panel-dark.panel-lg
 
-            .form-group.floating-label
-              label(for='password') Passwort
-              input.form-control.js-input.js-password(type='password', id='password', name='password', placeholder='Passwort', data-placeholder='••••••••••••••••••••••••')
-              .help-block.fixed
-                span 4-50 Zeichen, alles außer Leerzeichen
-                .checkbox-inline.hide
-                  label
-                    input.js-toggle-password(type='checkbox', tabindex='-1')
-                    | Passwort anzeigen
+            .panel-body
 
-            .form-group.floating-label
-              label(for='confirmPassword') Passwort wiederholen
-              input.form-control.js-input.js-confirm-password(type='password', id='confirmPassword', name='confirmPassword', placeholder='Passwort wiederholen', data-placeholder='••••••••••••••••••••••••')
+              if config.flags.registration
+                +form(class='form-dark js-form')
 
-            .form-group
-              button.btn.btn-primary.btn-pull-left(type='submit') Registrieren
-              button.btn.btn-link.btn-pull-right(type='reset') Zurücksetzen
+                  .form-group
+                    label(for='username') Benutzername
+                    input.form-control.js-input.js-username(type='text', id='username', name='username', placeholder='Username', autocorrect='off', autocapitalize='off', value=teamspeakName ? teamspeakName : null)
 
-        else
-          p.
-            Registrationen werden zur Zeit nicht angenommen. Bitte versuche es zu einem späteren Zeitpunkt erneut.
+                  .form-group
+                    label(for='email') E-Mail-Adresse
+                    input.form-control.js-input.js-email(type='email', id='email', name='email', placeholder='username@example.com')
+
+                  .form-group
+                    label(for='password') Passwort
+                    input.form-control.js-input.js-password(type='password', id='password', name='password', placeholder='Passwort', data-placeholder='••••••••••••••••••••••••')
+                    .help-block.fixed
+                      span 4-50 Zeichen, alles außer Leerzeichen
+                      label.checkbox-inline.hide
+                        input.js-toggle-password(type='checkbox', tabindex='-1')
+                        | Passwort anzeigen
+
+                  .form-group
+                    label(for='confirmPassword') Passwort wiederholen
+                    input.form-control.js-input.js-confirm-password(type='password', id='confirmPassword', name='confirmPassword', placeholder='Passwort wiederholen', data-placeholder='••••••••••••••••••••••••')
+
+                  .form-group
+                    button.btn.btn-primary.btn-pull-left(type='submit') Registrieren
+                    button.btn.btn-link.btn-pull-right(type='reset') Zurücksetzen
+
+              else
+                p.
+                  Registrationen werden zur Zeit nicht angenommen. Bitte versuche es zu einem späteren Zeitpunkt erneut.

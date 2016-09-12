@@ -35,8 +35,7 @@
   ul,
   ol {
     margin: 0;
-    padding: 0;
-    list-style-position: inside;
+    padding: 0 0 0 18px;
   }
 }
 
@@ -413,6 +412,10 @@ dd .form-control {
   }
 }
 
+.panel-dark {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
 // Forms ======================================================================
 
 legend {
@@ -433,6 +436,75 @@ legend {
     &,
     &:focus {
       box-shadow: none;
+    }
+  }
+}
+
+.form-dark {
+  color: @brand-text;
+
+  .form-group {
+    margin-bottom: 20px;
+
+    > label {
+      font-weight: 500;
+      color: lighten(@brand-text, 8%);
+    }
+  }
+
+  .form-control {
+    padding: 6px 12px;
+    background-color: @brand-darkest;
+    border: 1px solid #45494f; // hsl(214, 7%, 29%)
+    border-radius: 3px;
+    color: #fff;
+
+    &::placeholder {
+      color: darken(@brand-text, 20%);
+    }
+
+    &:hover {
+      border-color: hsl(214, 7%, 45%);
+    }
+
+    &:focus {
+      border-color: @brand-active;
+    }
+  }
+
+  .help-block,
+  .checkbox-inline {
+    color: darken(@brand-text, 15%);
+  }
+
+  .has-error {
+    .form-control {
+      border-color: @brand-danger;
+
+      &:not(:last-child) {
+        border-radius: 3px 3px 0 0;
+      }
+
+      + .help-block {
+        margin-top: 0;
+        padding: 8px 14px;
+        background-color: @brand-danger;
+        color: #fff;
+        border-radius: 0 0 3px 3px;
+
+        ul {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .btn-link {
+    color: @brand-text;
+
+    &:hover,
+    &:focus {
+      color: @brand-text-light;
     }
   }
 }

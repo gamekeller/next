@@ -125,11 +125,6 @@ body {
 }
 
 .help-block.fixed {
-  &,
-  .checkbox-inline {
-    color: #c0c0c0;
-  }
-
   .checkbox-inline {
     display: block;
     margin-top: 5px;
@@ -150,8 +145,7 @@ body {
 }
 
 .help-block ul {
-  padding-left: 0;
-  list-style-position: inside;
+  padding-left: 18px;
 }
 
 .mini-avatar {
@@ -311,6 +305,15 @@ body {
     position: sticky;
     top: 70px;
   }
+
+  .signup-row {
+    display: flex;
+    align-items: center;
+  }
+
+  .signup-copy {
+    margin-bottom: 0;
+  }
 }
 
 .img-flair {
@@ -319,6 +322,11 @@ body {
 
 .img-pixelated {
   image-rendering: pixelated;
+}
+
+.img-glow {
+  box-shadow: 0 0 0 1px @brand-primary, 0 0 15px @brand-primary;
+  border-radius: 3px;
 }
 
 .member-row:not(:last-child) {
@@ -384,4 +392,27 @@ th.sort-header {
   border: 0;
   background: none;
   font-family: @font-family-monospace;
+}
+
+.signup {
+  margin-bottom: 60px;
+
+  hr {
+    margin: 30px auto;
+    width: 50%;
+  }
+
+  h3, h4 {
+    margin-bottom: 6px;
+    line-height: inherit;
+  }
+
+  &-copy {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  .flash {
+    margin-bottom: 20px;
+  }
 }

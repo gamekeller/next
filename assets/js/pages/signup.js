@@ -23,7 +23,7 @@
     var $errs = $input.siblings('.js-errors')
 
     if(!$errs.length) {
-      $errs = $('<p class="help-block js-errors"/>').insertAfter($input)
+      $errs = $('<div class="help-block js-errors"/>').insertAfter($input)
       $input.closest('.form-group').addClass('has-error')
     }
 
