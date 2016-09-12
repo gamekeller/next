@@ -77,9 +77,13 @@
   &-logo {
     display: block;
     margin: 0 auto;
-    width: 50vw;
+    width: 75vw;
     max-width: 520px;
     color: #fff;
+
+    @media (min-width: @screen-xs-min) {
+      width: 50vw;
+    }
 
     a {
       color: inherit;
@@ -96,7 +100,7 @@
       font-weight: 300;
       text-align: center;
 
-      @media (min-width: @screen-xs-min) {
+      @media (min-width: @screen-md-min) {
         font-size: 64px;
       }
     }
