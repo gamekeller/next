@@ -22,6 +22,11 @@
     border-color: @brand-darker;
   }
 
+  strong, b {
+    font-weight: 400;
+    color: @brand-text-light;
+  }
+
   &-box {
     display: block;
     margin-bottom: 20px;
@@ -86,12 +91,14 @@
     }
 
     a {
+      display: block;
       color: inherit;
+      transition: transform .2s ease;
 
       &:hover,
       &:focus {
         color: #fff;
-        border-bottom: 2px solid fade(@brand-text, 50%);
+        transform: scale(1.075);
       }
     }
 
