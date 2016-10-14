@@ -19,4 +19,7 @@ block content
             p= preamble
 
           .form-group
-            button.btn.btn-primary(type='submit')= buttonText
+            button.btn.btn-primary.u-btn-inline(type='submit')= buttonText
+
+            if abort
+              a.btn.btn-default.u-btn-inline(href=abort.href)= abort.text
