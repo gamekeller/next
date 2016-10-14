@@ -9,9 +9,11 @@
 //= require bower/bootstrap/js/dropdown.js
 //= require bower/bootstrap/js/tooltip.js
 //= require bower/bootstrap/js/tab.js
+//= require bower/js-cookie/src/js.cookie.js
 //= require bower/autosize/dist/autosize.js
 //= require js/lib/fromNow.js
 //= require js/lib/markdownEditor.js
+//= require js/lib/cookieNotice.js
 
 !function($) {
   function checkPopulation($element) {
