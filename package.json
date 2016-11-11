@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "private": true,
   "dependencies": {
+    "agenda": "^0.9.0",
     "args-js": "^0.10.12",
     "aws-sdk": "^2.6.9",
     "bcryptjs": "^2.3.0",

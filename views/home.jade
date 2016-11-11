@@ -1,78 +1,93 @@
 extends layout
 
-mixin message
-  if !hasFriends
-    .panel.panel-default
-      .panel-heading
-        h3.panel-title Erste Schritte
-      .panel-body
-        p
-          | Willkommen auf der Website von Gamekeller!
-        p
-          | Hier ein paar Vorschläge, die du jetzt auf der Website erledigen kannst:
-          ul
-            if !hasFriends
-              li
-                b Füge jemanden als Freund hinzu
-                br
-                | Dadurch wird dir zum Beispiel auf dieser Seite angezeigt, sobald er im Teamspeak online ist, vorausgesetzt er hat seinen Account mit seiner Teamspeak-Identität verknüpft.
+mixin friendsListItem(friend)
+  a.friends-list-item(class={ 'is-online': friend.teamspeakOnline }, href='/#{friend.username}')
+    if friend.teamspeakOnline
+      != utils.avatarElement(friend, 48, 'friends-list-avatar')
+    .friends-list-body
+      .friends-list-name= friend.username
+      .friends-list-status-text
+        if friend.teamspeakOnline
+          span.status-indicator.status-indicator-active
+          span Online
+        else if friend.teamspeakTracking && friend.teamspeakTracking.lastSeen
+          | Offline #{moment(friend.teamspeakTracking.lastSeen).locale('de-since').fromNow()}
+        else
+          | Offline
 
-mixin reddit
-  .panel.panel-default.js-reddit
-    .panel-heading
-      h3.panel-title
-        | Neues aus dem Subreddit
-        small.small-pulled-right
-          button.btn.btn-link.btn-title.panel-title-right-btn.js-reddit-reload(type='button', title='Aktualisieren')
-            span.icon.icon-reload
+block head
+  style(nonce=nonce).
 
-    .panel-body
-      noscript: style(nonce=nonce) .js-reddit-error{display:block!important}.js-reddit-loading{display:none}
-      p.snuggle-down.text-danger.js-reddit-error.hide Beiträge konnten nicht geladen werden.
-      p.snuggle-down.text-muted.js-reddit-loading Laden...
-      p.js-reddit-info.hide
-        | Die drei neusten Beiträge aus&nbsp;
-        a(href='http://www.reddit.com/r/gamekeller') /r/gamekeller
-        | .
-    ul.panel-list.js-reddit-target.hide
 
-mixin friendsOnTeamspeak
-  .panel.panel-default
-    .panel-heading
-      h3.panel-title Freunde jetzt online im Teamspeak
-    .panel-body
-      if friendsOnTeamspeak.length
-        p Es #{(friendsOnTeamspeak.length > 1 ? 'sind ' : 'ist ') + friendsOnTeamspeak.length} deiner Freunde jetzt im Teamspeak online.
-      else
-        p Keiner deiner Freunde ist momentan auf dem Teamspeak online.
-    if friendsOnTeamspeak.length
-      ul.panel-list
-        each friend in friendsOnTeamspeak
-          each con in friend.teamspeakConnections
-            li.panel-list-item
-              if friend.rank
-                img.img-flair(src=asset_path(friend.getRankIcon()))
-                | &nbsp;
-              a(href='/#{friend.username}') #{friend.username}
-              |  im Channel #{con.currentChannel.name} als #{con.nickname}
-              a.pull-right.hidden-sm.hidden-xs(href='ts3server://#{config.teamspeak.url}?port=9987&cid=#{con.currentChannel.id}') Hinterherjoinen
-
-block content
-
-  - var hasFriends = user.friends.length
+block content-body
 
   include partials/flash
 
-  h1 Home
+  .vista
+    .vista-backdrop
+      img.vista-backdrop-image(sizes='100vw', srcset='#{asset_path("img/vistas/alps-1024.jpg")} 1024w, #{asset_path("img/vistas/alps-1600.jpg")} 1600w, #{asset_path("img/vistas/alps-2048.jpg")} 2048w', src='#{asset_path("img/vistas/alps-1024.jpg")}')
 
-  .row
-    .col-md-5.column
-      if hasFriends
-        +message
-      +reddit
+    .container
 
-    .col-md-7.column
-      if hasFriends
-        +friendsOnTeamspeak
-      else
-        +message
+      .row
+        .col-md-12
+          .usercard
+            .usercard-avatar
+              != utils.avatarElement(user, 128, 'usercard-avatar-image')
+            .usercard-body
+              .usercard-meta
+                h2.usercard-name!= user.username
+                .usercard-current-rank
+                  img.usercard-current-rank-image(src=asset_path(user.getRankIcon()), alt=user.getRankName())
+                  | #{user.getRankDisplayText()}
+              - var nextRank = user.getNextRank()
+              if user.rank > 0 && nextRank
+                if user.canRankUp()
+                  .usercard-next-rank
+                    +form(action='/account/rankup')
+                      button.btn.btn-primary(type='submit') Zum #{utils.getRankName(nextRank)} aufsteigen!
+                else
+                  .usercard-next-rank
+                    .usercard-next-rank-desc Nächster Rang
+                    img.usercard-next-rank-image(src=asset_path(utils.getRankIcon(nextRank)), alt=utils.getRankName(nextRank))
+                    != utils.getRankName(nextRank)
+                    if user.level < config.xp.nextRank[nextRank].levelNeeded
+                      p.usercard-next-rank-req ab Level #{config.xp.nextRank[nextRank].levelNeeded}
+                    else
+                      p.usercard-next-rank-req= moment(user.xp.lastPromotionAt).add(config.xp.nextRank[nextRank].lastPromotionHours, 'h').fromNow()
+
+          if !user.isStaff() && user.rank !== 0
+            .xp.u-mb
+              .xp-level #{user.level}
+              .xp-value #{user.xp.current} / #{utils.getXpNeededForLevel(user.level)} XP
+              .xp-bar
+                -
+                  var xp = {
+                    n: 1,
+                    bars: utils.getXpNeededForLevel(user.level) / config.xp.barAmount,
+                    full: Math.floor(user.xp.current / config.xp.barAmount),
+                    fill: (user.xp.current % config.xp.barAmount) / (config.xp.barAmount / 100)
+                  }
+                while xp.n++ <= xp.bars
+                  .xp-bar-part(class={'is-full': xp.n <= xp.full})
+                    if xp.fill > 0 && xp.n === xp.full + 1
+                      style(nonce=nonce) .xp-bar-fill{width:#{xp.fill}%}
+                      .xp-bar-fill
+              .xp-level #{user.level + 1}
+
+
+          .row
+            .friends.col-md-12
+              h3.friends-title
+                | Freunde
+                if user.friends.length
+                  small.friends-title-count #{_.filter(friends, 'teamspeakOnline').length} / #{user.friends.length} online
+              if user.friends.length
+                .friends-list
+                  each friend in friends
+                    +friendsListItem(friend)
+              else
+                .friends-none
+                  p.friends-none-symbol :(
+                  p.friends-none-text Noch keine Freunde. 
+                  a.btn.btn-outline(href='/members') Füge ein paar Leute hinzu!

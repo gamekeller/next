@@ -416,3 +416,87 @@ th.sort-header {
     margin-bottom: 20px;
   }
 }
+
+.usercard {
+  display: flex;
+  margin: 80px 0 20px;
+
+  &-avatar {
+    margin-right: 12px;
+    width: 64px;
+    height: 64px;
+
+    &-image {
+      width: 100%;
+      .tile-box-shadow();
+      border-radius: 3px;
+    }
+
+    // &-progress {
+    //   margin: -16px auto 0;
+    //   height: 32px;
+    // }
+
+    // &-rank {
+    //   width: 32px;
+    //   height: 32px;
+    //   image-rendering: pixelated;
+    // }
+  }
+
+  &-name {
+    margin: 0 0 4px;
+    line-height: 1;
+  }
+
+  &-body {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  // background-color: fade(@brand-darkest, 50%);
+  // box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+  // // box-shadow: 0 0 0 2px #f90, 0 0 20px #f90;
+  // border-radius: 3px;
+
+  &-current-rank {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+
+    &-image {
+      margin-right: 4px;
+      vertical-align: top;
+    }
+  }
+
+  &-next-rank {
+    margin-left: auto;
+    line-height: 16px;
+    color: rgba(255, 255, 255, 0.6);
+
+    &-desc {
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    &-image {
+      margin-right: 4px;
+      width: 16px;
+      height: 16px;
+      vertical-align: top;
+      opacity: 0.8;
+    }
+
+    &-req {
+      margin: 3px 0 0;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+}

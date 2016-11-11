@@ -1,0 +1,47 @@
+.xp {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-shadow: 0 3px 10px fade(@brand-darkest, 35%);
+
+  &-bar {
+    display: flex;
+    margin: 0 9px;
+    width: 100%;
+    height: 3px;
+
+    &-part {
+      margin: 0 1px;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.35);
+      .tile-box-shadow();
+      // background-color: fade(@brand-darkest, 50%);
+      // box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+
+      &.is-full {
+        background-color: #f90;
+      }
+    }
+
+    &-fill {
+      height: 100%;
+      background-color: #f90;
+    }
+  }
+
+  &-level {
+    line-height: 1;
+    font-size: 24px;
+    font-weight: 300;
+  }
+
+  &-value {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+  }
+}

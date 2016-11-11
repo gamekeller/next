@@ -66,6 +66,12 @@ require('./lib/mongo')
  * moment
  */
 moment.locale('de')
+moment.defineLocale('de-since', {
+  parentLocale: 'de',
+  relativeTime: {
+    past: 'seit %s'
+  }
+})
 app.moment = moment
 
 /**
@@ -151,6 +157,10 @@ app.use(csrf())
 // --------------------------------
 var Mailer = require('./lib/mailer')
 app.mailer = new Mailer(_.bind(app.render, app))
+
+// XP
+// --------------------------------
+require('./lib/xp')
 
 // Asset configuration
 // --------------------------------

@@ -7,12 +7,13 @@
   "cspReportUri": "",
   "ranks": {
     "0": "Gast",
-    "1": "User",
-    "2": "Stammuser",
-    "3": "Veteran",
-    "4": "Moderator",
-    "5": "Admin"
+    "100": "User",
+    "200": "Stammuser",
+    "300": "Veteran",
+    "9800": "Moderator",
+    "9900": "Admin"
   },
+  "rankProgression": [0, 100, 200],
   "aws": {
     "accessKeyId": "",
     "secretAccessKey": "",
@@ -68,11 +69,11 @@
     },
     "ranksToGroups": {
       "0": 8,
-      "1": 7,
-      "2": 9,
-      "3": 10,
-      "4": 11,
-      "5": 6
+      "100": 7,
+      "200": 9,
+      "300": 10,
+      "9800": 11,
+      "9900": 6
     }
   },
   "secrets": {
@@ -81,6 +82,33 @@
   "camo": {
     "url": "https://camo.gamekeller.net",
     "key": ""
+  },
+  "xp": {
+    "barAmount": 500,
+    "levelXpKey": {
+      "1": 1500,
+      "2": 3000,
+      "3": 5000,
+      "4": 7000,
+      "5": 9000,
+      "6": 10000,
+      "7": 11000,
+      "8": 12000,
+      "9": 13000,
+      "default": 14000
+    },
+    "rampUpDoneAtLevel": 10,
+    "nextRank": {
+      "200": {
+        "lastPromotionHours": 1440,
+        "levelNeeded": 56
+      }
+    },
+    "gains": {
+      "boostDuration": 120,
+      "eachTick": 20,
+      "eachTickBoosted": 100
+    }
   },
   "flags": {
     "login": false,
