@@ -72,6 +72,7 @@ moment.defineLocale('de-since', {
     past: 'seit %s'
   }
 })
+moment.locale('de') // Apparently need to set this again after defining a new locale
 app.moment = moment
 
 /**
