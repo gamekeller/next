@@ -111,4 +111,10 @@ block content
 
             .form-group
               button.btn.btn-primary(type='submit') User speichern
-              button.btn.btn-link.btn-pull-right(type='submit', formaction=url('../delete'), onclick='return prompt(\'Um diesen Account zu löschen, gib bitte den Username ein.\')===\'#{profile.username}\'') Account löschen
+              button.btn.btn-link.btn-pull-right.js-delete-account(type='submit', formaction=url('../delete')) Account löschen
+
+block footer
+  script(nonce=nonce).
+    $('.js-delete-account').on('click', function(e) {
+      return prompt('Um diesen Account zu löschen, gib bitte den Username ein.') === '#{profile.username}'
+    })
