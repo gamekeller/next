@@ -56,7 +56,7 @@ block content-body
                     else
                       p.usercard-next-rank-req= moment(user.xp.lastPromotionAt).add(config.xp.nextRank[nextRank].lastPromotionHours, 'h').fromNow()
 
-          if !user.isStaff() && user.rank !== 0
+          if user.rank !== 0
             .xp.u-mb
               .xp-level #{user.level}
               .xp-value #{user.xp.current} / #{utils.getXpNeededForLevel(user.level)} XP
