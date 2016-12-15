@@ -44,7 +44,7 @@ block content
                     | Unbestätigt
 
             .panel-body
-              +form
+              +form(action='/account/email')
 
                 if !user.emailVerified
                   - var btnClasses = 'btn btn-default btn-xs btn-inline'
@@ -64,7 +64,7 @@ block content
 
                 .form-group.floating-label.floating-label-populated
                   label(for='email') Aktuelle E-Mail-Adresse
-                  input.form-control(type='email', id='email', name='account[email]', value=user.email)
+                  input.form-control(type='email', id='email', name='email', value=user.email)
 
                 .form-group
                   button.btn.btn-primary(type='submit') E-Mail-Adresse ändern
@@ -79,19 +79,19 @@ block content
                   | geändert&nbsp;
                   +timestamp(user.passwordChangedAt)
             .panel-body
-              +form
+              +form(action='/account/password')
 
                 .form-group.floating-label
                   label(for='currentPassword') Aktuelles Passwort
-                  input.form-control(type='password', id='currentPassword', name='currentPassword', placeholder='Aktuelles Passwort', data-placeholder='••••••••••••••••••••••••')
+                  input.form-control(type='password', id='currentPassword', name='current', placeholder='Aktuelles Passwort', data-placeholder='••••••••••••••••••••••••')
 
                 .form-group.floating-label
                   label(for='newPassword') Neues Passwort
-                  input.form-control.js-password(type='password', id='newPassword', name='account[password]', placeholder='Neues Passwort', data-placeholder='••••••••••••••••••••••••')
+                  input.form-control.js-password(type='password', id='newPassword', name='new', placeholder='Neues Passwort', data-placeholder='••••••••••••••••••••••••')
 
                 .form-group.floating-label
                   label(for='newPasswordConfirmation') Neues Passwort wiederholen
-                  input.form-control.js-confirm-password(type='password', id='newPasswordConfirmation', name='confirmPassword', placeholder='Neues Passwort wiederholen', data-placeholder='••••••••••••••••••••••••')
+                  input.form-control.js-confirm-password(type='password', id='newPasswordConfirmation', name='confirm', placeholder='Neues Passwort wiederholen', data-placeholder='••••••••••••••••••••••••')
 
                 .form-group
                   button.btn.btn-primary.btn-pull-left(type='submit') Passwort ändern
