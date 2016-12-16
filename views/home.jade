@@ -68,7 +68,7 @@ block content-body
                     full: Math.floor(user.xp.current / config.xp.barAmount),
                     fill: (user.xp.current % config.xp.barAmount) / (config.xp.barAmount / 100)
                   }
-                while xp.n++ <= xp.bars
+                while ++xp.n <= xp.bars
                   .xp-bar-part(class={'is-full': xp.n <= xp.full})
                     if xp.fill > 0 && xp.n === xp.full + 1
                       style(nonce=nonce) .xp-bar-fill{width:#{xp.fill}%}
