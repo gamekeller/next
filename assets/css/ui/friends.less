@@ -12,64 +12,6 @@
     }
   }
 
-  &-list {
-    margin: 0 -15px;
-
-    @media (min-width: @screen-sm-min) {
-      display: flex;
-      flex-wrap: wrap;
-
-      &-item {
-        width: 50%;
-      }
-    }
-
-    &-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-      padding: 0 15px;
-
-      @media (min-width: @screen-md-min) {
-        width: 33.33333%;
-      }
-    }
-
-    &-body {
-      flex: 1;
-
-      &:first-child {
-        margin-left: 58px;
-      }
-    }
-
-    &-name {
-      margin: 0;
-      font-size: 16px;
-      color: @brand-text;
-
-      .is-online & {
-        color: @brand-text-light;
-      }
-    }
-
-    &-status-text {
-      color: darken(@brand-text, 15%);
-
-      .is-online & {
-        color: @brand-text;
-      }
-    }
-
-    &-avatar {
-      margin-right: 10px;
-      width: 48px;
-      height: 48px;
-      .tile-box-shadow();
-      border-radius: 3px;
-    }
-  }
-
   &-none {
     padding: 40px 0 60px;
     text-align: center;

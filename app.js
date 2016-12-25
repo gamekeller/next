@@ -18,6 +18,7 @@ var logger         = require('morgan')
 var methodOverride = require('method-override')
 var moment         = require('moment')
 var mongoose       = require('mongoose')
+var numeral        = require('numeral')
 var passport       = require('passport')
 var redis          = require('./lib/redis')
 var session        = require('express-session')
@@ -74,6 +75,13 @@ moment.defineLocale('de-since', {
 })
 moment.locale('de') // Apparently need to set this again after defining a new locale
 app.moment = moment
+
+/**
+ * numeral
+ */
+require('numeral/locales/de')
+numeral.locale('de')
+app.numeral = numeral
 
 /**
  * Express configuration
@@ -201,6 +209,7 @@ app.use(function(req, res, next) {
     config: config,
     user: user,
     moment: moment,
+    numeral: numeral,
     url: req.resolveUrl.bind(req),
     utils: utils
   })

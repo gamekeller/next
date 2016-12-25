@@ -1,22 +1,48 @@
-mixin content(member)
-  if member
-    .col-md-3
-      +profileCard(member)(link=true)
+mixin memberListItem(member)
+  a.userlist-item(class={ 'is-staff': member.isStaff() }, href='/#{member.username}')
+    .userlist-avatar
+      != utils.avatarElement(member, 48, 'userlist-avatar-image')
+      if member.teamspeakOnline
+        span.userlist-avatar-indicator
+      .userlist-avatar-rank
+        img.userlist-avatar-rank-icon(src=asset_path(member.getRankIcon()), alt=member.getRankName())
+        unless member.isStaff() || member.getRankValue() === 0
+          span.userlist-avatar-rank-level #{member.level}
+    .userlist-body
+      .userlist-name= member.username
 
 extends layout
 
-block content
+block content-body
 
   include partials/flash
 
-  h1 Mitglieder
+  .vista
+    .vista-backdrop
+      img.vista-backdrop-image(sizes='100vw', srcset='#{asset_path("img/signup/dorado-1024.jpg")} 1024w, #{asset_path("img/signup/dorado-1920.jpg")} 1920w', src='#{asset_path("img/vistas/alps-1024.jpg")}')
 
-  - var i = 0
+    .container
 
-  while i < members.length
-    .member-row.row
-      +content(members[i])
-      +content(members[i + 1])
-      +content(members[i + 2])
-      +content(members[i + 3])
-    - i += 4
+      .vista-logos
+        .vista-logo-gamekeller
+          span.icon.icon-gamekeller
+        h1.vista-logo Mitglieder
+
+      .row
+        .col-md-8.col-md-push-2
+          .userlist-stats
+            .userlist-stat
+              .userlist-stat-value= members.length
+              .userlist-stat-desc Mitglieder
+            .userlist-stat
+              .userlist-stat-value 26
+              .userlist-stat-desc Gruppen
+            .userlist-stat
+              .userlist-stat-value= numeral(totalXp).format('0,0')
+              .userlist-stat-desc XP gesammelt
+
+      .row
+        .col-md-12
+          .userlist
+            each member in members
+              +memberListItem(member)

@@ -1,15 +1,17 @@
 extends layout
 
 mixin friendsListItem(friend)
-  a.friends-list-item(class={ 'is-online': friend.teamspeakOnline }, href='/#{friend.username}')
+  a.userlist-item(class={ 'is-online': friend.teamspeakOnline }, href='/#{friend.username}')
     if friend.teamspeakOnline
-      != utils.avatarElement(friend, 48, 'friends-list-avatar')
-    .friends-list-body
-      .friends-list-name= friend.username
-      .friends-list-status-text
+      .userlist-avatar
+        != utils.avatarElement(friend, 48, 'userlist-avatar-image')
         if friend.teamspeakOnline
-          span.status-indicator.status-indicator-active
-          span Online
+          span.userlist-avatar-indicator
+    .userlist-body
+      .userlist-name= friend.username
+      .userlist-status-text
+        if friend.teamspeakOnline
+          | Online
         else if friend.teamspeakTracking && friend.teamspeakTracking.lastSeen
           | Offline #{moment(friend.teamspeakTracking.lastSeen).locale('de-since').fromNow()}
         else
@@ -83,7 +85,7 @@ block content-body
                 if user.friends.length
                   small.friends-title-count #{_.filter(friends, 'teamspeakOnline').length} / #{user.friends.length} online
               if user.friends.length
-                .friends-list
+                .userlist.userlist-show-status
                   each friend in friends
                     +friendsListItem(friend)
               else
