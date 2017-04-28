@@ -1,0 +1,20 @@
+mixin xpBar(profile, light, classes)
+  if profile.rank !== 0
+    .xp(class={ 'xp-light': light, 'u-mb': 1 }, class=classes)
+      .xp-value #{profile.xp.current} / #{utils.getXpNeededForLevel(profile.level)} XP
+      .xp-progress
+        .xp-level #{profile.level}
+        .xp-bar
+          -
+            var xp = {
+              n: 1,
+              bars: utils.getXpNeededForLevel(profile.level) / config.xp.barAmount,
+              full: Math.floor(profile.xp.current / config.xp.barAmount),
+              fill: (profile.xp.current % config.xp.barAmount) / (config.xp.barAmount / 100)
+            }
+          while ++xp.n <= xp.bars
+            .xp-bar-part(class={'is-full': xp.n <= xp.full})
+              if xp.fill > 0 && xp.n === xp.full + 1
+                style(nonce=nonce) .xp-bar-fill{width:#{xp.fill}%}
+                .xp-bar-fill
+        .xp-level #{profile.level + 1}

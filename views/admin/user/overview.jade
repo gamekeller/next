@@ -11,6 +11,12 @@ block content
 
       include ../../partials/flash
 
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title XP
+        .panel-body
+          +xpBar(profile)
+
       if user && user.admin && profile.teamspeakLinked
         .panel.panel-default
           .panel-heading

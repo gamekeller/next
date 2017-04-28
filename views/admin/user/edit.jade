@@ -113,6 +113,46 @@ block content
               button.btn.btn-primary(type='submit') User speichern
               button.btn.btn-link.btn-pull-right.js-delete-account(type='submit', formaction=url('../delete')) Account löschen
 
+      .panel.panel-default.panel-lg
+        .panel-heading
+          h3.panel-title XP
+
+        .panel-body
+          +xpBar(profile)
+
+          +form(action=url('./xp'))
+            .row
+              .col-md-6
+                .form-group.floating-label.floating-label-populated
+                  label Level
+                  .floating-label-body
+                    dl.dl-horizontal.dl-small
+                      dt: label(for='levelMode') Modus
+                      dd
+                        select(id='levelMode', name='levelMode')
+                          option(value='add') Level hinzufügen
+                          option(value='sub') Level abziehen
+                      dt: label(for='levelVal') Wert
+                      dd
+                        input.form-control(type='number', id='levelVal', name='levelVal', placeholder='0', min='0', step='1')
+
+              .col-md-6
+                .form-group.floating-label.floating-label-populated
+                  label XP
+                  .floating-label-body
+                    dl.dl-horizontal.dl-small
+                      dt: label(for='xpMode') Modus
+                      dd
+                        select(id='xpMode', name='xpMode')
+                          option(value='add') XP hinzufügen
+                          option(value='sub') XP abziehen
+                      dt: label(for='xpVal') Wert
+                      dd
+                        input.form-control(type='number', id='xpVal', name='xpVal', placeholder='0', min='0', step='1')
+
+            .form-group
+              button.btn.btn-primary(type='submit') XP verändern
+
 block footer
   script(nonce=nonce).
     $('.js-delete-account').on('click', function(e) {
