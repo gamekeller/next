@@ -12,15 +12,15 @@ module.exports = function(grunt) {
         done(false)
       }
 
-      var jade = 'a.footer-rev(href=\'https://github.com/gamekeller/next/commit/' + rev.replace('\n', '') + '\') rev. ' + rev.substr(0, 10)
+      var pug = 'a.footer-rev(href=\'https://github.com/gamekeller/next/commit/' + rev.replace('\n', '') + '\') rev. ' + rev.substr(0, 10)
 
-      fs.writeFile(path.resolve(process.cwd(), 'views/partials/rev.jade'), jade, function(err) {
+      fs.writeFile(path.resolve(process.cwd(), 'views/partials/rev.pug'), pug, function(err) {
         if(err) {
           grunt.fail.fatal(err)
           done(false)
         }
 
-        grunt.log.writeln('views/partials/rev.jade updated.')
+        grunt.log.writeln('views/partials/rev.pug updated.')
 
         done()
       })
