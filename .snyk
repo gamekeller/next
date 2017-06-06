@@ -1,15 +1,16 @@
-version: v1.5.2
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.7.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:minimatch:20160620':
     - snyk > recursive-readdir > minimatch:
         reason: None given
         expires: '2016-07-22T11:19:16.495Z'
+# patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:uglify-js:20150824':
     - hbs > handlebars > uglify-js:
         patched: '2016-03-23T16:43:41.262Z'
-      jade > transformers > uglify-js:
-        patched: '2016-10-13T06:31:57.559Z'
     - jade > transformers > uglify-js:
         patched: '2016-03-23T16:43:41.262Z'
     - jade > transformers > uglify-js:
@@ -26,11 +27,13 @@ patch:
         patched: '2016-06-22T11:19:06.255Z'
     - hbs > handlebars > uglify-js:
         patched: '2016-06-22T11:19:06.255Z'
+    - jade > transformers > uglify-js:
+        patched: '2016-10-13T06:31:57.559Z'
+    - jade > transformers > uglify-js:
+        patched: '2017-06-03T22:05:16.389Z'
   'npm:uglify-js:20151024':
     - hbs > handlebars > uglify-js:
         patched: '2016-03-23T16:43:41.262Z'
-      jade > transformers > uglify-js:
-        patched: '2016-10-13T06:31:57.559Z'
     - jade > transformers > uglify-js:
         patched: '2016-03-23T16:43:41.262Z'
     - jade > transformers > uglify-js:
@@ -47,9 +50,18 @@ patch:
         patched: '2016-06-22T11:19:06.255Z'
     - hbs > handlebars > uglify-js:
         patched: '2016-06-22T11:19:06.255Z'
+    - jade > transformers > uglify-js:
+        patched: '2016-10-13T06:31:57.559Z'
+    - jade > transformers > uglify-js:
+        patched: '2017-06-03T22:05:16.389Z'
   'npm:hawk:20160119':
     - grunt-nodemon > nodemon > chokidar > fsevents > node-pre-gyp > request > hawk:
         patched: '2016-03-23T16:43:41.262Z'
   'npm:is-my-json-valid:20160118':
     - grunt-nodemon > nodemon > chokidar > fsevents > node-pre-gyp > request > har-validator > is-my-json-valid:
         patched: '2016-03-23T16:43:41.262Z'
+  'npm:ms:20170412':
+    - compression > debug > ms:
+        patched: '2017-06-03T22:05:16.389Z'
+    - gm > debug > ms:
+        patched: '2017-06-03T22:05:16.389Z'
