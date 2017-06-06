@@ -16,5 +16,5 @@ block content
             each group in groups
               tr
                 td
-                  a(href=url('./#{group.vanity}'))= group.name
+                  a(href=url(`./${group.vanity}`))= group.name
                 td(data-sort=group.members.length)= group.members.length

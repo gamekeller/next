@@ -22,7 +22,7 @@ block content
           if friendsCount
             .panel-list
               each friend in profile.friends
-                a.panel-list-item(href='/#{friend.username}')
+                a.panel-list-item(href=`/${friend.username}`)
                   != utils.avatarElement(friend, 40, 'mini-avatar')
                   | &nbsp;
                   strong #{friend.username}
@@ -34,4 +34,4 @@ block content
                       else
                         span.text-muted Offline
                     else
-                      span.text-muted.help(title='#{friend.username} hat seinen Account nicht mit einer Teamspeak-ID verknüpft.') Nicht verknüpft
+                      span.text-muted.help(title=`${friend.username} hat seinen Account nicht mit einer Teamspeak-ID verknüpft.`) Nicht verknüpft

@@ -57,7 +57,7 @@ block content
                       if user.emailVerification.resendTries <= 0
                         button.visually-disabled.js-tooltip(class=btnClasses, type='button', tabindex='-1', title=config.emailVerification.messages.resendThresholdDepleted) E-Mail erneut senden
                       else if Date.now() - user.emailVerification.sentAt <= config.emailVerification.resendCooldown * 1e3
-                        button.visually-disabled.js-tooltip.js-resend-cooldown(class=btnClasses, type='button', tabindex='-1', data-placement='bottom', title=config.emailVerification.messages.resendOnCooldown, data-ready-at='#{user.emailVerification.sentAt + config.emailVerification.resendCooldown * 1e3}') E-Mail erneut senden
+                        button.visually-disabled.js-tooltip.js-resend-cooldown(class=btnClasses, type='button', tabindex='-1', data-placement='bottom', title=config.emailVerification.messages.resendOnCooldown, data-ready-at=`${user.emailVerification.sentAt + config.emailVerification.resendCooldown * 1e3}`) E-Mail erneut senden
                       else
                         button(class=btnClasses, type='submit', formaction=url('./verify/email/resend')) E-Mail erneut senden
 

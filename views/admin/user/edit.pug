@@ -32,7 +32,7 @@ block content
               label Rang
               select(name='user[rank]')
                 each name, id in config.ranks
-                  option(value='#{id}', selected=(id == profile.rank ? true : null))= name
+                  option(value=`${id}`, selected=(id == profile.rank ? true : null))= name
 
             .form-group.floating-label
               label(for='password') Passwort ändern
@@ -101,7 +101,7 @@ block content
             h3
               | Profil&nbsp;
               small
-                a(href=url('/#{profile.username}'), target='_blank')
+                a(href=url(`/${profile.username}`), target='_blank')
                   span.icon.icon-open
 
             .form-group.floating-label.floating-label-populated

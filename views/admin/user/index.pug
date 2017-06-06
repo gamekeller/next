@@ -26,7 +26,7 @@ block content
                   else
                     | -
                 td
-                  a(href=url('./#{user._id}'), title=user._id)= user.username
+                  a(href=url(`./${user._id}`), title=user._id)= user.username
                 td= user.admin ? 'Ja' : 'Nein'
                 td(class=user.teamspeakUid ? 'js-select-input' : null, data-sort=user.teamspeakUid ? 1 : 0)
                   if user.teamspeakUid

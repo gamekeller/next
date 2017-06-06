@@ -5,7 +5,7 @@ block head
   meta(name='twitter:site', content='@gamekeller')
   meta(name='twitter:url', property='og:url', content=config.url + req.originalUrl)
   meta(name='twitter:title', property='og:title', content=utils.getPageTitle(title))
-  meta(name='twitter:description', property='og:description', content='#{profile.username} auf Gamekeller')
+  meta(name='twitter:description', property='og:description', content=`${profile.username} auf Gamekeller`)
   meta(name='twitter:image', property='og:image', content=profile.avatarUrl(512))
   meta(property='og:site_name', content='Gamekeller')
 

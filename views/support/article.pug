@@ -7,7 +7,7 @@ block support
       .support-article-breadcrumbs
         a.support-article-breadcrumb(href=url('../')) Support
         if article.category
-          a.support-article-breadcrumb(href=url('../#{article.categorySlug}'))= article.category
+          a.support-article-breadcrumb(href=url(`../${article.categorySlug}`))= article.category
       h2.support-article-title= article.title
 
       .support-article-text
@@ -22,7 +22,7 @@ block support
     .support-team
       .support-team-list
         each member in team
-          a.support-team-item(href='/#{member.username}')
+          a.support-team-item(href=`/${member.username}`)
             != utils.avatarElement(member, 80, 'support-team-avatar')
             .support-team-desc
               .support-team-name #{member.username}

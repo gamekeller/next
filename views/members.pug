@@ -1,5 +1,7 @@
+extends layout
+
 mixin memberListItem(member)
-  a.userlist-item(class={ 'is-staff': member.isStaff() }, href='/#{member.username}')
+  a.userlist-item(class={ 'is-staff': member.isStaff() }, href=`/${member.username}`)
     .userlist-avatar
       != utils.avatarElement(member, 48, 'userlist-avatar-image')
       if member.teamspeakOnline
@@ -11,15 +13,13 @@ mixin memberListItem(member)
     .userlist-body
       .userlist-name= member.username
 
-extends layout
-
 block content-body
 
   include partials/flash
 
   .vista
     .vista-backdrop
-      img.vista-backdrop-image(sizes='100vw', srcset='#{asset_path("img/signup/dorado-1024.jpg")} 1024w, #{asset_path("img/signup/dorado-1920.jpg")} 1920w', src='#{asset_path("img/vistas/alps-1024.jpg")}')
+      img.vista-backdrop-image(sizes='100vw', srcset=`${asset_path('img/signup/dorado-1024.jpg')} 1024w, ${asset_path('img/signup/dorado-1920.jpg')} 1920w`, src=`${asset_path('img/vistas/alps-1024.jpg')}`)
 
     .container
 

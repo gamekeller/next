@@ -23,6 +23,6 @@ block content
               tr
                 td= article.category || 'Keine Kategorie'
                 td
-                  a(href=url('./#{article._id}'), title=article._id)= article.title
+                  a(href=url(`./${article._id}`), title=article._id)= article.title
                 td= article.order
                 td= article.showcase.active ? 'Ja' : 'Nein'

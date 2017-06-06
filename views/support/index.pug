@@ -7,7 +7,7 @@ block content-body
   .vista
 
     .vista-backdrop
-      img.vista-backdrop-image(sizes='100vw', srcset='#{asset_path("img/support/pioneer10-1024.jpg")} 1024w, #{asset_path("img/support/pioneer10-1600.jpg")} 1600w, #{asset_path("img/support/pioneer10-2048.jpg")} 2048w', src='#{asset_path("img/support/pioneer10-1024.jpg")}')
+      img.vista-backdrop-image(sizes='100vw', srcset=`${asset_path('img/support/pioneer10-1024.jpg')} 1024w, ${asset_path('img/support/pioneer10-1600.jpg')} 1600w, ${asset_path('img/support/pioneer10-2048.jpg')} 2048w`, src=`${asset_path('img/support/pioneer10-1024.jpg')}`)
 
     .container
 
@@ -26,7 +26,7 @@ block content-body
                 p Du findest uns auch regelmäßig auf unserem TeamSpeak-Server. Zögere nicht uns zu kontaktieren—wir helfen gerne!
               .support-team-list
                 each member in team
-                  a.support-team-item(href='/#{member.username}')
+                  a.support-team-item(href=`/${member.username}`)
                     != utils.avatarElement(member, 80, 'support-team-avatar')
                     .support-team-desc
                       .support-team-name #{member.username}
@@ -48,7 +48,7 @@ block content-body
               .row
                 each article in showcaseArticles
                   .col-md-4
-                    a.support-quick.vista-box(href=url('./#{article.slug}'))
+                    a.support-quick.vista-box(href=url(`./${article.slug}`))
                       h4.support-quick-heading.vista-box-heading= article.showcase.title || article.title
                       .support-quick-action #{article.showcase.guide ? 'Anleitung' : 'Antwort'} ansehen
 
@@ -59,11 +59,11 @@ block content-body
 
               each articles, category in articlesByCategory
                 h3.support-category-heading.header-anchor-heading
-                  a(href=url('./#{articles[0].categorySlug}'))
+                  a(href=url(`./${articles[0].categorySlug}`))
                     span.header-anchor(aria-hidden='true')
                       svg.header-anchor-icon(viewBox='0 0 16 16')
                         path(d='M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z')
                     = category
                 .support-article-list
                   each article in articles
-                    a.support-article-list-item(href=url('./#{article.slug}'))= article.title
+                    a.support-article-list-item(href=url(`./${article.slug}`))= article.title

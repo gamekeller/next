@@ -1,7 +1,7 @@
 extends layout
 
 mixin friendsListItem(friend)
-  a.userlist-item(class={ 'is-online': friend.teamspeakOnline }, href='/#{friend.username}')
+  a.userlist-item(class={ 'is-online': friend.teamspeakOnline }, href=`/${friend.username}`)
     if friend.teamspeakOnline
       .userlist-avatar
         != utils.avatarElement(friend, 48, 'userlist-avatar-image')
@@ -27,7 +27,7 @@ block content-body
 
   .vista
     .vista-backdrop
-      img.vista-backdrop-image(sizes='100vw', srcset='#{asset_path("img/vistas/alps-1024.jpg")} 1024w, #{asset_path("img/vistas/alps-1600.jpg")} 1600w, #{asset_path("img/vistas/alps-2048.jpg")} 2048w', src='#{asset_path("img/vistas/alps-1024.jpg")}')
+      img.vista-backdrop-image(sizes='100vw', srcset=`${asset_path('img/vistas/alps-1024.jpg')} 1024w, ${asset_path('img/vistas/alps-1600.jpg')} 1600w, ${asset_path('img/vistas/alps-2048.jpg')} 2048w`, src=`${asset_path('img/vistas/alps-1024.jpg')}`)
 
     .container
 

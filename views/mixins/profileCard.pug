@@ -6,7 +6,7 @@ mixin profileCard(profile)
   .profile-usercard
     .profile-card.panel.panel-default
       if attributes.link
-        a.profile-avatar-link(href='/#{profile.username}')
+        a.profile-avatar-link(href=`/${profile.username}`)
           +avatar
       else
         +avatar
@@ -15,9 +15,9 @@ mixin profileCard(profile)
         if profile.teamspeakOnline
           .js-expander-scope
             h1.profile-username
-              button.status-indicator.status-indicator-active.status-indicator-lg.js-expander-toggle(type='button', title='#{profile.username} ist im Teamspeak online, klicke für mehr Details')
+              button.status-indicator.status-indicator-active.status-indicator-lg.js-expander-toggle(type='button', title=`${profile.username} ist im Teamspeak online, klicke für mehr Details`)
               if attributes.link
-                a(href='/#{profile.username}')= profile.username
+                a(href=`/${profile.username}`)= profile.username
               else
                 = profile.username
 
@@ -46,7 +46,7 @@ mixin profileCard(profile)
         else
           h1.profile-username
             if attributes.link
-              a(href='/#{profile.username}')= profile.username
+              a(href=`/${profile.username}`)= profile.username
             else
               = profile.username
 
@@ -65,16 +65,16 @@ mixin profileCard(profile)
           //- Friends link -//
           if user && user.username === profile.username && user.friends.length
             li
-              a(href='/#{user.username}/friends') #{user.friends.length} #{'Freund' + (user.friends.length > 1 ? 'e' : '')}
+              a(href=`/${user.username}/friends`) #{user.friends.length} #{'Freund' + (user.friends.length > 1 ? 'e' : '')}
 
         //- Friend button -//
         if user && user.username !== profile.username
           if user.friendsWith(profile.id)
-            +form(action=url('/#{profile.username}/unfriend'))
-              button.btn.btn-link.profile-unfriend.js-confirm(type='submit', data-text='Befreundet', data-hover-text='Als Freund entfernen', data-confirm-text='Bist du dir sicher, dass du #{profile.username} als Freund entfernen möchtest?')
+            +form(action=url(`/${profile.username}/unfriend`))
+              button.btn.btn-link.profile-unfriend.js-confirm(type='submit', data-text='Befreundet', data-hover-text='Als Freund entfernen', data-confirm-text=`Bist du dir sicher, dass du ${profile.username} als Freund entfernen möchtest?`)
                 span.icon
           else
-            +form(action=url('/#{profile.username}/befriend'))
+            +form(action=url(`/${profile.username}/befriend`))
               button.btn.btn-primary(type='submit') Als Freund hinzufügen
 
         if block

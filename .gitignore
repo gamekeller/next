@@ -65,6 +65,7 @@ $RECYCLE.BIN/
 ###App###
 migrations/.migrate
 views/partials/rev.jade
+views/partials/rev.pug
 config.local.json
 
 ###Deploy###

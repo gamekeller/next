@@ -8,7 +8,7 @@ mixin sessionList(sessions)
             span.account-session-indicator(class=session.recentlyUsed ? 'active' : '')
             span.account-session-icon.icon.icon-lg(class='icon-device-' + (session.isMobile ? 'mobile' : session.isTablet ? 'tablet' : 'desktop'))
             if !current
-              +form(action=url('/session/#{session.id}/revoke'))
+              +form(action=url(`/session/${session.id}/revoke`))
                 button.account-session-revoke.btn.btn-default.btn-sm(type='submit') Annullieren
             .account-session-details.js-expander-scope
               div
