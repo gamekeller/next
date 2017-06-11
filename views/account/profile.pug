@@ -25,8 +25,6 @@ block content
   - var isViewingOwnProfile = user && user.username === profile.username
 
   if !hasContent && !isViewingOwnProfile
-    include ../partials/flash
-
     .profile.is-empty
       +profileCard(profile)
 
@@ -36,8 +34,6 @@ block content
         +profileCard(profile)
 
       .col-md-9
-        include ../partials/flash
-
         if isViewingOwnProfile
           .panel.panel-default
             if hasContent

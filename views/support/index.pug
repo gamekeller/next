@@ -2,9 +2,8 @@ extends ../layout
 
 block content-body
 
-  include ../partials/flash
-
   .vista
+    include ../partials/nav
 
     .vista-backdrop
       img.vista-backdrop-image(sizes='100vw', srcset=`${asset_path('img/support/pioneer10-1024.jpg')} 1024w, ${asset_path('img/support/pioneer10-1600.jpg')} 1600w, ${asset_path('img/support/pioneer10-2048.jpg')} 2048w`, src=`${asset_path('img/support/pioneer10-1024.jpg')}`)

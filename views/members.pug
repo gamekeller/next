@@ -15,9 +15,9 @@ mixin memberListItem(member)
 
 block content-body
 
-  include partials/flash
-
   .vista
+    include partials/nav
+
     .vista-backdrop
       img.vista-backdrop-image(sizes='100vw', srcset=`${asset_path('img/signup/dorado-1024.jpg')} 1024w, ${asset_path('img/signup/dorado-1920.jpg')} 1920w`, src=`${asset_path('img/vistas/alps-1024.jpg')}`)
 

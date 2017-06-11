@@ -1,5 +1,4 @@
 body {
-  padding-top: 40px;
   background-color: @brand-darkest;
 }
 
@@ -26,7 +25,7 @@ body {
 }
 
 #wrapper {
-  padding: 30px 0 70px;
+  padding: 20px 0 70px;
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -156,22 +155,35 @@ body {
 }
 
 .navbar {
-  margin: 0;
   border: none;
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .navbar-brand {
-  padding-right: 10px;
-  padding-left: 10px;
   font-size: 20px;
   color: @brand-primary;
 }
 
+@media (max-width: @grid-float-breakpoint) {
+  body {
+    padding-top: @navbar-height;
+  }
+
+  .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: @zindex-navbar;
+  }
+}
+
 @media (min-width: @grid-float-breakpoint) {
-  .navbar-header {
-    padding-left: 5px;
+  .navbar {
+    background: none;
+  }
+
+  .navbar-brand {
+    padding-right: 10px;
   }
 }
 
@@ -179,18 +191,40 @@ body {
   color: @brand-primary;
 }
 
-.navbar-nav.navbar-right {
-
+.navbar-nav {
   @media (min-width: @grid-float-breakpoint) {
-    > li {
-      > a,
-      .btn-link {
-        padding: 10px 8px;
+    &.navbar-right {
+      > li {
+        > a,
+        .btn-link {
+          padding: @navbar-padding-vertical 8px;
+        }
       }
     }
 
     &:last-child {
       padding-right: 5px;
+    }
+
+    > .active {
+      > a,
+      .btn-link {
+        box-shadow: inset 0 -2px @brand-primary;
+        // position: relative;
+        // overflow: hidden;
+
+        // &::after {
+        //   content: '';
+        //   position: absolute;
+        //   bottom: -4px;
+        //   left: 50%;
+        //   margin-left: -4px;
+        //   width: 8px;
+        //   height: 8px;
+        //   transform: rotate(45deg);
+        //   background-color: @brand-primary;
+        // }
+      }
     }
   }
 
@@ -202,6 +236,14 @@ body {
     font-size: 16px;
     text-align: center;
   }
+}
+
+.navbar-inverse .navbar-collapse {
+  background-color: @brand-darkest;
+  border-radius: 4px;
+  // border-radius: 4px 4px 0 0;
+  // border-bottom: 2px solid @brand-primary;
+  .tile-box-shadow();
 }
 
 .small-pulled-right {

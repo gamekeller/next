@@ -34,23 +34,22 @@ mixin _list(items, dontCheckActive)
             else if item.name
               = item.name
 
-.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
-  .container
+.navbar.navbar-inverse.container(role='navigation')
 
-    .navbar-header
+  .navbar-header
 
-      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-        span.sr-only Toggle navigation
-        - for(var x = 0; x < 3; x++)
-          span.icon-bar
+    button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+      span.sr-only Toggle navigation
+      - for(var x = 0; x < 3; x++)
+        span.icon-bar
 
-      a.navbar-brand(href='/')
-        span.icon.icon-gamekeller
+    a.navbar-brand(href='/')
+      span.icon.icon-gamekeller
 
-    .collapse.navbar-collapse
+  .collapse.navbar-collapse
 
-      ul.nav.navbar-nav
-        +_list(nav.main)
+    ul.nav.navbar-nav
+      +_list(nav.main)
 
-      ul.nav.navbar-nav.navbar-right
-        +_list(nav.right, true)
+    ul.nav.navbar-nav.navbar-right
+      +_list(nav.right, true)

@@ -228,8 +228,8 @@ app.use(function(req, res, next) {
   if(user) {
     nav.main.push(
       // { href: '/groups', name: 'Gruppen', view: /^groups/ },
-      { href: '/support', name: 'Support', view: /^support/ },
-      { href: '/members', name: 'Mitglieder', view: 'members' }
+      { href: '/members', name: 'Mitglieder', view: 'members' },
+      { href: '/support', name: 'Support', view: /^support/ }
     )
 
     // Admin
@@ -251,6 +251,10 @@ app.use(function(req, res, next) {
       { href: '/logout', form: true, content: '<button type="submit" class="btn btn-link" title="Ausloggen"><span class="icon icon-logout"></span></button>' }
     )
   } else { // Not logged-in
+    nav.main.push(
+      { href: '/support', name: 'Support', view: /^support/ }
+    )
+
     nav.right.push(
       { href: '/login', name: 'Login' },
       { href: '/signup', name: 'Registrieren' }

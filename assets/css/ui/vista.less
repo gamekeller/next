@@ -1,5 +1,4 @@
 .vista {
-  position: relative;
   min-height: 500px;
   color: @brand-text;
 
@@ -39,6 +38,17 @@
     }
   }
 
+  @media (min-width: @grid-float-breakpoint) {
+    > .navbar {
+      padding-top: 20px;
+
+      .navbar-collapse,
+      .dropdown-menu {
+        background-color: rgba(22, 25, 29, 0.75);
+      }
+    }
+  }
+
   &-box {
     display: block;
     margin-bottom: 20px;
@@ -54,12 +64,15 @@
 
   &-backdrop {
     position: absolute;
-    top: 0;
     left: 0;
     right: 0;
     height: 500px;
     z-index: -10;
     overflow: hidden;
+
+    @media (min-width: @grid-float-breakpoint) {
+      top: 0;
+    }
 
     &-image {
       position: absolute;

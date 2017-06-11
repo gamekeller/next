@@ -179,7 +179,7 @@ pre {
   }
 }
 
-.navbar-inverse .navbar-nav > .open > a {
+.navbar .navbar-nav > .open > a {
   &,
   &:hover,
   &:focus {
@@ -188,9 +188,12 @@ pre {
 }
 
 .navbar-toggle {
+  margin: 0;
+  padding: @navbar-padding-vertical @navbar-padding-horizontal;
+  height: @navbar-height;
   border: 0;
 
-  .navbar-inverse & {
+  .navbar & {
     &:hover,
     &:focus {
       background-color: transparent;

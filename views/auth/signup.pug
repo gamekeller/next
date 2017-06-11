@@ -3,6 +3,7 @@ extends ../layout
 block content-body
 
   .vista.signup
+    include ../partials/nav
 
     .vista-backdrop
       img.vista-backdrop-image(sizes='100vw', srcset=`${asset_path('img/signup/dorado-1024.jpg')} 1024w, ${asset_path('img/signup/dorado-1920.jpg')} 1920w`, src=`${asset_path('img/signup/dorado-1024.jpg')}`)
@@ -31,8 +32,6 @@ block content-body
             p Steige in unseren Ranglisten auf und arbeite auf Beförderungen hin!
 
         .col-md-6.col-md-offset-1
-          include ../partials/flash
-
           if teamspeakName
             .panel.panel-dark.panel-lg
               .panel-heading

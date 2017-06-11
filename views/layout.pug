@@ -11,11 +11,13 @@ html(lang='de', prefix='og: http://ogp.me/ns#')
     include partials/head
     block head
   body
-    include partials/nav
+    include partials/flash
     include partials/accountProgress
 
     block content-body
       #wrapper
+        include partials/nav
+
         .container
           block content
 

@@ -1,13 +1,16 @@
 mixin alert
   if flash[attributes.type] && flash[attributes.type].length
     div(class!='flash-message alert alert-dismissible ' + attributes.class)
-      button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
-      if flash[attributes.type].length > 1
-        ul
-          each message in flash[attributes.type]
-            li!= message.msg
-      else
-        != flash[attributes.type][0].msg
+      .container
+        .row
+          .col-md-12
+            button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
+            if flash[attributes.type].length > 1
+              ul
+                each message in flash[attributes.type]
+                  li!= message.msg
+            else
+              != flash[attributes.type][0].msg
 
 
 if flash.hasMessages
