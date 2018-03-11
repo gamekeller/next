@@ -1,15 +1,15 @@
 /**
  * Dependencies
  */
+var mongoose       = require('mongoose')
+mongoose.plugin(function(schema) { schema.options.usePushEach = true })
+
 var _              = require('lodash')
-var avatar         = require('./lib/controllers/account/avatar')
 var bodyParser     = require('body-parser')
 var compress       = require('compression')
-var config         = require('./lib/config')
 var cookieParser   = require('cookie-parser')
 var csp            = require('helmet-csp')
 var csrf           = require('csurf')
-var error          = require('./lib/error')
 var errorHandler   = require('errorhandler')()
 var express        = require('express')
 var favicon        = require('serve-favicon')
@@ -17,15 +17,18 @@ var hbs            = require('hbs').__express
 var logger         = require('morgan')
 var methodOverride = require('method-override')
 var moment         = require('moment')
-var mongoose       = require('mongoose')
 var numeral        = require('numeral')
 var passport       = require('passport')
-var redis          = require('./lib/redis')
 var session        = require('express-session')
-var utils          = require('./lib/utils')
 var uuid           = require('uuid')
 var validator      = require('express-validator')
 var RedisStore     = require('connect-redis')(session)
+
+var error          = require('./lib/error')
+var config         = require('./lib/config')
+var redis          = require('./lib/redis')
+var utils          = require('./lib/utils')
+var avatar         = require('./lib/controllers/account/avatar')
 
 if(config.opbeat.active) {
   var opbeat = require('opbeat').start(config.opbeat.credentials)
