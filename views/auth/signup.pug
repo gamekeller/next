@@ -46,16 +46,18 @@ block content-body
               if config.flags.registration
                 +form(class='form-dark js-form')
 
+                  .help-block.fixed Pflichtfelder sind mit einem * Markiert
+
                   .form-group
-                    label(for='username') Benutzername
+                    label(for='username') Benutzername *
                     input.form-control.js-input.js-username(type='text', id='username', name='username', placeholder='Username', autocorrect='off', autocapitalize='off', value=teamspeakName ? teamspeakName : null)
 
                   .form-group
-                    label(for='email') E-Mail-Adresse
+                    label(for='email') E-Mail-Adresse *
                     input.form-control.js-input.js-email(type='email', id='email', name='email', placeholder='username@example.com')
 
                   .form-group
-                    label(for='password') Passwort
+                    label(for='password') Passwort *
                     input.form-control.js-input.js-password(type='password', id='password', name='password', placeholder='Passwort', data-placeholder='••••••••••••••••••••••••')
                     .help-block.fixed
                       span 4-50 Zeichen, alles außer Leerzeichen
@@ -64,8 +66,17 @@ block content-body
                         | Passwort anzeigen
 
                   .form-group
-                    label(for='confirmPassword') Passwort wiederholen
+                    label(for='confirmPassword') Passwort wiederholen *
                     input.form-control.js-input.js-confirm-password(type='password', id='confirmPassword', name='confirmPassword', placeholder='Passwort wiederholen', data-placeholder='••••••••••••••••••••••••')
+
+                  .form-group
+                    label.form-check-label(for='consent')
+                      input.js-consent(type='checkbox', id='consent', name='consent')
+                      |  Ich akzeptiere die
+                      a.form-a(href='/privacy') Datenschutzerklärung
+                      | *
+                    .help-block.fixed
+                      span Unter 16 Jahren (Unter 14 Jahren in Österreich), muss ein Erziehungsberechtigter der Datenschutzerklärung zustimmen
 
                   .form-group
                     button.btn.btn-primary.btn-pull-left(type='submit') Registrieren
