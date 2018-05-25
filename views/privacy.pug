@@ -2,7 +2,7 @@ extends layout
 
 block content-body
 
-  .vista.signup
+  .vista.privacy
     include partials/nav
 
     .vista-backdrop
@@ -16,118 +16,140 @@ block content-body
         h1.vista-logo Datenschutzerklärung
 
       .row
-        .col-md-10.col-md-offset-2.privacy-statement
-          ol
+        .col-md-10.col-md-offset-1
+          ol.privacy-master-list
             li
               h3 Rechtsgrundlage
-              ol
+              ol.privacy-text
                 li
                   p Die EU-Datenschutz-Grundverordnung, das Datenschutzgesetz 2000 sowie das Datenschutz-Anpassungsgesetz 2018 dienen dem Recht auf Schutz personenbezogener Daten. Wir verarbeiten Ihre Daten ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, DSG 2018, TKG 2003).
             li
               h3 Grundsätzliches
-              ol
+              ol.privacy-text
                 li
                   p Verantwortlicher ist:<br>
                     | <strong>Heinrich Fenkart</strong><br>
                     | Klimschgasse 16/28<br>
                     | 1030 Wien, Österreich<br>
-                    | <abbr title="E-Mail-Adresse">M:</abbr> <a href="mailto:support@gamekeller.net">support@gamekeller.net</a><br>
+                    | <abbr title="E-Mail-Adresse">M:</abbr> <a href="mailto:hnrch02@gamekeller.net">hnrch02@gamekeller.net</a><br>
                     |<br>
-                    | Stellvertreter des Verantworlichen ist:<br>
+                    | Stellvertreter des Verantwortlichen ist:<br>
                     | <strong>Juri Schreib</strong><br>
                     | <abbr title="E-Mail-Adresse">M:</abbr> <a href="mailto:bujuhu@gamekeller.net">bujuhu@gamekeller.net</a><br>
                 li
                   p Uns ist es ein besonderes Anliegen, alle personenbezogenen Daten, die Sie uns anvertrauen, zu schützen und sicher zu verwahren. In diesem Dokument erfahren Sie mehr darüber, wie wir Ihre personenbezogenen Daten verwenden und verarbeiten.
             li
               h3 Zweckbindung, Rechtsgrundlage, Speicherdauer sowie Datenempfänger
-              ol
+              ol.privacy-text
                 li
-                  p Die gesammelten personenbezogenen Daten benötigen wir für Vertragserfüllung, Verrechnung, Geltendmachung der Vertragsansprüche, für Zwecke des Kundenservice, die Authentifizierung des Benutzerkontos auf unserer Website, zur Kontaktaufnahme mit dem Benutzer, einrichtung eines personalisierten Benutzerprofils, sowie zur statistischen Auswertung der Nutzung unserer Dienste. Die Daten werden hierfür erhoben, gespeichert, verarbeitet und genutzt.
+                  p Die gesammelten personenbezogenen Daten benötigen wir für Vertragserfüllung, Verrechnung, Geltendmachung der Vertragsansprüche, Zwecke des Kundenservice, Authentifizierung des Benutzerkontos auf unserer Website, zur Kontaktaufnahme mit dem Benutzer, Einrichtung eines personalisierten Benutzerprofils, sowie zur statistischen Auswertung der Nutzung unserer Dienste. Die Daten werden hierfür erhoben, gespeichert, verarbeitet und genutzt.
 
                 li
-                  p Die rechtlichen Grundlagen für die Verarbeitung von Ihren personenbezogenen Daten sind einerseits einerseits Vertragserfüllung, berechtigte Interessen, die Erfüllung unserer rechtlichen bzw vertraglichen Verpflichtungen sowie andererseits Ihre Einwilligung (z.B. bei der Accounterstellung auf der Website). Die Nichtbereitstellung der Daten kann unterschiedliche Folgen haben.
+                  p Die rechtlichen Grundlagen für die Verarbeitung von Ihren personenbezogenen Daten sind Vertragserfüllung, berechtigte Interessen, die Erfüllung unserer rechtlichen beziehungsweise vertraglichen Verpflichtungen sowie Ihre Einwilligung (z.B. bei der Accounterstellung auf unserer Website). Die Nichtbereitstellung der Daten kann unterschiedliche Folgen haben.
 
                 li
-                  p Zudem verarbeiten wir Daten, die wir von <br>
-                    | <strong>Aut O’Mattic A8C Ireland Ltd.</strong><br>
-                    | Business Centre, No.1 Lower Mayor Street <br>
-                    | International Financial Services Centre <br>
-                    | Dublin 1, Ireland
-                    | zulässigerweise erhalten haben. Dabei handelt es sich um ein Profilbild. Dieses stammt aus der öffentlichen Gravatar-Datenbank, welches es erlaubt aufgrund eines MD5-Hashs ihrer E-Mail Adresse ein öffentlich abrufbares Bild zu hinterlegen. Dabei werden keine persönliche Daten an Aut O’Mattic A8C Ireland Ltd. übertragen.
+                  p.
+                    Zudem verarbeiten wir Daten, die wir von<br>
+                    <strong>Aut O’Mattic A8C Ireland Ltd.</strong><br>
+                    Business Centre, No.1 Lower Mayor Street<br>
+                    International Financial Services Centre<br>
+                    Dublin 1, Ireland<br>
+                    zulässigerweise erhalten haben. Dabei handelt es sich um ein Profilbild, das aus der öffentlichen Gravatar-Datenbank stammt. Diese erlaubt es mithilfe eines MD5-Hashes Ihrer E-Mail-Adresse ein öffentlich abrufbares Bild zu erhalten. Dabei werden keine persönliche Daten an Aut O’Mattic A8C Ireland Ltd. übertragen.
 
                 li
-                  p Wir verarbeiten Ihre personenbezogenen Daten (Benutzername, Name, Profilbild) soweit erforderlich, für die Dauer der gesamten Geschäftsbeziehung (von der Anbahnung, Abwicklung bis zur Beendigung eines Vertrags) sowie darüber hinaus gemäß den gesetzlichen Aufbewahrungs und Dokumentationspflichten, die sich ua aus dem Unternehmensgesetzbuch (UGB), der Bundesabgabenordnung (BAO) ergeben sowie bis zur Beendigung eines allfälligen Rechtsstreits, fortlaufender Gewährleistungs- und Garantiefristen usw.
+                  p Wir verarbeiten Ihre personenbezogenen Daten (Benutzername, E-Mail-Adresse, Profilbild) für die Dauer der gesamten Geschäftsbeziehung (von der Anbahnung, Abwicklung bis zur Beendigung eines Vertrags) sowie darüber hinaus gemäß den gesetzlichen Aufbewahrungs- und Dokumentationspflichten, die sich u.a. aus dem Unternehmensgesetzbuch (UGB) und der Bundesabgabenordnung (BAO) ergeben sowie bis zur Beendigung eines allfälligen Rechtsstreits, fortlaufender Gewährleistungs- und Garantiefristen usw.
 
                 li
-                  p Im Rahmen der Betreibung unserer Websites beauftragen wir Softwaredienstleister, die im Zuge ihrer Tätigkeiten Zugriff auf Ihre personenbezogenen Daten erlangen können, sofern diese die Daten zur Erfüllung ihrer jeweiligen Leistung benötigen. Diese haben sich zur Einhaltung der geltenden datenschutzrechtlichen Bestimmungen uns gegenüber verpflichtet. Es wurden Auftragsverarbeitungsverträge gemäß Art 28 DSGVO abgeschlossen. Nähere Informationen zu den von uns beauftragten Auftragsverarbeitern können Sie unter
-                    a.form-a(href='mailto:support@gamekeller.net') support@gamekeller.net
-                    | anfragen
+                  p
+                    | Im Rahmen des Betriebs unserer Websites beauftragen wir Softwaredienstleister, die im Zuge ihrer Tätigkeiten Zugriff auf Ihre personenbezogenen Daten erlangen können, sofern diese die Daten zur Erfüllung ihrer jeweiligen Leistung benötigen. Diese haben sich zur Einhaltung der geltenden datenschutzrechtlichen Bestimmungen uns gegenüber verpflichtet. Es wurden Auftragsverarbeitungsverträge gemäß Art 28 DSGVO abgeschlossen. Nähere Informationen zu den von uns beauftragten Auftragsverarbeitern können Sie unter
+                    |
+                    a.text-link(href='mailto:datenschutz@gamekeller.net') datenschutz@gamekeller.net
+                    |  anfragen.
             li
-              h3 Nutzung des Teamspeaks
-              ol
+              h3 Nutzung des TeamSpeak-Servers
+              ol.privacy-text
                 li
-                  p Durch die Nutzung des TeamSpeaks werden durch Gamekeller keine personenbezogenen Daten verarbeitet. Zur verbesserung unserer Services wird die Zeit erfasst, welche ein Nutzer auf dem TeamSpeak verbracht hat. Diese Daten sind mit einer eindeutigen Kennung verknüpft, die keine Rückschlüsse auf den Endnutzer zulassen und durch diesen jedrzeit in der TeamSpeak software geändert werden kann.
+                  p Bei der Nutzung des TeamSpeak-Servers werden durch Gamekeller keine personenbezogenen Daten verarbeitet. Zur Verbesserung unserer Services wird die Zeit erfasst, welche ein Nutzer auf dem TeamSpeak-Server verbracht hat. Diese Daten sind mit einer eindeutigen Kennung verknüpft, die keine Rückschlüsse auf den Endnutzer zulassen und durch diesen jedrzeit in der TeamSpeak-Client-Software geändert werden kann.
 
                 li
-                  p Unser Anliegen im Sinne der DSGVO (berechtigtes Interesse) ist die Verbesserung unseres Angebotes und unseres TeamSpeak-Servers. Die verarbeitetn Informationen lassen keine Rückschlüsse auf eine natürliche Person zu. Um Statistiken wie die Anzahl individueller Nutzer, oder die Summe der aktiven Onlinezeit aller Nutzer zu erfassen, speichern wir anonymisierte Benutzerdaten auf unbegrenzte Zeit.
+                  p Unser Anliegen im Sinne der DSGVO (berechtigtes Interesse) ist die Verbesserung unseres Angebotes und unseres TeamSpeak-Servers. Die verarbeiteten Informationen lassen keine Rückschlüsse auf eine natürliche Person zu. Um Statistiken wie die Anzahl individueller Nutzer oder die Summe der aktiven Onlinezeit aller Nutzer zu erfassen, speichern wir anonymisierte Benutzerdaten auf unbegrenzte Zeit.
 
                 li
-                  p Bei der Nutzung des Teamspeaks gelten die Datenschutzbedingungen des Herstellers der Client-Software, TeamSpeak Systems GmbH sowie des Softwaredienstleisters Ocris GmbH, welche den Server zur verfügung erstellen.
+                  p Bei der Nutzung des TeamSpeak-Servers gelten die Datenschutzbedingungen des Herstellers der Client-Software, TeamSpeak Systems GmbH, sowie des Softwaredienstleisters OCIRIS GmbH, welche den Server zur Verfügung stellen.
                   ul
                     li
-                      a.form-a(href='https://teamspeak.com/en/policies.html') Datenschutzerklärung der TeamSpeak Systems GmbH
+                      a.text-link(href='https://teamspeak.com/de/policies.html') Datenschutzerklärung der TeamSpeak Systems GmbH
                     li
-                      a.form-a(href='https://www.g-portal.com/de/privacy') Datenschutzerklärung der OCIRIS GmbH
+                      a.text-link(href='https://www.g-portal.com/de/privacy') Datenschutzerklärung der OCIRIS GmbH
             li
-              h3 Erstellen eines Benutzerkontos auf der Website
-              ol
+              h3 Erstellen eines Benutzerkontos auf unserer Website
+              ol.privacy-text
                 li
-                  p Durch das erstellen eines Benutzerprofils, werden folgende Personenbezogenen Daten verarbeitet:
+                  p Durch das Erstellen eines Benutzerkontos werden folgende personenbezogene Daten verarbeitet:
                     ul
                       li Benutzername
-                      li E-Mail Adresse
+                      li E-Mail-Adresse
                       li Profilbild
-                    | Das erstellen eines Benutzerprofils erlaubt es dem Nutzer ein öffentliches Profil zu erstellen und sich mit Freunden zu verknüpfen, sowie eventuell zusätzlichen Funktionen, welche laufend neu Entwickelt werden. Diese Daten werden für die Dauer der Existenz des Benutzerprofils gespeichert und können jederzeit durch den Nutzer gelöscht werden.<br>
-                    a(href='/account/delete') Datenschutzerklärung wiederrufen / Account löschen
+                  p Das Erstellen eines Benutzerkontos erlaubt es dem Nutzer ein öffentliches Profil zu führen, sich mit anderen Nutzern zu verknüpfen sowie laufend neu entwickelte Funktionen zu nutzen. Diese Daten werden für die Dauer der Existenz des Benutzerkontos gespeichert und können jederzeit durch den Nutzer gelöscht werden.
+                    br
+                    a.text-link(href='/account/delete') Datenschutzerklärung widerrufen / Account löschen
 
                 li
-                  p Zur Absicherung der Benutzerkonten, identifizieren wir Geräte und verarbeiten Daten um festzustellen, ob bedeutente Kontenaktionen (z.B. Anmeldung, änderung der E-Mail Adresse, änderung des Passworts, etc.) vom Benutzer selbst, oder durch unbefugte durchgeführt wurden. Diese Daten Beeinhalten:
+                  p Zur Gewährleistung der Sicherheit der Benutzerkonten identifizieren wir Geräte und verarbeiten deren technische Daten, um festzustellen, ob bedeutende Kontoaktionen (z.B. Anmeldung, Änderung der E-Mail-Adresse, Änderung des Passworts, etc.) vom Benutzer selbst oder durch unbefugte Dritte durchgeführt wurden. Diese Daten beinhalten:
                     ul
                       li IP-Adresse
-                      li Betriebssystem
-                      li Zeitpunkt der Ausführung der Aktion
-
-                    | Diese Aktionen werden Protokolliert und für die Dauer der Existenz des Benutzerprofils gespeichert und können jederzeit durch den Nutzer gelöscht werden.<br>
-                    a(href='/account/delete') Datenschutzerklärung wiederrufen / Account löschen
+                      li Betriebssystem und verwendeter Browser (HTTP User Agent)
+                      li Zeitpunkt des Ereignisses
+                  p Diese Aktionen werden protokolliert und für die Dauer der Existenz des Benutzerkontos gespeichert und können jederzeit durch den Nutzer gelöscht werden.
+                    br
+                    a.text-link(href='/account/delete') Datenschutzerklärung widerrufen / Account löschen
 
                 li
-                  p Die Datenverarbeitung erfolgt auf Basis der gesetzlichen Bestimmungen des § 96 Abs 3 TKG sowie des Art 6 Abs 1 lit a (Einwilligung) DSGVO.
+                  p Die Datenverarbeitung erfolgt auf Basis der gesetzlichen Bestimmungen des § 96 Abs. 3 TKG sowie des Art. 6 Abs. 1 lit. a (Einwilligung) DSGVO.
 
             li
-              h3 Verknüpfung einer TeamSpeak Kennung mit einem Benutzerprofil
-              ol
+              h3 Verknüpfung einer TeamSpeak-Kennung mit einem Benutzerkonto
+              ol.privacy-text
                 li
-                  p Die Verknüpfung einer Teamspeak Kennung erlaubt es uns die Onlinezeit, welche bereits für statistische Zwecke gesammelt wird, mit anderen Personenbezogenen Daten zu verknüpfen. Dies ermöglicht den Nutzer level zu sammeln und Ränge aufzusteigen. Dies soll Nutzer motiveren unsere Dienste zu Nutzen und spielerisch neue funktionen freizuschalten. Wird die Verknüpfung einer Teamspeak-Verknüpfung aufgehoben, der Datenschutzerklärung wiederrufen oder der Account gelöscht, wird die verknüpfung dieser Daten aufgehoben und somit die Person nichtmehr mithilfe der Teamspeak Kennung identifizierbar.
+                  p.
+                    Die Verknüpfung einer TeamSpeak-Kennung erlaubt es uns die Onlinezeit, welche bereits für statistische Zwecke gesammelt wird, mit personenbezogenen Daten in Verbindung zu bringen.<br>
+                    Dies ermöglicht dem Nutzer Level zu sammeln und Ränge aufzusteigen. Dadurch sollen Nutzer motiviert werden, unsere Dienste zu nutzen und spielerisch neue Funktionen freizuschalten.<br>
+                    Wird die Verknüpfung einer TeamSpeak-Kennung mit einem Benutzerkonto durch den Nutzer aufgehoben, die Datenschutzerklärung widerrufen oder der Account gelöscht, wird die Verbindung der anonymisierten TeamSpeak-Nutzungsdaten mit personenbezogenen Daten aufgehoben und somit die Person nicht mehr mithilfe der TeamSpeak-Kennung identifizierbar sein.
 
                 li
-                  p Die Datenverarbeitung erfolgt auf Basis der gesetzlichen Bestimmungen des § 96 Abs 3 TKG sowie des Art 6 Abs 1 lit a (Einwilligung) DSGVO.
+                  p Die Datenverarbeitung erfolgt auf Basis der gesetzlichen Bestimmungen des § 96 Abs. 3 TKG sowie des Art. 6 Abs. 1 lit. a (Einwilligung) DSGVO.
             li
-              h3 Cookies, andere Tracking Tools sowie Web-Analyse
-              ol
+              h3 Cookies
+              .privacy-text
+                p
+                  i
+                    | Mehr zu Cookies können Sie auch
+                    |
+                    a.text-link(href='./cookies') unserer Cookies-Informationsseite
+                    |  entnehmen.
+                ol
+                  li
+                    p Unsere Website verwendet sogenannte Cookies. Dabei handelt es sich um kleine Textdateien, die mithilfe des Browsers auf Ihrem Endgerät abgelegt werden. Sie richten keinen Schaden an. Wir nutzen Cookies dazu, unser Angebot nutzerfreundlich zu gestalten. Einige Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Sie ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen. Wenn Sie dies nicht wünschen, so können Sie Ihren Browser so einrichten, dass er Sie über das Setzen von Cookies informiert und Sie dies nur im Einzelfall erlauben.
+
+                  li
+                    p
+                      | Durch die Nutzung unserer Website willigen Sie damit ein, dass wir Cookies setzen. Informationen zum Widerruf finden Sie auf unserer
+                      |
+                      a.text-link(href='./cookies') Cookies-Informationsseite
+                      | . Wenn Sie sich gegen bestimmte technische und/oder funktionelle Cookies entscheiden, könnte die Funktionalität unserer Website eventuell eingeschränkt werden. Einige Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen.
+
+            li
+              h3 Web-Analyse und andere Tracking-Tools
+              ol.privacy-text
                 li
-                  p Unsere Website verwendet so genannte Cookies. Dabei handelt es sich um kleine Textdateien, die mit Hilfe des Browsers auf Ihrem Endgerät abgelegt werden. Sie richten keinen Schaden an. Wir nutzen Cookies dazu, unser Angebot nutzerfreundlich zu gestalten. Einige Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Sie ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen. Wenn Sie dies nicht wünschen, so können Sie Ihren Browser so einrichten, dass er Sie über das Setzen von Cookies informiert und Sie dies nur im Einzelfall erlauben. Bei der Deaktivierung von Cookies kann die Funktionalität unserer Website eingeschränkt sein.
-                li
-                  p Unsere Website verwendet Funktionen des Webanalysedienstes Google Analytics der Firma Google Inc. Dazu werden Cookies verwendet, die eine Analyse der Benutzung der Website durch Ihre Benutzer ermöglicht. Die dadurch erzeugten Informationen werden auf den Server des Anbieters übertragen und dort gespeichert. Sie können dies verhindern, indem Sie Ihren Browser so einrichten, dass keine Cookies gespeichert werden. Sie können darüber hinaus die Erfassung der durch das Cookie erzeugten und auf Ihre Nutzung der Website bezogenen pseudonymisierten Daten an Google sowie die Verarbeitung dieser Daten durch Google verhindern, indem sie das unter dem folgenden Link verfügbare Browser-Plugin herunterladen und installieren: <a class="form-a" href="http://tools.google.com/dlpage/gaoptout?hl=de">http://tools.google.com/dlpage/gaoptout?hl=de.</a>. Wir haben mit dem Anbieter einen entsprechenden Vertrag zur Auftragsdatenverarbeitung abgeschlossen.
+                  p Unsere Website verwendet Funktionen des Webanalysedienstes Google Analytics der Firma Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Dazu werden Cookies verwendet, die eine Analyse der Benutzung der Website durch ihre Benutzer ermöglicht. Die dadurch erzeugten Informationen werden auf den Server des Anbieters übertragen und dort gespeichert. Sie können dies verhindern, indem Sie Ihren Browser so einrichten, dass keine Cookies gespeichert werden. Sie können darüber hinaus die Erfassung der durch das Cookie erzeugten und auf Ihre Nutzung der Website bezogenen pseudonymisierten Daten an Google sowie die Verarbeitung dieser Daten durch Google verhindern, indem sie das unter dem folgenden Link verfügbare Browser-Plugin herunterladen und installieren: <a class="text-link" href="http://tools.google.com/dlpage/gaoptout?hl=de">http://tools.google.com/dlpage/gaoptout?hl=de.</a>.
 
                 li
-                  p Durch die Nutzung unserer Website willigen Sie damit ein, dass wir Cookies setzen. Informatione zum Wiederruf finden sie auf unserer
-                    a.form-a(href='./cookies') Cookies-Informationsseite.
-                    | Wenn Sie sich gegen bestimmte technische und/oder funktionelle Cookies entscheiden, könnte die Funktionalität unserer Website eventuell eingeschränkt werden. Einige Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen.
-
-                li
-                  p Wir haben mit dem Anbieter einen entsprechenden Vertrag zur Auftragsdatenverarbeitung abgeschlossen. Diese haben sich zur Einhaltung der geltenden datenschutzrechtlichen Bestimmungen uns gegenüber verpflichtet. Nähere Informationen zu den von uns beauftragten Auftragsverarbeitern können Sie unter
-                    a.form-a(href='mailto:support@gamekeller.net') support@gamekeller.net
-                    | anfragen
+                  p
+                    | Wir haben mit dem Anbieter einen entsprechenden Vertrag zur Auftragsdatenverarbeitung abgeschlossen. Dieser hat sich zur Einhaltung der geltenden datenschutzrechtlichen Bestimmungen uns gegenüber verpflichtet. Nähere Informationen zu den von uns beauftragten Auftragsverarbeitern können Sie unter
+                    |
+                    a.text-link(href='mailto:datenschutz@gamekeller.net') datenschutz@gamekeller.net
+                    |  anfragen.
 
                 li
                   p Ihre IP-Adresse wird erfasst, aber umgehend pseudonymisiert. Dadurch ist nur mehr eine grobe Lokalisierung möglich.
@@ -136,50 +158,62 @@ block content-body
                   p Unser Anliegen im Sinne der DSGVO (berechtigtes Interesse) ist die Verbesserung unseres Angebotes und unseres Webauftritts. Da uns die Privatsphäre unserer Nutzer wichtig ist, werden die Nutzerdaten pseudonymisiert. Die Nutzerdaten werden für die Dauer von 26 Monaten aufbewahrt.
 
             li
-              h3 Einwillgung und Recht auf Wiederruf
-              ol
+              h3 Einwilligung und Recht auf Widerruf
+              ol.privacy-text
                 li
                   p Ist für die Verarbeitung Ihrer Daten Ihre Zustimmung notwendig, verarbeiten wir diese erst nach Ihrer ausdrücklichen Zustimmung.
                 li
-                  p Grundsätzlich verarbeiten wir keine Daten minderjähriger Personen und sind dazu auch nicht befugt. Mit der Abgabe Ihrer Zustimmung bestätigen Sie, dass Sie das 14. Lebensjahr vollendet haben oder die Zustimmung Ihres gesetzlichen Vertreters vorliegt.
+                  p Grundsätzlich verarbeiten wir keine Daten minderjähriger Personen und sind dazu auch nicht befugt. Mit der Abgabe Ihrer Zustimmung bestätigen Sie, dass Sie das 16. Lebensjahr (das 14. Lebensjahr in Österreich) vollendet haben oder die Zustimmung Ihres gesetzlichen Vertreters vorliegt.
                 li
-                  p Ihre Zustimmung können Sie jederzeit unter folgender E-Mail Adresse widerrufen:
-                    a.form-a(href='mailto:support@gamekeller.net') support@gamekeller.net.
-                    | In einem solchen Fall werden die bisher über Sie gespeicherten Daten anonymisiert und in weiterer Folge lediglich für statistische Zwecke ohne Personenbezug weiterverwendet. Mittels des Widerrufs der Zustimmung wird die Rechtmäßigkeit der aufgrund der Zustimmung bis zum Widerruf erfolgten Verarbeitung nicht berührt.
+                  p
+                    | Ihre Zustimmung können Sie jederzeit unter folgender E-Mail Adresse widerrufen:
+                    |
+                    a.text-link(href='mailto:datenschutz@gamekeller.net') datenschutz@gamekeller.net
+                    | . In einem solchen Fall werden die bisher über Sie gespeicherten Daten anonymisiert und in weiterer Folge lediglich für statistische Zwecke ohne Personenbezug weiterverwendet. Mittels des Widerrufs der Zustimmung wird die Rechtmäßigkeit der aufgrund der Zustimmung bis zum Widerruf erfolgten Verarbeitung nicht berührt.
+
             li
               h3 Datensicherheit
-              ol
+              ol.privacy-text
                 li
-                  p  Heinrich Fenkart setzt technische und organisatorische Sicherheitsmaßnahmen ein, um die gespeicherten personenbezogenen Daten gegen zufällige oder vorsätzliche Manipulation, Verlust oder Zerstörung und gegen den Zugriff unberechtigter Personen zu schützen. Unsere Sicherheitsmaßnahmen werden entsprechend des technischen Fortschritts fortlaufend verbessert.
+                  p Heinrich Fenkart setzt technische und organisatorische Sicherheitsmaßnahmen ein, um die gespeicherten personenbezogenen Daten gegen zufällige oder vorsätzliche Manipulation, Verlust oder Zerstörung und gegen den Zugriff unberechtigter Personen zu schützen. Unsere Sicherheitsmaßnahmen werden entsprechend des technischen Fortschritts fortlaufend verbessert.
+
             li
               h3 Ihre Rechte
-              ol
+              ol.privacy-text
                 li
-                  p Sie haben jederzeit das Recht auf Auskunft seitens des Verantwortlichen (Heinrich Fenkart,<br>
-                    a.form-a(href='mailto:support@gamekeller.net') support@gamekeller.net
-                    | ) über die betreffenden personenbezogenen Daten. Soweit keine gesetzliche Aufbewahrungspflicht besteht, haben Sie das Recht auf Löschung dieser Daten sowie Widerspruch gegen die Verarbeitung. Ferner haben Sie das Recht auf Berichtigung der Daten sowie auf Einschränkung der Verarbeitung, auf Datenübertragbarkeit sowie auf Beschwerde bei der Österreichischen Datenschutzbehörde (Wickenburggasse 8-10, 1080 Wien, E-Mail:
-                    a.form-a(href='mailto:dsb@dsb.gv.at') dsb@dsb.gv.at
+                  p
+                    | Sie haben jederzeit das Recht auf Auskunft seitens des Verantwortlichen (Heinrich Fenkart,
+                    |
+                    a.text-link(href='mailto:datenschutz@gamekeller.net') datenschutz@gamekeller.net
+                    | ) über die betreffenden personenbezogenen Daten. Soweit keine gesetzliche Aufbewahrungspflicht besteht, haben Sie das Recht auf Löschung dieser Daten sowie Widerspruch gegen die Verarbeitung. Ferner haben Sie das Recht auf Berichtigung der Daten sowie auf Einschränkung der Verarbeitung, auf Datenübertragbarkeit sowie auf Beschwerde bei der Österreichischen Datenschutzbehörde (Wickenburggasse 8-10, 1080 Wien, Österreich, E-Mail:
+                    |
+                    a.text-link(href='mailto:dsb@dsb.gv.at') dsb@dsb.gv.at
                     | ).
                 li
-                  p Wenden Sie sich bezüglich Ihrer Rechte bitte an uns unter
-                    a.form-a(href='mailto:support@gamekeller.net') support@gamekeller.net
-                    | oder schreiben Sie an:<br>
+                  p
+                    | Wenden Sie sich bezüglich Ihrer Rechte bitte an uns unter
+                    |
+                    a.text-link(href='mailto:datenschutz@gamekeller.net') datenschutz@gamekeller.net
+                    |  oder schreiben Sie an:<br>
                     | <strong>Heinrich Fenkart</strong><br>
                     | Klimschgasse 16/28<br>
                     | 1030 Wien, Österreich<br>
-                    | <abbr title="E-Mail-Adresse">M:</abbr> <a href="mailto:support@gamekeller.net">support@gamekeller.net</a><br>
-                    |<br>
 
-            p Stand: 25. Mai 2018
+          p Stand: 25. Mai 2018
+
       if user && !user.consent
         .row
           .col-md-6.col-md-offset-3
             .panel.panel-dark.panel-lg
               .panel-body
                 +form(class='form-dark js-form')
-                  .help-block.fixed
-                    span Unter 16 Jahren (Unter 14 Jahren in Österreich), muss ein Erziehungsberechtigter der Einwilligungserklärung zustimmen
+                  p Sollten Sie das 16. Lebensjahr (das 14. Lebensjahr in Österreich) noch nicht vollendet haben, muss die Zustimmung Ihres gesetzlichen Vertreters vorliegen, um zuzustimmen.
 
                   .form-group
                       button.btn.btn-primary.btn-pull-left(type='submit') Zustimmen
                       a.btn.btn-link.btn-pull-right(href='/account/delete') Ablehnen und Account löschen
+
+      if user && user.consent
+        .row
+          .col-md-6.col-md-offset-3.text-center
+            a.btn.btn-outline.btn-lg(href='/account/delete') Datenschutzerklärung widerrufen

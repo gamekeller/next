@@ -2,6 +2,14 @@ body {
   background-color: @brand-darkest;
 }
 
+ol ol {
+  list-style: lower-alpha;
+}
+
+ol ol ol {
+  list-style: lower-roman;
+}
+
 .u-mb {
   margin-bottom: 20px;
 }
@@ -551,5 +559,34 @@ th.sort-header {
 
   dd {
     margin-left: 100px;
+  }
+}
+
+.form-dark .form-group.form-group-inline {
+  margin: 0;
+}
+
+.form-group-inline {
+  display: flex;
+  align-items: baseline;
+}
+
+.form-group-inline > label {
+  padding: 10px;
+  min-width: 50px;
+}
+
+.privacy {
+
+  &-master-list {
+    font-size: @font-size-h3;
+  }
+
+  &-text {
+    font-size: @font-size-base;
+  }
+
+  .text-link {
+    text-decoration: underline;
   }
 }

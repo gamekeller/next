@@ -46,7 +46,7 @@ block content-body
               if config.flags.registration
                 +form(class='form-dark js-form')
 
-                  .help-block.fixed Pflichtfelder sind mit einem * Markiert
+                  .help-block.fixed Pflichtfelder sind mit einem * markiert
 
                   .form-group
                     label(for='username') Benutzername *
@@ -69,14 +69,15 @@ block content-body
                     label(for='confirmPassword') Passwort wiederholen *
                     input.form-control.js-input.js-confirm-password(type='password', id='confirmPassword', name='confirmPassword', placeholder='Passwort wiederholen', data-placeholder='••••••••••••••••••••••••')
 
-                  .form-group
+                  .form-group.checkbox
                     label.form-check-label(for='consent')
                       input.js-consent(type='checkbox', id='consent', name='consent')
-                      |  Ich akzeptiere die
-                      a.form-a(href='/privacy') Datenschutzerklärung
-                      | *
+                      | Ich akzeptiere die
+                      |
+                      a.form-a(href='/privacy', target='_blank') Datenschutzerklärung
+                      |  *
                     .help-block.fixed
-                      span Unter 16 Jahren (Unter 14 Jahren in Österreich), muss ein Erziehungsberechtigter der Datenschutzerklärung zustimmen
+                      span Sollten Sie das 16. Lebensjahr (das 14. Lebensjahr in Österreich) noch nicht vollendet haben, muss die Zustimmung Ihres gesetzlichen Vertreters vorliegen, um der Datenschutzerklärung zuzustimmen.
 
                   .form-group
                     button.btn.btn-primary.btn-pull-left(type='submit') Registrieren

@@ -7,26 +7,28 @@ block content
     .panel.panel-default.panel-lg
 
       .panel-heading
-        h3.panel-title Datenschutzerklärung wiederrufen und Account löschen
+        h3.panel-title Datenschutzerklärung widerrufen und Account löschen
 
       .panel-body
 
-        p Falls du deinen Account nicht länger brauchst oder nicht mehr aktiv bei Gamekeller bist, steht dir frei deinen Account zu löschen.
+        p Falls du deinen Account nicht länger brauchst oder nicht mehr aktiv bei Gamekeller bist, steht es dir frei deinen Account zu löschen.
 
-        p Wenn du die Datenschutzerklärung wiederrufen möchtest musst du deinen Account löschen, da es uns in dem Fall nicht länger gestattet ist deine Daten zu verarbeiten oder zu Speichern.
+        p
+          | Um die Datenschutzerklärung zu widerrufen, musst du deinen Account löschen.
+          br
+          | Uns ist es in diesem Fall nicht länger gestattet deine Daten zu verarbeiten oder zu speichern. Sämtliche bisher gespeicherte Daten bis auf anonymisierte Nutzungsdaten, die zu statistischen Zwecken erhoben wurden, werden <b>sofort</b> gelöscht.
 
-        p Bitte beachte das es aufgrund von Backups der Benutzerdaten es bis zu 90 Tage dauern kann, bis alle Informationen gelöscht wurden.
+        p Bitte beachte jedoch, dass es aufgrund von Backups der Benutzerdaten bis zu 90 Tage dauern kann, bis alle Informationen restlos und endgültig gelöscht wurden.
 
-        p Anonymisierte Daten, welche zu statistiken Zwecken erhoben werden, werden hierdurch
-          u  nicht
-        | gelöscht. Wenn du dies veranlassen möchtest, bitte kontaktiere uns unter
-        a(href='mailto:support@gamekeller.net')  support@gamekeller.net
-        br
-        br
+        p.u-mb
+          | Bei etwaigen Fragen zum Datenschutz kannst du uns gerne unter
+          a(href='mailto:datenschutz@gamekeller.net')  datenschutz@gamekeller.net
+          |  kontaktieren.
 
         .js-delete-form
           +form
 
+            p Gib zur Bestätigung bitte dein Passwort ein.
             .form-group.floating-label
               label(for='password') Passwort
               input.form-control(type='password', id='password', name='password', placeholder='Passwort', data-placeholder='••••••••••••••••••••••••', required)
@@ -39,5 +41,5 @@ block content
         .alert.alert-danger.js-delete-warning.hide
           p Du wirst deinen Account nicht wiederherstellen können, solltest du fortfahren.
           p
-            button.btn.btn-default(type='button', data-dismiss='alert') Verstanden
-            a.btn.btn-link.text-white(href=url('../')) Abbrechen
+            a.btn.btn-default(href=url('../')) Abbrechen
+            button.btn.btn-danger(type='button', data-dismiss='alert') Verstanden
