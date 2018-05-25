@@ -30,10 +30,6 @@ var redis          = require('./lib/redis')
 var utils          = require('./lib/utils')
 var avatar         = require('./lib/controllers/account/avatar')
 
-if(config.opbeat.active) {
-  var opbeat = require('opbeat').start(config.opbeat.credentials)
-}
-
 /**
  * Create Express server
  */
@@ -312,10 +308,6 @@ function outputError(err, req, res) {
 app.use(function(req, res) {
   outputError(new error.NotFound(), req, res)
 })
-
-// Opbeat
-if(config.opbeat.active)
-  app.use(opbeat.middleware.express())
 
 // Final error handler
 app.use(function(err, req, res, next) {
