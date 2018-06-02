@@ -7,7 +7,7 @@
     "log_date_format": "YYYY-MM-DD HH:mm Z",
     "env": {
       "NODE_ENV": "production",
-      "LOGFORMAT": "[:date[clf]] :method :url HTTP/:http-version :status - :response-time ms"
+      "LOGFORMAT": "[:date[clf]] :method :url :status - :response-time ms"
     }
   }],
   "deploy": {
