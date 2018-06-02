@@ -139,7 +139,7 @@ app.use(csp({
     defaultSrc: ["'self'", 'https://serve.gamekeller.net', 'https://' + config.assetHost],
     scriptSrc: ["'self'", 'https://www.google-analytics.com', 'https://api.tumblr.com', 'https://' + config.assetHost, acceptNonce, "'unsafe-inline'"],
     styleSrc: ["'self'", 'https://fonts.googleapis.com', 'https://' + config.assetHost, acceptNonce, "'unsafe-inline'"],
-    imgSrc: ["'self'", 'data:', 'https://0.gravatar.com', 'https://camo.gamekeller.net', 'https://www.google-analytics.com', 'https://' + config.assetHost, 'https://' + config.userContentHost],
+    imgSrc: ["'self'", 'data:', 'https://0.gravatar.com', 'https://*.media.tumblr.com', 'https://camo.gamekeller.net', 'https://www.google-analytics.com', 'https://' + config.assetHost, 'https://' + config.userContentHost],
     fontSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'https://' + config.assetHost],
     connectSrc: ["'self'", 'https://www.reddit.com'],
     formAction: ["'self'"],
