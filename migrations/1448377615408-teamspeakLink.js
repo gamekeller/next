@@ -7,7 +7,7 @@ var connection = require('../lib/mongo')
 exports.up = function(next) {
   connection
   .then(function() {
-    return User.update({}, { $unset: { teamspeakLink: 1 } }, { strict: false, multi: true })
+    return User.updateMany({}, { $unset: { teamspeakLink: 1 } }, { strict: false })
   })
   .then(function() {
     next()

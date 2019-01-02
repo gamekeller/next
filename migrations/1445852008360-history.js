@@ -25,7 +25,7 @@ exports.up = function(next) {
     return Promise.all(promises)
   })
   .then(function() {
-    return User.update({}, { $unset: { history: 1 } }, { strict: false, multi: true })
+    return User.updateMany({}, { $unset: { history: 1 } }, { strict: false })
   })
   .then(function() {
     next()
@@ -44,7 +44,7 @@ exports.down = function(next) {
     var owner = history.owner
     delete history.owner
     delete history.__v
-    return User.update({ _id: owner }, { $push: { history: history } }, { strict: false })
+    return User.updateOne({ _id: owner }, { $push: { history: history } }, { strict: false })
   })
   .then(function() {
     return new Promise(function(resolve, reject) {

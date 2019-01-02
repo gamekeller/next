@@ -15,7 +15,7 @@ function pad(str, width) {
 
 function toggleAdmin(state) {
   return function(username, cb) {
-    User.update({ username: username }, { admin: state }, function(err, numberAffected) {
+    User.updateOne({ username: username }, { admin: state }, function(err, numberAffected) {
       if(err)
         return cb('Something went wrong: ' + err)
       if(numberAffected === 0)
@@ -46,7 +46,7 @@ function logoutUser(username, cb) {
         if(err)
           return cb('Something went wrong: ' + err)
 
-        User.update({}, { sessions: [] }, { multi: true }, function(err) {
+        User.updateMany({}, { sessions: [] }, function(err) {
           if(err)
             return cb('Something went wrong: ' + err)
 

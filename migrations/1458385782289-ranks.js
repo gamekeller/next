@@ -37,7 +37,7 @@ exports.up = function(next) {
       rank = ranks[tsRank]
     }
 
-    return User.update({ _id: user.id }, { rank: rank })
+    return User.updateOne({ _id: user.id }, { rank: rank })
   })
   .then(function() {
     next()
@@ -50,7 +50,7 @@ exports.up = function(next) {
 exports.down = function(next) {
   connection
   .then(function() {
-    return User.update({ teamspeakLinked: true }, { $unset: { rank: true } })
+    return User.updateMany({ teamspeakLinked: true }, { $unset: { rank: true } })
   })
   .then(function() {
     next()

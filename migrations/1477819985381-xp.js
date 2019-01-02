@@ -20,7 +20,7 @@ exports.up = function(next) {
   connection
   .then(function() {
     // Initialize XP
-    return User.update({
+    return User.updateMany({
       level: { $exists: false }
     }, {
       level: 1,
@@ -29,25 +29,25 @@ exports.up = function(next) {
         total: 0,
         boostMinutesRemaining: config.xp.gains.boostDuration
       }
-    }, { multi: true })
+    })
   })
   .then(function() {
     return User.find({}, '_id createdAt', { lean: true })
   })
   .map(function(user) {
-    return User.update({ _id: user._id }, { $set: { 'xp.lastPromotionAt': user.createdAt } })
+    return User.updateOne({ _id: user._id }, { $set: { 'xp.lastPromotionAt': user.createdAt } })
   })
   .then(function() {
     // Mitigate ranks
     return Promise.all(
       _.map(rankMigration, function(newRank, oldRank) {
-        return User.update({ rank: oldRank }, { $set: { rank: newRank } }, { multi: true })
+        return User.updateMany({ rank: oldRank }, { $set: { rank: newRank } })
       })
     )
   })
   .then(function() {
     // Set rank 0 for all users without ranks
-    return User.update({ rank: { $exists: false } }, { $set: { rank: 0 } }, { multi: true })
+    return User.updateMany({ rank: { $exists: false } }, { $set: { rank: 0 } })
   })
   .then(function() {
     // Get all users with linked TeamSpeak
@@ -82,7 +82,7 @@ exports.up = function(next) {
       xp %= config.xp.levelXpKey.default
     }
 
-    return User.update({ _id: user._id }, {
+    return User.updateOne({ _id: user._id }, {
       $set: {
         level: level,
         'xp.total': totalXp,

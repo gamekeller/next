@@ -19,7 +19,7 @@ exports.up = function(next) {
       return mongoose.Types.ObjectId(friend)
     })
 
-    return User.update({ _id: user._id }, { $set: { friends: user.friends } })
+    return User.updateOne({ _id: user._id }, { $set: { friends: user.friends } })
   })
   .then(function() {
     next()
