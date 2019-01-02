@@ -85,7 +85,7 @@
   "scripts": {
     "test": "snyk test",
     "snyk-protect": "snyk protect",
-    "dev": "concurrently -n \"app,assets\" \"npm run server-dev\" \"npm run assets-watch\"",
+    "dev": "concurrently -i -n \"app,assets\" \"npm run server-dev\" \"npm run assets-watch\"",
     "server-dev": "nodemon -i assets/ -i public/ app.js",
     "server-prod": "NODE_ENV=production SIMULATE_PRODUCTION=1 node ./app.js",
     "assets-dev": "NODE_ENV=development gulp",
