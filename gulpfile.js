@@ -174,17 +174,8 @@ exports.default = exports.build = gulp.series(
 exports.dev = exports.watch = function watch(done) {
   exports.build()
   gulp.watch(paths.scripts.solo.src, exports.soloScripts)
-  // gulp.watch(paths.styles.watch, exports.styles)
+  gulp.watch(paths.styles.watch, exports.styles)
   gulp.watch(paths.copy.src, exports.copy)
-
-  // Temporary fix for https://github.com/less/less.js/issues/3185 https://github.com/gulp-community/gulp-less/issues/283
-  gulp.watch(paths.styles.watch, function(done) {
-    (lessc.environment && lessc.environment.fileManagers || []).forEach(fileManager => {
-      if(fileManager.contents) fileManager.contents = {}
-    })
-
-    exports.styles().on('end', done)
-  })
 
   for(file in paths.scripts.concat) {
     gulp.watch(paths.scripts.concat[file].src, exports.concatScripts)
