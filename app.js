@@ -40,12 +40,12 @@ require('./lib/helpers/returnWith')(app)
 require('./lib/helpers/handleMongooseError')(app)
 require('./lib/helpers/resolveUrl')(app)
 require('./lib/helpers/render')(app)
+require('./lib/helpers/assets')(app)
 
 /**
  * Configuration
  */
 app.config = config
-var mincer = require('./lib/mincer')
 
 /**
  * Redis
@@ -98,7 +98,6 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'pug')
 app.engine('html', hbs)
 app.engine('txt', hbs)
-app.use(mincer.assets())
 app.use(compress())
 app.use(favicon(__dirname + '/public/favicon.ico'))
 app.use(logger(process.env.LOGFORMAT || 'dev', {
@@ -172,9 +171,6 @@ require('./lib/xp')
 
 // Asset configuration
 // --------------------------------
-if(app.get('env') === 'development')
-  app.use('/assets', mincer.createServer())
-
 if(app.get('env') === 'development' || process.env.SIMULATE_PRODUCTION)
   app.use(express.static(__dirname + '/public'))
 
@@ -329,6 +325,6 @@ app.use(function(err, req, res, next) {
  * Start the server
  */
 if(!module.parent)
-  app.listen(app.get('port'), function() {
+  app.listen(app.get('port'), 'localhost', function() {
     console.log('✔ Express server listening on port %d in %s mode.', app.get('port'), app.get('env'))
   })

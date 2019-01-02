@@ -27,7 +27,7 @@ block content-body
     include partials/nav
 
     .vista-backdrop
-      img.vista-backdrop-image(sizes='100vw', srcset=`${asset_path('img/vistas/alps-1024.jpg')} 1024w, ${asset_path('img/vistas/alps-1600.jpg')} 1600w, ${asset_path('img/vistas/alps-2048.jpg')} 2048w`, src=`${asset_path('img/vistas/alps-1024.jpg')}`)
+      img.vista-backdrop-image(sizes='100vw', srcset=`${asset('img/vistas/alps-1024.jpg')} 1024w, ${asset('img/vistas/alps-1600.jpg')} 1600w, ${asset('img/vistas/alps-2048.jpg')} 2048w`, src=`${asset('img/vistas/alps-1024.jpg')}`)
 
     .container
 
@@ -40,7 +40,7 @@ block content-body
               .usercard-meta
                 h2.usercard-name!= user.username
                 .usercard-current-rank
-                  img.usercard-current-rank-image(src=asset_path(user.getRankIcon()), alt=user.getRankName())
+                  img.usercard-current-rank-image(src=asset(user.getRankIcon()), alt=user.getRankName())
                   | #{user.getRankDisplayText()}
               - var nextRank = user.getNextRank()
               if user.rank > 0 && nextRank
@@ -51,7 +51,7 @@ block content-body
                 else
                   .usercard-next-rank
                     .usercard-next-rank-desc Nächster Rang
-                    img.usercard-next-rank-image(src=asset_path(utils.getRankIcon(nextRank)), alt=utils.getRankName(nextRank))
+                    img.usercard-next-rank-image(src=asset(utils.getRankIcon(nextRank)), alt=utils.getRankName(nextRank))
                     != utils.getRankName(nextRank)
                     if user.level < config.xp.nextRank[nextRank].levelNeeded
                       p.usercard-next-rank-req ab Level #{config.xp.nextRank[nextRank].levelNeeded}

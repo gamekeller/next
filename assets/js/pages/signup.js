@@ -1,9 +1,7 @@
-//= require bower/validator-js/validator.js
-
 !function($, window, document) {
   'use strict';
 
-  var vanityBlacklist = '"$$ getConfig().blacklist.vanity $$"'.split(',')
+  var vanityBlacklist = '%%vanityBlacklist%%'.split(',')
 
   function clearErrors($input) {
     $input

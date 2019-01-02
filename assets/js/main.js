@@ -1,20 +1,3 @@
-//= require bower/jquery/dist/jquery.slim.js
-//= require bower/Stickyfill/dist/stickyfill.js
-//= require bower/autofill-event/src/autofill-event.js
-//= require bower/table.sort/src/tablesort.js
-//= require bower/table.sort/src/sorts/tablesort.number.js
-//= require bower/bootstrap/js/transition.js
-//= require bower/bootstrap/js/alert.js
-//= require bower/bootstrap/js/collapse.js
-//= require bower/bootstrap/js/dropdown.js
-//= require bower/bootstrap/js/tooltip.js
-//= require bower/bootstrap/js/tab.js
-//= require bower/js-cookie/src/js.cookie.js
-//= require bower/autosize/dist/autosize.js
-//= require js/lib/fromNow.js
-//= require js/lib/markdownEditor.js
-//= require js/lib/cookieNotice.js
-
 !function($) {
   function checkPopulation($element) {
     $element.closest('.floating-label').toggleClass('floating-label-populated', !!$element.val())
@@ -70,7 +53,7 @@
       if(e.type === 'keydown' && !/32|13/.test(e.which)) return
       e.preventDefault()
       $target.add($toggle).toggleClass('active')
-      Stickyfill.rebuild()
+      Stickyfill.refreshAll()
     })
   })
 }($);
@@ -109,13 +92,13 @@
 }($);
 
 !function($) {
-  $('.js-sticky').Stickyfill()
+  Stickyfill.add($('.js-sticky'))
   $('.js-tooltip').tooltip()
   autosize($('.js-autosize'))
   $('.js-tablesort').each(function () {
     new Tablesort(this)
   })
   $(window).on('load', function() {
-    Stickyfill.rebuild()
+    Stickyfill.refreshAll()
   })
 }($);

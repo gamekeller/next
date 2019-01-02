@@ -7,7 +7,7 @@ mixin memberListItem(member)
       if member.teamspeakOnline
         span.userlist-avatar-indicator
       .userlist-avatar-rank
-        img.userlist-avatar-rank-icon(src=asset_path(member.getRankIcon()), alt=member.getRankName())
+        img.userlist-avatar-rank-icon(src=asset(member.getRankIcon()), alt=member.getRankName())
         unless member.isStaff() || member.getRankValue() === 0
           span.userlist-avatar-rank-level #{member.level}
     .userlist-body
@@ -19,7 +19,7 @@ block content-body
     include partials/nav
 
     .vista-backdrop
-      img.vista-backdrop-image(sizes='100vw', srcset=`${asset_path('img/signup/dorado-1024.jpg')} 1024w, ${asset_path('img/signup/dorado-1920.jpg')} 1920w`, src=`${asset_path('img/vistas/alps-1024.jpg')}`)
+      img.vista-backdrop-image(sizes='100vw', srcset=`${asset('img/signup/dorado-1024.jpg')} 1024w, ${asset('img/signup/dorado-1920.jpg')} 1920w`, src=`${asset('img/vistas/alps-1024.jpg')}`)
 
     .container
 

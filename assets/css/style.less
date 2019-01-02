@@ -383,7 +383,7 @@ ol ol ol {
   margin-bottom: 40px;
 }
 
-th.sort-header {
+th[role=columnheader] {
   cursor: pointer;
 
   &::selection {
@@ -400,18 +400,18 @@ th.sort-header {
     visibility: hidden;
   }
 
-  &:hover::after {
+  &:hover::after,
+  &[aria-sort]:hover::after {
     visibility: visible;
+    opacity: 1;
   }
 
-  &.sort-up::after,
-  &.sort-down::after,
-  &.sort-down:hover::after {
+  &[aria-sort]::after {
     visibility: visible;
     opacity: 0.4;
   }
 
-  &.sort-up::after {
+  &[aria-sort=ascending]::after {
     border-bottom: none;
     border-width: 4px 4px 0;
   }

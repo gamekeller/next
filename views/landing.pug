@@ -45,7 +45,7 @@ html(lang='de')
         .section-heading
           h3.section-heading-title Aktivitäten
         .activities
-          - var localAssetPath = asset_path('img/landing.svg').replace(/^http(s?):\/\//, '').replace(config.assetHost, '')
+          - var localAssetPath = asset('img/landing.svg').replace(/^http(s?):\/\//, '').replace(config.assetHost, '')
           a.activity.activity-league.landing-box(href='http://lol.gamekeller.net')
             svg.activity-icon
               use(xlink:href=localAssetPath + '#lol')

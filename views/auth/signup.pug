@@ -6,7 +6,7 @@ block content-body
     include ../partials/nav
 
     .vista-backdrop
-      img.vista-backdrop-image(sizes='100vw', srcset=`${asset_path('img/signup/dorado-1024.jpg')} 1024w, ${asset_path('img/signup/dorado-1920.jpg')} 1920w`, src=`${asset_path('img/signup/dorado-1024.jpg')}`)
+      img.vista-backdrop-image(sizes='100vw', srcset=`${asset('img/signup/dorado-1024.jpg')} 1024w, ${asset('img/signup/dorado-1920.jpg')} 1920w`, src=`${asset('img/signup/dorado-1024.jpg')}`)
 
     .container
 
@@ -19,7 +19,7 @@ block content-body
       .signup-row.row
         .signup-copy.col-md-3.col-md-offset-1
           section
-            img.img-pixelated.img-glow(src=asset_path('img/ranks/user.png'), width=32)
+            img.img-pixelated.img-glow(src=asset('img/ranks/user.png'), width=32)
             h3 Werde zum User
             p Steige zum User auf und genieße mehr Rechte auf dem TeamSpeak.
           hr

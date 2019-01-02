@@ -16,9 +16,6 @@ results
 npm-debug.log
 node_modules
 
-# Bower
-assets/bower
-
 # Mincer
 public/assets
 
@@ -71,3 +68,4 @@ config.local.json
 
 ###Deploy###
 .aws-deploy.json
+.awspublish*

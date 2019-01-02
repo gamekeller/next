@@ -49,7 +49,7 @@ block content
                   #profile-bio.markdown-body.tab-pane.active
                     != profile.bio.rendered
                   #profile-bio-edit.tab-pane
-                    +bio
+                    +bio(null, false)
             else
               .panel-heading
                 h3.panel-title Biografie

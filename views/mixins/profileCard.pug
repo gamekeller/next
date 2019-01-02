@@ -54,7 +54,7 @@ mixin profileCard(profile)
           //- Rank -//
           if profile.rank
             li.help(title='Rang')
-              img.profile-rank(src=asset_path(profile.getRankIcon()), alt=profile.getRankName())
+              img.profile-rank(src=asset(profile.getRankIcon()), alt=profile.getRankName())
               | #{profile.getRankDisplayText()}
 
           //- Registered -//

@@ -20,7 +20,7 @@ block content
               tr
                 td(data-sort=user.getRankValue(), title=user.getRankName(), class=user.rank ? 'help' : '')
                   if rankImage
-                    img(src=asset_path(rankImage), alt=user.getRankName())
+                    img(src=asset(rankImage), alt=user.getRankName())
                   else
                     | -
                 td
