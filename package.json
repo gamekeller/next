@@ -91,7 +91,7 @@
     "assets-dev": "NODE_ENV=development gulp",
     "assets-prod": "NODE_ENV=production gulp",
     "assets-watch": "gulp watch",
-    "deploy": "npm run assets-prod && gulp deploy"
+    "deploy": "npm run assets-prod && gulp revupdate && gulp deploy"
   },
   "snyk": true
 }
